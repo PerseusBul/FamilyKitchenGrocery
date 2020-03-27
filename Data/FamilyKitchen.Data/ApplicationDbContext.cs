@@ -5,7 +5,7 @@
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
-
+    using AspNetCoreTemplate.Data.Models;
     using FamilyKitchen.Data.Common.Models;
     using FamilyKitchen.Data.Models;
 
@@ -25,6 +25,8 @@
         }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
