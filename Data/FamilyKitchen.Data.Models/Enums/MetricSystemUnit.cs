@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AspNetCoreTemplate.Data.Models.Enums
+﻿namespace AspNetCoreTemplate.Data.Models.Enums
 {
     public enum MetricSystemUnit
     {

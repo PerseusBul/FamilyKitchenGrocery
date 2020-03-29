@@ -28,6 +28,12 @@
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Allergen> Allergens { get; set; }
+
+        public DbSet<NutritionDeclaration> NutritionDeclarations { get; set; }
+
+        public DbSet<FoodResource> FoodResources { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -66,6 +72,12 @@
                 var method = SetIsDeletedQueryFilterMethod.MakeGenericMethod(deletableEntityType.ClrType);
                 method.Invoke(null, new object[] { builder });
             }
+
+
+            builder.Entity<FoodResource>()
+                .HasOne(fr => fr.NutritionDeclaration)
+                .WithMany(n => n.FoodResources)
+                .HasForeignKey(fr => fr.NutritionDeclarationId);
 
             // Disable cascade delete
             var foreignKeys = entityTypes

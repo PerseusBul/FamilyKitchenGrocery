@@ -1,10 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FamilyKitchen.Data.Models
+﻿namespace AspNetCoreTemplate.Data.Models
 {
-    class Allergen
+    using System.ComponentModel.DataAnnotations;
+
+    public class Allergen
     {
+        //public Allergen()
+        //{
+        //    this.FoodResourcesAllergens = new HashSet<FoodResourceAllergen>();
+        //}
+
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        //public ICollection<FoodResourceAllergen> FoodResourcesAllergens { get; set; }
     }
 }

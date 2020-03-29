@@ -22,5 +22,17 @@
   <ItemGroup>
     <ProjectReference Include="..\FamilyKitchen.Data.Common\FamilyKitchen.Data.Common.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BaseProduct.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Enums\MetricSystemUnit.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Enums\Size.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
   
 </Project>
