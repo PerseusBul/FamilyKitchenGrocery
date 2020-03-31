@@ -1,7 +1,8 @@
-﻿namespace AspNetCoreTemplate.Data.Models
+﻿namespace FamilyKitchen.Data.Models
 {
     using System;
     using System.Collections.Generic;
+
     using FamilyKitchen.Data.Common.Models;
 
     public class NutritionDeclaration : BaseDeletableModel<int>

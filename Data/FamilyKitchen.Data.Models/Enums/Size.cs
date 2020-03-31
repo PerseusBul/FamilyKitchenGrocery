@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreTemplate.Data.Models.Enums
+﻿namespace FamilyKitchen.Data.Models.Enums
 {
     public enum Size
     {

@@ -1,12 +1,7 @@
-﻿namespace AspNetCoreTemplate.Data.Models
+﻿namespace FamilyKitchen.Data.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Text;
-
-    using AspNetCoreTemplate.Data.Models.Enums;
 
     public class FoodResource : BaseProduct
     {
@@ -23,8 +18,8 @@
 
         public virtual NutritionDeclaration NutritionDeclaration { get; set; }
 
-        //public virtual ICollection<FoodResourceAllergen> FoodResourcesAllergens { get; set; }
+        public virtual IEnumerable<FoodResourceAllergen> FoodResourcesAllergens { get; set; }
 
-        //public virtual ICollection<FoodResourceRecipe> FoodResourcesRecipes { get; set; }
+        //public virtual IEnumerable<FoodResourceRecipe> FoodResourcesRecipes { get; set; }
     }
 }

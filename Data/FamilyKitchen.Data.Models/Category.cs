@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreTemplate.Data.Models
+﻿namespace FamilyKitchen.Data.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;

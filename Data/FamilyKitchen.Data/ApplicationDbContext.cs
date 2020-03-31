@@ -5,10 +5,9 @@
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
-    using AspNetCoreTemplate.Data.Models;
+
     using FamilyKitchen.Data.Common.Models;
     using FamilyKitchen.Data.Models;
-
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -30,9 +29,13 @@
 
         public DbSet<Allergen> Allergens { get; set; }
 
+        public DbSet<FoodResourceAllergen> FoodResourcesAllergens { get; set; }
+
         public DbSet<NutritionDeclaration> NutritionDeclarations { get; set; }
 
         public DbSet<FoodResource> FoodResources { get; set; }
+
+        public DbSet<Recipe> Recipes { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -73,6 +76,18 @@
                 method.Invoke(null, new object[] { builder });
             }
 
+            builder.Entity<FoodResourceAllergen>()
+                .HasKey(pa => new { pa.FoodResourceId, pa.AllergenId });
+
+            builder.Entity<FoodResourceAllergen>()
+                .HasOne(pa => pa.FoodResource)
+                .WithMany(p => p.FoodResourcesAllergens)
+                .HasForeignKey(pa => pa.FoodResourceId);
+
+            builder.Entity<FoodResourceAllergen>()
+                .HasOne(pa => pa.Allergen)
+                .WithMany(p => p.FoodResourcesAllergens)
+                .HasForeignKey(pa => pa.AllergenId);
 
             builder.Entity<FoodResource>()
                 .HasOne(fr => fr.NutritionDeclaration)

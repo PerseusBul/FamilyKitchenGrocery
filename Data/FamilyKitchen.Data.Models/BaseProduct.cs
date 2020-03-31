@@ -1,9 +1,10 @@
-﻿namespace AspNetCoreTemplate.Data.Models
+﻿namespace FamilyKitchen.Data.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using AspNetCoreTemplate.Data.Models.Enums;
+
     using FamilyKitchen.Data.Common.Models;
+    using FamilyKitchen.Data.Models.Enums;
 
     public class BaseProduct : BaseDeletableModel<int>
     {
