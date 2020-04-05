@@ -37,6 +37,12 @@
 
         public DbSet<Recipe> Recipes { get; set; }
 
+        public DbSet<SubCategory> SubCategories { get; set; }
+
+        public DbSet<FoodResourceRecipe> FoodResourcesRecipes { get; set; }
+
+        public DbSet<ShopProduct> ShopProducts { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -93,6 +99,19 @@
                 .HasOne(fr => fr.NutritionDeclaration)
                 .WithMany(n => n.FoodResources)
                 .HasForeignKey(fr => fr.NutritionDeclarationId);
+
+            builder.Entity<FoodResourceRecipe>()
+              .HasKey(frr => new { frr.FoodResourceId, frr.RecipeId });
+
+            builder.Entity<FoodResourceRecipe>()
+                .HasOne(frr => frr.FoodResource)
+                .WithMany(fr => fr.FoodResourcesRecipes)
+                .HasForeignKey(frr => frr.FoodResourceId);
+
+            builder.Entity<FoodResourceRecipe>()
+                .HasOne(frr => frr.Recipe)
+                .WithMany(fr => fr.FoodResourcesRecipes)
+                .HasForeignKey(frr => frr.RecipeId);
 
             // Disable cascade delete
             var foreignKeys = entityTypes

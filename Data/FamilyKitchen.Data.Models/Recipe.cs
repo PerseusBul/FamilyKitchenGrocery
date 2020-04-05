@@ -14,7 +14,7 @@
         {
             this.CreatedOn = DateTime.UtcNow;
             this.IsDeleted = false;
-            //this.FoodResourcesRecipes = new HashSet<FoodResourceRecipe>();
+            this.FoodResourcesRecipes = new HashSet<FoodResourceRecipe>();
             //this.FavoritedBy = new HashSet<UserFavoriteRecipe>()
         }
 
@@ -39,6 +39,6 @@
 
         // public IEnumerable<UserFavoriteRecipe> FavoritedBy { get; set; }
 
-        // public virtual IEnumerable<FoodResourceRecipe> FoodResourcesRecipes { get; set; }
+        public virtual IEnumerable<FoodResourceRecipe> FoodResourcesRecipes { get; set; }
     }
 }

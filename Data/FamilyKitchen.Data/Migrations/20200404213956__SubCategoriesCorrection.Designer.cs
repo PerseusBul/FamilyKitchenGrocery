@@ -4,14 +4,16 @@ using FamilyKitchen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FamilyKitchen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200404213956__SubCategoriesCorrection")]
+    partial class _SubCategoriesCorrection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,24 +255,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.ToTable("FoodResourcesAllergens");
                 });
 
-            modelBuilder.Entity("FamilyKitchen.Data.Models.FoodResourceRecipe", b =>
-                {
-                    b.Property<int>("FoodResourceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("FoodResourceId", "RecipeId");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("FoodResourcesRecipes");
-                });
-
             modelBuilder.Entity("FamilyKitchen.Data.Models.NutritionDeclaration", b =>
                 {
                     b.Property<int>("Id")
@@ -390,67 +374,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
-                });
-
-            modelBuilder.Entity("FamilyKitchen.Data.Models.ShopProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Availability")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("EANCode")
-                        .HasColumnType("decimal(20,0)");
-
-                    b.Property<DateTime?>("ExpireDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MetricSystemUnit")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NutritionDeclarationId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Producer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TradeMark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("NutritionDeclarationId");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("ShopProducts");
                 });
 
             modelBuilder.Entity("FamilyKitchen.Data.Models.SubCategory", b =>
@@ -612,34 +535,6 @@ namespace FamilyKitchen.Data.Migrations
                         .HasForeignKey("FoodResourceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FamilyKitchen.Data.Models.FoodResourceRecipe", b =>
-                {
-                    b.HasOne("FamilyKitchen.Data.Models.FoodResource", "FoodResource")
-                        .WithMany("FoodResourcesRecipes")
-                        .HasForeignKey("FoodResourceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("FamilyKitchen.Data.Models.Recipe", "Recipe")
-                        .WithMany("FoodResourcesRecipes")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FamilyKitchen.Data.Models.ShopProduct", b =>
-                {
-                    b.HasOne("FamilyKitchen.Data.Models.NutritionDeclaration", "NutritionDeclaration")
-                        .WithMany()
-                        .HasForeignKey("NutritionDeclarationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("FamilyKitchen.Data.Models.Recipe", "Recipe")
-                        .WithMany()
-                        .HasForeignKey("RecipeId");
                 });
 
             modelBuilder.Entity("FamilyKitchen.Data.Models.SubCategory", b =>
