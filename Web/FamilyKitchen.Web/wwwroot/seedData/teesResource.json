@@ -1,0 +1,10 @@
+[{"Name":"Potatoes","Price":0.69,"Availability":500,"EANCode":3800000004312,"ExpireDate":null,"MetricSystemUnit":1,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":167},
+    {"Name":"Carrots","Price":0.89,"Availability":500,"EANCode":3800000004467,"ExpireDate":null,"MetricSystemUnit":1,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":165},
+    {"Name":"Onion","Price":0.79,"Availability":500,"EANCode":3800000004788,"ExpireDate":null,"MetricSystemUnit":1,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":166},
+    {"Name":"Broccolli","Price":14.88,"Availability":200,"EANCode":3800000004722,"ExpireDate":null,"MetricSystemUnit":1,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":165},
+    {"Name":"Cabage","Price":1.55,"Availability":200,"EANCode":3800000004723,"ExpireDate":null,"MetricSystemUnit":1,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":165},
+    {"Name":"Garlic","Price":12.90,"Availability":200,"EANCode":3800000004724,"ExpireDate":null,"MetricSystemUnit":1,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":168},
+    {"Name":"Peppers","Price":6.49,"Availability":200,"EANCode":3800000004725,"ExpireDate":null,"MetricSystemUnit":1,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":164},
+    {"Name":"Tomatoes","Price":5.76,"Availability":200,"EANCode":3800000004726,"ExpireDate":null,"MetricSystemUnit":1,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":163},
+    {"Name":"Radishes","Price":1.24,"Availability":200,"EANCode":3800000004212,"ExpireDate":null,"MetricSystemUnit":3,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":164},
+    {"Name":"Green Salad","Price":1.59,"Availability":200,"EANCode":3800000004167,"ExpireDate":null,"MetricSystemUnit":3,"Producer":"Pancno","TradeMark":"Pepper","NutritionDeclarationId":171}]

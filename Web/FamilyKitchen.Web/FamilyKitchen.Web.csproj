@@ -39,4 +39,8 @@
     <ProjectReference Include="..\FamilyKitchen.Web.Infrastructure\FamilyKitchen.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\FamilyKitchen.Web.ViewModels\FamilyKitchen.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\seedData\" />
+  </ItemGroup>
 </Project>
