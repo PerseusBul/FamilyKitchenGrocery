@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FamilyKitchen.Data.Models
+﻿namespace FamilyKitchen.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class ShopProduct : BaseProduct
     {
         public ShopProduct()
@@ -26,8 +26,8 @@ namespace FamilyKitchen.Data.Models
 
         public NutritionDeclaration NutritionDeclaration { get; set; }
 
-       // public virtual IEnumerable<ShoppingCartShopProduct> ShoppingCartsShopProducts { get; set; }
+        public virtual IEnumerable<ShoppingCartShopProduct> ShoppingCartsShopProducts { get; set; }
 
-       // public virtual IEnumerable<ShopProductSubCategory> ShopProductsSubCategories { get; set; }
+       public virtual IEnumerable<ShopProductSubCategory> ShopProductsSubCategories { get; set; }
     }
 }

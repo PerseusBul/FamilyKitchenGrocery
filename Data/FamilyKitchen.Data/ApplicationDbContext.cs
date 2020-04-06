@@ -43,6 +43,12 @@
 
         public DbSet<ShopProduct> ShopProducts { get; set; }
 
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
+        public DbSet<ShoppingCartShopProduct> ShoppingCartsShopProducts { get; set; }
+
+        public DbSet<ShopProductSubCategory> ShopProductsSubCategories { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -112,6 +118,32 @@
                 .HasOne(frr => frr.Recipe)
                 .WithMany(fr => fr.FoodResourcesRecipes)
                 .HasForeignKey(frr => frr.RecipeId);
+
+            builder.Entity<ShoppingCartShopProduct>()
+                .HasKey(sc => new { sc.ShoppingCartId, sc.ShopProductId });
+
+            builder.Entity<ShoppingCartShopProduct>()
+               .HasOne(sc => sc.ShopProduct)
+               .WithMany(sp => sp.ShoppingCartsShopProducts)
+               .HasForeignKey(sc => sc.ShopProductId);
+
+            builder.Entity<ShoppingCartShopProduct>()
+                .HasOne(sc => sc.ShoppingCart)
+                .WithMany(sp => sp.ShoppingCartsShopProducts)
+                .HasForeignKey(sc => sc.ShoppingCartId);
+
+            builder.Entity<ShopProductSubCategory>()
+                .HasKey(rs => new { rs.ShopProductId, rs.SubCategoryId });
+
+            builder.Entity<ShopProductSubCategory>()
+                .HasOne(rs => rs.ShopProduct)
+                .WithMany(r => r.ShopProductsSubCategories)
+                .HasForeignKey(rs => rs.ShopProductId);
+
+            builder.Entity<ShopProductSubCategory>()
+                .HasOne(rs => rs.SubCategory)
+                .WithMany(r => r.ShopProductsSubCategories)
+                .HasForeignKey(rs => rs.SubCategoryId);
 
             // Disable cascade delete
             var foreignKeys = entityTypes

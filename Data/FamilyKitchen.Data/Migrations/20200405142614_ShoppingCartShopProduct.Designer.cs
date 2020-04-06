@@ -4,14 +4,16 @@ using FamilyKitchen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FamilyKitchen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200405142614_ShoppingCartShopProduct")]
+    partial class ShoppingCartShopProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -453,21 +455,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.ToTable("ShopProducts");
                 });
 
-            modelBuilder.Entity("FamilyKitchen.Data.Models.ShopProductSubCategory", b =>
-                {
-                    b.Property<int>("ShopProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubCategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ShopProductId", "SubCategoryId");
-
-                    b.HasIndex("SubCategoryId");
-
-                    b.ToTable("ShopProductsSubCategories");
-                });
-
             modelBuilder.Entity("FamilyKitchen.Data.Models.ShoppingCart", b =>
                 {
                     b.Property<int>("Id")
@@ -702,21 +689,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.HasOne("FamilyKitchen.Data.Models.Recipe", "Recipe")
                         .WithMany()
                         .HasForeignKey("RecipeId");
-                });
-
-            modelBuilder.Entity("FamilyKitchen.Data.Models.ShopProductSubCategory", b =>
-                {
-                    b.HasOne("FamilyKitchen.Data.Models.ShopProduct", "ShopProduct")
-                        .WithMany("ShopProductsSubCategories")
-                        .HasForeignKey("ShopProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("FamilyKitchen.Data.Models.SubCategory", "SubCategory")
-                        .WithMany("ShopProductsSubCategories")
-                        .HasForeignKey("SubCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("FamilyKitchen.Data.Models.ShoppingCartShopProduct", b =>
