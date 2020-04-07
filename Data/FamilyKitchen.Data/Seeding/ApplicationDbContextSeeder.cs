@@ -27,6 +27,15 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              //new CategoriesSeeder(),
+                              //new SubCategoriesSeeder(),
+                              //new AllergensSeeder(),
+                              //new NutritionDeclarationsSeeder(),
+                              //new ShopProductsSeeder(),
+                              //new FoodResourcesSeeder(),
+                              //new FoodResourcesAllergensSeeder(),
+                              //new RecipesSeeder(),
+                              //new FoodResourcesRecipesSeeder(),
                           };
 
             foreach (var seeder in seeders)
