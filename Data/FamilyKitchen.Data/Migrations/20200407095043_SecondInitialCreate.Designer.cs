@@ -4,14 +4,16 @@ using FamilyKitchen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FamilyKitchen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200407095043_SecondInitialCreate")]
+    partial class SecondInitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,9 +103,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FamilyId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -144,8 +143,6 @@ namespace FamilyKitchen.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FamilyId");
 
                     b.HasIndex("IsDeleted");
 
@@ -188,33 +185,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("FamilyKitchen.Data.Models.Family", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("Families");
                 });
 
             modelBuilder.Entity("FamilyKitchen.Data.Models.FoodResource", b =>
@@ -684,13 +654,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("FamilyKitchen.Data.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("FamilyKitchen.Data.Models.Family", "Family")
-                        .WithMany("FamilyMembers")
-                        .HasForeignKey("FamilyId");
                 });
 
             modelBuilder.Entity("FamilyKitchen.Data.Models.FoodResource", b =>

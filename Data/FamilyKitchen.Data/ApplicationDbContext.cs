@@ -49,6 +49,8 @@
 
         public DbSet<ShopProductSubCategory> ShopProductsSubCategories { get; set; }
 
+        public DbSet<Family> Families { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -144,6 +146,11 @@
                 .HasOne(rs => rs.SubCategory)
                 .WithMany(r => r.ShopProductsSubCategories)
                 .HasForeignKey(rs => rs.SubCategoryId);
+
+            builder.Entity<Family>()
+                .HasMany(f => f.FamilyMembers)
+                .WithOne(fm => fm.Family)
+                .HasForeignKey(fm => fm.FamilyId);
 
             // Disable cascade delete
             var foreignKeys = entityTypes

@@ -28,6 +28,10 @@ namespace FamilyKitchen.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        public string FamilyId { get; set; }
+
+        public Family Family { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
