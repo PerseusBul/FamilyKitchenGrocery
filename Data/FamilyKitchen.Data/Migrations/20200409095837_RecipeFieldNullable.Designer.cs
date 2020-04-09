@@ -4,14 +4,16 @@ using FamilyKitchen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FamilyKitchen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200409095837_RecipeFieldNullable")]
+    partial class RecipeFieldNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -462,7 +464,7 @@ namespace FamilyKitchen.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NutritionDeclarationId")
+                    b.Property<int>("NutritionDeclarationId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -737,7 +739,9 @@ namespace FamilyKitchen.Data.Migrations
                 {
                     b.HasOne("FamilyKitchen.Data.Models.NutritionDeclaration", "NutritionDeclaration")
                         .WithMany()
-                        .HasForeignKey("NutritionDeclarationId");
+                        .HasForeignKey("NutritionDeclarationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("FamilyKitchen.Data.Models.Recipe", "Recipe")
                         .WithMany()

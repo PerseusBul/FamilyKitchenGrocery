@@ -30,6 +30,8 @@
 
         public Size Size { get; set; }
 
+        public bool? IsPrivate { get; set; }
+
         // TODO calculate it in the constructor or may be in any service from NutritionDeclaration of the KitchenProducts
         [NotMapped]
         public NutritionDeclaration Nutrients { get; }// => GetNutritionDeclaration(this.Id);

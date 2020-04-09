@@ -9,19 +9,19 @@
 
     using FamilyKitchen.Data.Models;
 
-    public class NutritionDeclarationsSeeder : ISeeder
+    public class RecipesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            if (dbContext.NutritionDeclarations.Any())
+            if (dbContext.Recipes.Any())
             {
                 return;
             }
 
-            var jsonString = File.ReadAllText("../FamilyKitchen.Web/wwwroot/seedData/nutritionDeclarations.json");
-            var entities = JsonSerializer.Deserialize<List<NutritionDeclaration>>(jsonString);
+            var jsonString = File.ReadAllText("../FamilyKitchen.Web/wwwroot/seedData/recipes.json");
+            var entities = JsonSerializer.Deserialize<List<Recipe>>(jsonString);
 
-            await dbContext.NutritionDeclarations.AddRangeAsync(entities);
+            await dbContext.AddRangeAsync(entities);
         }
     }
 }

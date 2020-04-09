@@ -1,6 +1,7 @@
 ﻿namespace FamilyKitchen.Data.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -26,6 +27,8 @@
         public virtual IQueryable<TEntity> AllAsNoTracking() => this.DbSet.AsNoTracking();
 
         public virtual Task AddAsync(TEntity entity) => this.DbSet.AddAsync(entity).AsTask();
+
+        public virtual async Task AddRangeAsync(IEnumerable<TEntity> entity) => await this.DbSet.AddRangeAsync(entity);
 
         public virtual void Update(TEntity entity)
         {
