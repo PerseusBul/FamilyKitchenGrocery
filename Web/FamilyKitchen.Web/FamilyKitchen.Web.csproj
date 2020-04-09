@@ -49,10 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\seedData\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="wwwroot\images\.DS_Store">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -675,6 +671,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\seedData\shopProducts.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\seedData\shopProductsSubCategories.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\seedData\subCategories.json">

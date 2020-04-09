@@ -10,9 +10,11 @@
         {
             this.IsDeleted = false;
             this.CreatedOn = DateTime.UtcNow;
-           // this.ShoppingCartsShopProducts = new HashSet<ShoppingCartShopProduct>();
-            this.ExpireDate = this.CreatedOn.AddMonths(2);
-           // this.ShopProductsSubCategories = new HashSet<ShopProductSubCategory>();
+           this.ShoppingCartsShopProducts = new HashSet<ShoppingCartShopProduct>();
+
+            //this.ExpireDate = this.CreatedOn.AddMonths(2);
+
+           this.ShopProductsSubCategories = new HashSet<ShopProductSubCategory>();
         }
 
         public string TradeMark { get; set; }
@@ -22,7 +24,7 @@
         // TODO change name to content via attribute
         public Recipe Recipe { get; set; }
 
-        public int NutritionDeclarationId { get; set; }
+        public int? NutritionDeclarationId { get; set; }
 
         public NutritionDeclaration NutritionDeclaration { get; set; }
 

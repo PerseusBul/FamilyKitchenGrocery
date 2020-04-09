@@ -36,6 +36,7 @@
                               new FoodResourcesAllergensSeeder(),
                               new RecipesSeeder(),
                               new FoodResourcesRecipesSeeder(),
+                              new ShopProductsSubCategoriesSeeder(),
                           };
 
             foreach (var seeder in seeders)
