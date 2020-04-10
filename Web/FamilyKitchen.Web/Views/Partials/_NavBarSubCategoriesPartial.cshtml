@@ -1,0 +1,10 @@
+﻿<div class="navbar navbar-expand-lg ftco_navbar bg-dark ftco-navbar-light">
+    <div class="container">
+        <ul class="navbar-nav @*flex-column*@ categories category-wrap product-category">
+            @foreach (var subCategory in @Model.SubCategories)
+            {
+                <li><a class=" nav-item btn btn-group-lg text-justify text-lg-center"    href="/SubCategory/Details/@subCategory.Id">@subCategory.Name</a></li>
+            }
+        </ul>
+    </div>
+</div>
