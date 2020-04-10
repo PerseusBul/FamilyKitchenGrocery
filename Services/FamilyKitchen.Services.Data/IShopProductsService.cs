@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FamilyKitchen.Services.Data
+﻿namespace FamilyKitchen.Services.Data
 {
+    using System.Collections.Generic;
+
     public interface IShopProductsService
     {
         IEnumerable<T> GetAll<T>(int? count = null);

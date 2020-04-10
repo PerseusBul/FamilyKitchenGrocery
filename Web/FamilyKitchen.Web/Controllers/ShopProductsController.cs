@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FamilyKitchen.Services.Data;
-using FamilyKitchen.Web.ViewModels.FoodResources;
-using FamilyKitchen.Web.ViewModels.ShopProducts;
-using Microsoft.AspNetCore.Mvc;
-
-namespace FamilyKitchen.Web.Controllers
+﻿namespace FamilyKitchen.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using FamilyKitchen.Services.Data;
+    using FamilyKitchen.Web.ViewModels.ShopProducts;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ShopProductsController : BaseController
     {
         private readonly IShopProductsService productsService;
 
-        public ShopProductsController(IShopProductsService productsService) // TODO to be changed with ShopProducts
+        public ShopProductsController(IShopProductsService productsService)
         {
             this.productsService = productsService;
         }
@@ -29,7 +26,7 @@ namespace FamilyKitchen.Web.Controllers
         {
             var viewModel = new ListAllProductsViewModel
             {
-                Products = this.productsService.GetAllProducts<ShopProductViewModel>(), // await
+                Products = this.productsService.GetAllProducts<ShopProductViewModel>(), // TODO await
             };
 
             return this.View(viewModel);
@@ -39,7 +36,7 @@ namespace FamilyKitchen.Web.Controllers
         {
             var viewModel = new ListAllMealsViewModel
             {
-                Products = this.productsService.GetAllMeals<MealViewModel>(), // await
+                Products = this.productsService.GetAllMeals<ShopProductViewModel>(), // await
             };
 
             return this.View(viewModel);

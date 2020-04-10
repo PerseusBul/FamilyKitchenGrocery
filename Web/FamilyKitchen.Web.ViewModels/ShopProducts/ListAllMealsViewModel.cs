@@ -6,6 +6,6 @@
 
     public class ListAllMealsViewModel
     {
-        public IEnumerable<MealViewModel> Products { get; set; }
+        public IEnumerable<ShopProductViewModel> Products { get; set; }
     }
 }

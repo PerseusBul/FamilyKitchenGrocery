@@ -13,6 +13,7 @@
     using FamilyKitchen.Services.Messaging;
     using FamilyKitchen.Web.ViewModels;
 
+    using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -21,6 +22,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using FamilyKitchen.Web.MappingConfiguration;
 
     public class Startup
     {
@@ -69,6 +71,8 @@
             });
             services.AddRazorPages();
 
+            services.AddAutoMapper(cfg => cfg.AddProfile<FamilyKitchenProfile>(), typeof(Startup));
+
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -83,6 +87,7 @@
             services.AddTransient<IShopProductsService, ShopProductsService>();
             services.AddTransient<IFoodResourcesService, FoodResourcesService>();
             services.AddTransient<IRecipesService, RecipesService>();
+            services.AddTransient<ISubCategoriesService, SubCategoriesService>();
 
             //Account account = new Account(
             // this.configuration["Cloudinary:AppName"],
