@@ -1,7 +1,7 @@
-﻿namespace FamilyKitchen.Web
+﻿    namespace FamilyKitchen.Web
 {
     using System.Reflection;
-
+    using CloudinaryDotNet;
     using FamilyKitchen.Data;
     using FamilyKitchen.Data.Common;
     using FamilyKitchen.Data.Common.Repositories;
@@ -16,6 +16,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -37,7 +38,23 @@
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddRoles<ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAuthentication()
+                //.AddGoogle(options =>
+                // {
+                //     IConfigurationSection googleAuthNSection =
+                //         this.configuration.GetSection("Authentication:Google");
+
+                //     options.ClientId = googleAuthNSection["ClientId"];
+                //     options.ClientSecret = googleAuthNSection["ClientSecret"];
+                // })
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+                    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+                });
 
             services.Configure<CookiePolicyOptions>(
                 options =>
@@ -46,7 +63,10 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(configure =>
+            {
+                configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);
@@ -59,6 +79,18 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IShopProductsService, ShopProductsService>();
+            services.AddTransient<IFoodResourcesService, FoodResourcesService>();
+            services.AddTransient<IRecipesService, RecipesService>();
+
+            //Account account = new Account(
+            // this.configuration["Cloudinary:AppName"],
+            // this.configuration["Cloudinary:AppKey"],
+            // this.configuration["Cloudinary:AppSecret"]);
+
+            //Cloudinary cloudinary = new Cloudinary(account);
+            //services.AddSingleton(cloudinary);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
