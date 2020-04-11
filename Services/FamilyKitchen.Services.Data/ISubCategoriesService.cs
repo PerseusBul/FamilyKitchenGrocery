@@ -1,11 +1,11 @@
 ﻿namespace FamilyKitchen.Services.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using FamilyKitchen.Web.ViewModels.SubCategories;
 
     public interface ISubCategoriesService
     {
+        SubCategoryViewModel GetSubcategoryById(int id);
 
+        int GetCategoryId(int id);
     }
 }

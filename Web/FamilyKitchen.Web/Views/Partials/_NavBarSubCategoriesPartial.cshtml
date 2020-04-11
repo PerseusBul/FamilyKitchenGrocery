@@ -3,7 +3,7 @@
         <ul class="navbar-nav @*flex-column*@ categories category-wrap product-category">
             @foreach (var subCategory in @Model.SubCategories)
             {
-                <li><a class=" nav-item btn btn-group-lg text-justify text-lg-center"    href="/SubCategory/Details/@subCategory.Id">@subCategory.Name</a></li>
+                <li><a class=" nav-item btn btn-group-lg text-justify text-lg-center"    href="/SubCategories/Details/@subCategory.Id">@subCategory.Name</a></li>
             }
         </ul>
     </div>
