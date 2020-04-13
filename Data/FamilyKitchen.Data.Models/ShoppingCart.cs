@@ -13,7 +13,7 @@
             this.IsDeleted = false;
             this.CreatedOn = DateTime.UtcNow;
             this.ShoppingCartsShopProducts = new HashSet<ShoppingCartShopProduct>();
-            //this.UsersShoppingCarts = new HashSet<UserShoppingCart>();
+            this.FamilyKitchenUsersShoppingCarts = new HashSet<FamilyKitchenUserShoppingCart>();
         }
 
         [Required]
@@ -21,6 +21,6 @@
 
         public virtual IEnumerable<ShoppingCartShopProduct> ShoppingCartsShopProducts { get; set; }
 
-        // public virtual IEnumerable<UserShoppingCart> UsersShoppingCarts { get; set; }
+        public virtual IEnumerable<FamilyKitchenUserShoppingCart> FamilyKitchenUsersShoppingCarts { get; set; }
     }
 }

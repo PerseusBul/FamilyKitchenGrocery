@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class ApplicationDbContext : IdentityDbContext<FamilyKitchenUser, ApplicationRole, string>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
             typeof(ApplicationDbContext).GetMethod(
@@ -50,6 +50,8 @@
         public DbSet<ShopProductSubCategory> ShopProductsSubCategories { get; set; }
 
         public DbSet<Family> Families { get; set; }
+
+        public DbSet<FamilyKitchenUserShoppingCart> FamilyKitchenUsersShoppingCarts { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -151,6 +153,19 @@
                 .HasMany(f => f.FamilyMembers)
                 .WithOne(fm => fm.Family)
                 .HasForeignKey(fm => fm.FamilyId);
+
+            builder.Entity<FamilyKitchenUserShoppingCart>()
+               .HasKey(usc => new { usc.UserId, usc.ShoppingCartId });
+
+            builder.Entity<FamilyKitchenUserShoppingCart>()
+                .HasOne(usc => usc.User)
+                .WithMany(u => u.FamilyKitchenUsersShoppingCarts)
+                .HasForeignKey(usc => usc.UserId);
+
+            builder.Entity<FamilyKitchenUserShoppingCart>()
+                .HasOne(usc => usc.ShoppingCart)
+                .WithMany(u => u.FamilyKitchenUsersShoppingCarts)
+                .HasForeignKey(usc => usc.ShoppingCartId);
 
             // Disable cascade delete
             var foreignKeys = entityTypes

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
 
     public class ShopProduct : BaseProduct
@@ -18,6 +19,9 @@
         }
 
         public string TradeMark { get; set; }
+
+        [Range(0, 60)]
+        public decimal Discount { get; set; }
 
         public int? RecipeId { get; set; }
 

@@ -8,7 +8,7 @@
     using System.Text.Json;
     using System.Threading.Tasks;
 
-    public class ShopProductsSubCategoriesSeeder : ISeeder
+    internal class ShopProductsSubCategoriesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {

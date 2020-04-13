@@ -9,7 +9,7 @@
 
     using FamilyKitchen.Data.Models;
 
-    public class NutritionDeclarationsSeeder : ISeeder
+    internal class NutritionDeclarationsSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {

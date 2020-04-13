@@ -14,6 +14,6 @@
 
         public string Name { get; set; }
 
-        public virtual IEnumerable<ApplicationUser> FamilyMembers { get; set; }
+        public virtual IEnumerable<FamilyKitchenUser> FamilyMembers { get; set; }
     }
 }

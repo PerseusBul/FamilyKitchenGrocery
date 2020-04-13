@@ -1,4 +1,4 @@
-﻿    namespace FamilyKitchen.Web
+﻿namespace FamilyKitchen.Web
 {
     using System.Reflection;
     using CloudinaryDotNet;
@@ -39,18 +39,23 @@
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
+            services.AddDefaultIdentity<FamilyKitchenUser>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireUppercase = false;
+            })
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication()
-                //.AddGoogle(options =>
+                //.AddGoogle(googleOptions =>
                 // {
-                //     IConfigurationSection googleAuthNSection =
-                //         this.configuration.GetSection("Authentication:Google");
-
-                //     options.ClientId = googleAuthNSection["ClientId"];
-                //     options.ClientSecret = googleAuthNSection["ClientSecret"];
+                //     googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
+                //     googleOptions.ClientSecret = this.configuration["Authentication:ClientSecret"];
                 // })
                 .AddFacebook(facebookOptions =>
                 {
@@ -88,15 +93,18 @@
             services.AddTransient<IFoodResourcesService, FoodResourcesService>();
             services.AddTransient<IRecipesService, RecipesService>();
             services.AddTransient<ISubCategoriesService, SubCategoriesService>();
+            services.AddTransient<IShoppingCartsService, ShoppingCartsService>();
 
-            //Account account = new Account(
-            // this.configuration["Cloudinary:AppName"],
-            // this.configuration["Cloudinary:AppKey"],
-            // this.configuration["Cloudinary:AppSecret"]);
+            Account account = new Account(
+             this.configuration["Cloudinary:AppName"],
+             this.configuration["Cloudinary:AppKey"],
+             this.configuration["Cloudinary:AppSecret"]);
 
-            //Cloudinary cloudinary = new Cloudinary(account);
-            //services.AddSingleton(cloudinary);
+            Cloudinary cloudinary = new Cloudinary(account);
+            services.AddSingleton(cloudinary);
         }
+
+        // mongodb+srv://PerseusBul:PerseusBul1@cluster0-aw8nr.azure.mongodb.net/test?retryWrites=true&w=majority // TODO encode
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -113,7 +121,7 @@
                     dbContext.Database.Migrate();
                 }
 
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+                new FamilyKitchenDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             if (env.IsDevelopment())

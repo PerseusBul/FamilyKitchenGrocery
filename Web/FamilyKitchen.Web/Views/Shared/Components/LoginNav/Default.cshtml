@@ -1,8 +1,8 @@
 ﻿@using FamilyKitchen.Common
 @using FamilyKitchen.Data.Models
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<FamilyKitchenUser> SignInManager
+@inject UserManager<FamilyKitchenUser> UserManager
 
 <ul class="navbar-nav ml-auto">
     @if (this.SignInManager.IsSignedIn(this.User))

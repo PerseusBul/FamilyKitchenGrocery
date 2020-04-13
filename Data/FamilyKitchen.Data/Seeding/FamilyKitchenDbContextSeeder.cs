@@ -2,12 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
-    public class ApplicationDbContextSeeder : ISeeder
+    public class FamilyKitchenDbContextSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
@@ -21,7 +22,7 @@
                 throw new ArgumentNullException(nameof(serviceProvider));
             }
 
-            var logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ApplicationDbContextSeeder));
+            var logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FamilyKitchenDbContextSeeder));
 
             var seeders = new List<ISeeder>
                           {

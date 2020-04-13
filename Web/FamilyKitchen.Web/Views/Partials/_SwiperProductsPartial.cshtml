@@ -1,0 +1,55 @@
+﻿<div class="swiper-container">
+    <div class="swiper-wrapper">
+        @foreach (var product in Model.Products)
+        {
+            <div class="swiper-slide">
+                <div class="ftco-animate">
+                    <div class="product">
+                        <a href="Details/@product.Id" class="img-prod">
+                            <img class="img-fluid" src=@product.ImageUrl alt=@product.Name>
+                            @if (product.Discount > 0)
+                            {
+                                <span class="status">@product.Discount%</span>
+                            };
+
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="#">@product.Name</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    <p class="price">
+                                        @if (product.Discount > 0)
+                                        {
+                                            <span class="mr-2 price-dc">$ @product.Price</span>
+                                        }
+                                        <span class="price-sale">$ @product.SalePrice</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <span><i class="ion-ios-cart"></i></span>
+                                    </a>
+                                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                        <span><i class="ion-ios-heart"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
