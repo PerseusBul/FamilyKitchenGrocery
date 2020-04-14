@@ -11,11 +11,12 @@
         {
             this.IsDeleted = false;
             this.CreatedOn = DateTime.UtcNow;
-           this.ShoppingCartsShopProducts = new HashSet<ShoppingCartShopProduct>();
+            this.ShoppingCartsShopProducts = new HashSet<ShoppingCartShopProduct>();
 
             //this.ExpireDate = this.CreatedOn.AddMonths(2);
 
-           this.ShopProductsSubCategories = new HashSet<ShopProductSubCategory>();
+            this.ShopProductsSubCategories = new HashSet<ShopProductSubCategory>();
+            this.FamilyKitchenUsersFavoriteProducts = new HashSet<FamilyKitchenUserFavoriteProduct>();
         }
 
         public string TradeMark { get; set; }
@@ -34,6 +35,8 @@
 
         public virtual IEnumerable<ShoppingCartShopProduct> ShoppingCartsShopProducts { get; set; }
 
-       public virtual IEnumerable<ShopProductSubCategory> ShopProductsSubCategories { get; set; }
+        public virtual IEnumerable<ShopProductSubCategory> ShopProductsSubCategories { get; set; }
+
+        public virtual IEnumerable<FamilyKitchenUserFavoriteProduct> FamilyKitchenUsersFavoriteProducts { get; set; }
     }
 }

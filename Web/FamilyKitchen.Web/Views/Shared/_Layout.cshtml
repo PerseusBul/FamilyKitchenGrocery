@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@*@using AspNetCoreTemplate.Web.ViewModels.Home*@
+
 @inject SignInManager<FamilyKitchenUser> SignInManager
 @inject UserManager<FamilyKitchenUser> UserManager
 <!DOCTYPE html>
@@ -43,14 +43,12 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-12 ftco-animate text-center">
-                    <p class="mb-0 bread"><span class="mr-2"><a href="index.html">Favorite</a></span> <span>Products</span></p>
+                    <p class="mb-0 bread"><span class="mr-2"><a href="/FavoriteProducts/List">Favorite</a></span> <span>Products</span></p>
                     <h1 class="breadcrumbs">TAKE ALL!</h1>
                 </div>
             </div>
         </div>
     </div>
-    @*<vc:nav-bar></vc:nav-bar>*@
-    @*<div> <partial name="~/Views/Partials/_NavbarCategoriesPartial.cshtml" /></div>*@
     <section class="ftco-section">
         <div class="container">
 

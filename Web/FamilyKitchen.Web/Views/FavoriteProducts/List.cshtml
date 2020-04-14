@@ -1,0 +1,51 @@
+﻿@using FamilyKitchen.Web.ViewModels.ShopProducts
+@model ListAllProductsViewModel
+
+<h1>G r o c e r y</h1>
+<div class="container">
+    <div class="row justify-content-center mb-3 pb-3">
+        <div class="col-md-12 heading-section text-center ftco-animate">
+
+            <h2 class="mb-4">Favorite Products</h2>
+            <span class="subheading">Products</span>
+        </div>
+    </div>
+</div>
+<partial name="~/Views/Partials/_SwiperProductsPartial.cshtml" model="@Model" />
+
+<script>
+    $(document).ready(function () {
+
+        var quantitiy = 0;
+        $('.quantity-right-plus').click(function (e) {
+
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            $('#quantity').val(quantity + 1);
+
+
+            // Increment
+
+        });
+
+        $('.quantity-left-minus').click(function (e) {
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
+            // Increment
+            if (quantity > 0) {
+                $('#quantity').val(quantity - 1);
+            }
+        });
+
+    });
+</script>

@@ -15,7 +15,7 @@
         private readonly IDeletableEntityRepository<Recipe> recipeRepository;
 
         public ShopProductsService(IDeletableEntityRepository<ShopProduct> productsRepository, 
-            IDeletableEntityRepository<Recipe> recipeRepository)
+                                   IDeletableEntityRepository<Recipe> recipeRepository)
         {
             this.productsRepository = productsRepository;
             this.recipeRepository = recipeRepository;
@@ -76,7 +76,6 @@
         private IEnumerable<ShopProduct> ProduceNewKitchenProducts(IQueryable<Recipe> meals)
         {
             Random number = new Random();
-            var debug = meals.Select(x => x.FoodResourcesRecipes.Select(y => y.FoodResource.Price * y.Quantity).Sum()).ToList();
 
             var products = meals.Select(x => new ShopProduct
             {
