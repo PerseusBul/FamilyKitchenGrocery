@@ -3,22 +3,26 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using FamilyKitchen.Data.Common.Repositories;
     using FamilyKitchen.Data.Models;
     using FamilyKitchen.Data.Models.Enums;
     using FamilyKitchen.Services.Mapping;
+    using Nest;
 
     public class ShopProductsService : IShopProductsService
     {
         private readonly IDeletableEntityRepository<ShopProduct> productsRepository;
         private readonly IDeletableEntityRepository<Recipe> recipeRepository;
+        private readonly IElasticClient elasticClient;
 
         public ShopProductsService(IDeletableEntityRepository<ShopProduct> productsRepository, 
-                                   IDeletableEntityRepository<Recipe> recipeRepository)
+                                   IDeletableEntityRepository<Recipe> recipeRepository,
+                                   IElasticClient elasticClient)
         {
             this.productsRepository = productsRepository;
             this.recipeRepository = recipeRepository;
+            this.elasticClient = elasticClient;
         }
 
         public IEnumerable<T> GetAll<T>(int? count = null)
@@ -62,7 +66,9 @@
         {
             IQueryable<ShopProduct> query =
                 this.productsRepository.All().Where(x => x.RecipeId == null);
-
+            var products = query.Take(1).ToArray();
+            var indexManyResponse = this.elasticClient.IndexMany(products);
+            var result = this.elasticClient.Bulk(b => b.Index("shopProducts").IndexMany(products));
             return query.To<T>().ToList();
         }
 
@@ -71,6 +77,54 @@
             var product = this.productsRepository.All().Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
             return product;
+        }
+
+        public async Task Add(ShopProduct product)
+        {
+            var isExist = this.productsRepository
+                .All()
+                .Any(p => p.Name == product.Name || p.EANCode == product.EANCode);
+
+            if (isExist || product == null)
+            {
+                return;
+            }
+
+            await this.productsRepository.AddAsync(product);
+            await this.productsRepository.SaveChangesAsync();
+            await this.elasticClient.IndexDocumentAsync<ShopProduct>(product);
+        }
+
+        public async Task Delete(ShopProduct product)
+        {
+            var isExist = this.productsRepository
+                .All()
+                .Any(p => p.Name == product.Name || p.EANCode == product.EANCode);
+
+            if (isExist || product == null)
+            {
+                return;
+            }
+
+            await this.productsRepository.AddAsync(product);
+            await this.productsRepository.SaveChangesAsync();
+            await this.elasticClient.DeleteAsync<ShopProduct>(product);
+        }
+
+        public async Task Update(ShopProduct product)
+        {
+            var isExist = this.productsRepository
+                .All()
+                .Any(p => p.Name == product.Name || p.EANCode == product.EANCode);
+
+            if (isExist || product == null)
+            {
+                return;
+            }
+
+            await this.productsRepository.AddAsync(product);
+            await this.productsRepository.SaveChangesAsync();
+            await this.elasticClient.UpdateAsync<ShopProduct>(product, u => u.Doc(product));
         }
 
         private IEnumerable<ShopProduct> ProduceNewKitchenProducts(IQueryable<Recipe> meals)
@@ -90,6 +144,7 @@
                 RecipeId = x.Id,
             }).ToList();
 
+            var indexManyResponse = this.elasticClient.IndexMany(products);
             return products;
         }
     }

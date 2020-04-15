@@ -750,4 +750,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ElasticSearchConf\Controllers\" />
+  </ItemGroup>
 </Project>

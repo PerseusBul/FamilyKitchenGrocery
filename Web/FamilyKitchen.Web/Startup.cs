@@ -1,6 +1,7 @@
 ﻿namespace FamilyKitchen.Web
 {
     using System.Reflection;
+    using Nest;
     using CloudinaryDotNet;
     using FamilyKitchen.Data;
     using FamilyKitchen.Data.Common;
@@ -23,6 +24,9 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using FamilyKitchen.Web.MappingConfiguration;
+    using FamilyKitchen.Web.ElasticSearchConf;
+    using ProductElasticSearch.Services;
+    using Microsoft.Extensions.DependencyInjection.Extensions;
 
     public class Startup
     {
@@ -74,34 +78,43 @@
             {
                 configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
-            services.AddRazorPages();
 
+            services.AddSignalR(options => options.EnableDetailedErrors = true);
+            services.AddRazorPages();
+            services.AddSession();
             services.AddAutoMapper(cfg => cfg.AddProfile<FamilyKitchenProfile>(), typeof(Startup));
 
             services.AddSingleton(this.configuration);
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(FamilyKitchen.Data.Common.Repositories.IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
-            services.AddTransient<ICategoriesService, CategoriesService>();
-            services.AddTransient<IShopProductsService, ShopProductsService>();
-            services.AddTransient<IFoodResourcesService, FoodResourcesService>();
-            services.AddTransient<IRecipesService, RecipesService>();
-            services.AddTransient<ISubCategoriesService, SubCategoriesService>();
-            services.AddTransient<IShoppingCartsService, ShoppingCartsService>();
+            services.AddScoped<IEmailSender, NullMessageSender>();
+            services.AddScoped<ISettingsService, SettingsService>();
+            services.AddScoped<ICategoriesService, CategoriesService>();
+            services.AddScoped<IShopProductsService, ShopProductsService>();
+            services.AddScoped<IFoodResourcesService, FoodResourcesService>();
+            services.AddScoped<IRecipesService, RecipesService>();
+            services.AddScoped<ISubCategoriesService, SubCategoriesService>();
+            services.AddScoped<IShoppingCartsService, ShoppingCartsService>();
+            services.AddScoped<IFavoriteProductService, FavoriteProductService>();
 
-            Account account = new Account(
+             Account account = new Account(
              this.configuration["Cloudinary:AppName"],
              this.configuration["Cloudinary:AppKey"],
              this.configuration["Cloudinary:AppSecret"]);
 
             Cloudinary cloudinary = new Cloudinary(account);
             services.AddSingleton(cloudinary);
+
+            //services.AddSingleton<IProductService, ElasticSearchProductService>();
+            //services.Configure<ProductSettings>(configuration.GetSection("shopProducts"));
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddElasticsearch(this.configuration);
         }
 
         // mongodb+srv://PerseusBul:PerseusBul1@cluster0-aw8nr.azure.mongodb.net/test?retryWrites=true&w=majority // TODO encode
@@ -136,6 +149,7 @@
             }
 
             app.UseHttpsRedirection();
+            app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
