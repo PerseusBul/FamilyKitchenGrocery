@@ -39,6 +39,16 @@
             return this.View(viewModel);
         }
 
+        public IActionResult Contact()
+        {
+            return this.View();
+        }
+
+        public IActionResult About()
+        {
+            return this.View();
+        }
+
         public IActionResult Privacy()
         {
             return this.View();

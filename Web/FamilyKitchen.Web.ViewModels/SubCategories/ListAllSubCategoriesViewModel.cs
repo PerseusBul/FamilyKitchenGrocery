@@ -5,5 +5,7 @@
     public class ListAllSubCategoriesViewModel
     {
         public IEnumerable<SubCategoryViewModel> SubCategories { get; set; }
+
+        public bool Toggler { get; set; }
     }
 }

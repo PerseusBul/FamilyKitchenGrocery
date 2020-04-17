@@ -4,14 +4,22 @@
     ViewData["Title"] = "Details";
 }
 
-<vc:nav-bar></vc:nav-bar>
-<partial name="~/Views/Partials/_NavBarSubCategoriesPartial.cshtml" model="@Model" />
+@if (Model.Toggler)
+{
+    <vc:nav-bar></vc:nav-bar>
+}
+else
+{
+    <vc:nav-bar-meals></vc:nav-bar-meals>
+}
+
+<partial name="~/Views/Shared/Partials/_NavBarSubCategoriesPartial.cshtml" model="@Model" />
 <section class="ftco-section">
     <div class="container">
         <div class="row">
             @foreach (var category in @Model.SubCategories)
             {
-                <partial name="~/Views/Partials/_ProductsSelectionPartial.cshtml" model="@category" />
+                <partial name="~/Views/Shared/Partials/_ProductsSelectionPartial.cshtml" model="@category" />
             }
         </div>
     </div>

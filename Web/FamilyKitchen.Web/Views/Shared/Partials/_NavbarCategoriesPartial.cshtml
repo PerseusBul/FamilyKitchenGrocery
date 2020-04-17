@@ -4,6 +4,11 @@
 <div class="navbar navbar-expand-lg ftco_navbar bg-dark ftco-navbar-light">
     <div class="container">
         <ul class="navbar-nav product-category">
+            @*@foreach (var category in Model.CategoryNames)
+            {
+                <li><a class=" nav-item btn btn-group-lg text-justify text-lg-center" href="@category.Id">@category.Name</a></li>
+            }*@
+
             @for (int i = 0; i < @Model.CategoryNames.Count(); i++)
             {
                 <li><a class=" nav-item btn btn-group-lg text-justify text-lg-center" href="@Model.CategoryNames.ToArray()[i].Id">@Model.CategoryNames.ToArray()[i].Name</a></li>

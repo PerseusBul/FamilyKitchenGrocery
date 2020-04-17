@@ -28,6 +28,7 @@
             {
                 SubCategory = this.subCategoriesService.GetSubcategoryById(id),
                 SubCategories = this.categoriesService.GetSubCategoriesByCategoryId(categoryId),
+                Toggler = categoryId <= 12 ? true : false,
             };
             return this.View(viewModel);
         }

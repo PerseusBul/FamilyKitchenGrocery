@@ -22,7 +22,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> AllProducts()
+        public IActionResult AllProducts()
         {
             var viewModel = new ListAllProductsViewModel
             {
@@ -32,7 +32,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> AllMeals()
+        public IActionResult AllMeals()
         {
             var viewModel = new ListAllMealsViewModel
             {

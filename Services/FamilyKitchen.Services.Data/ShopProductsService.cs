@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using FamilyKitchen.Data.Common.Repositories;
     using FamilyKitchen.Data.Models;
     using FamilyKitchen.Data.Models.Enums;
@@ -67,8 +68,8 @@
             IQueryable<ShopProduct> query =
                 this.productsRepository.All().Where(x => x.RecipeId == null);
             var products = query.Take(1).ToArray();
-            var indexManyResponse = this.elasticClient.IndexMany(products);
-            var result = this.elasticClient.Bulk(b => b.Index("shopProducts").IndexMany(products));
+            // var indexManyResponse = this.elasticClient.IndexMany(products);
+            // var result = this.elasticClient.Bulk(b => b.Index("shopProducts").IndexMany(products));
             return query.To<T>().ToList();
         }
 
@@ -92,7 +93,7 @@
 
             await this.productsRepository.AddAsync(product);
             await this.productsRepository.SaveChangesAsync();
-            await this.elasticClient.IndexDocumentAsync<ShopProduct>(product);
+           // await this.elasticClient.IndexDocumentAsync<ShopProduct>(product);
         }
 
         public async Task Delete(ShopProduct product)
@@ -108,7 +109,7 @@
 
             await this.productsRepository.AddAsync(product);
             await this.productsRepository.SaveChangesAsync();
-            await this.elasticClient.DeleteAsync<ShopProduct>(product);
+            // await this.elasticClient.DeleteAsync<ShopProduct>(product);
         }
 
         public async Task Update(ShopProduct product)
@@ -124,7 +125,7 @@
 
             await this.productsRepository.AddAsync(product);
             await this.productsRepository.SaveChangesAsync();
-            await this.elasticClient.UpdateAsync<ShopProduct>(product, u => u.Doc(product));
+            // await this.elasticClient.UpdateAsync<ShopProduct>(product, u => u.Doc(product));
         }
 
         private IEnumerable<ShopProduct> ProduceNewKitchenProducts(IQueryable<Recipe> meals)
