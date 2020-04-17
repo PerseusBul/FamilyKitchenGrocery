@@ -13,14 +13,10 @@
             this.IsDeleted = false;
             this.CreatedOn = DateTime.UtcNow;
             this.ShoppingCartsShopProducts = new HashSet<ShoppingCartShopProduct>();
-            this.FamilyKitchenUsersShoppingCarts = new HashSet<FamilyKitchenUserShoppingCart>();
         }
 
-        [Required]
-        public decimal Total { get; set; }
+        public virtual FamilyKitchenUser FamilyKitchenUser { get; set; }
 
         public virtual IEnumerable<ShoppingCartShopProduct> ShoppingCartsShopProducts { get; set; }
-
-        public virtual IEnumerable<FamilyKitchenUserShoppingCart> FamilyKitchenUsersShoppingCarts { get; set; }
     }
 }

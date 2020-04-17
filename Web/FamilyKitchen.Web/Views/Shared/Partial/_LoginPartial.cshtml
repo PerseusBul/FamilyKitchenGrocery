@@ -1,14 +1,15 @@
-﻿@using FamilyKitchen.Common
-@using FamilyKitchen.Data.Models
-@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<FamilyKitchenUser> SignInManager
 @inject UserManager<FamilyKitchenUser> UserManager
+@{
+    ViewData["Nick"] = this.User.HasClaim(x=>x.Type== "Nickname") ? this.User.FindFirst(c=>c.Type== "Nickname").Value : this.User.Identity.Name;
+}
 
 <ul class="navbar-nav ml-auto">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @(this.User.Identity.Name)!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @ViewData["Nick"]!</a>
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {

@@ -1,4 +1,5 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
+
 namespace FamilyKitchen.Data.Models
 {
     using System;

@@ -51,8 +51,6 @@
 
         public DbSet<Family> Families { get; set; }
 
-        public DbSet<FamilyKitchenUserShoppingCart> FamilyKitchenUsersShoppingCarts { get; set; }
-
         public DbSet<FamilyKitchenUserFavoriteProduct> FamilyKitchenUsersFavoriteProducts { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
@@ -156,19 +154,6 @@
                 .WithOne(fm => fm.Family)
                 .HasForeignKey(fm => fm.FamilyId);
 
-            builder.Entity<FamilyKitchenUserShoppingCart>()
-               .HasKey(usc => new { usc.UserId, usc.ShoppingCartId });
-
-            builder.Entity<FamilyKitchenUserShoppingCart>()
-                .HasOne(usc => usc.User)
-                .WithMany(u => u.FamilyKitchenUsersShoppingCarts)
-                .HasForeignKey(usc => usc.UserId);
-
-            builder.Entity<FamilyKitchenUserShoppingCart>()
-                .HasOne(usc => usc.ShoppingCart)
-                .WithMany(u => u.FamilyKitchenUsersShoppingCarts)
-                .HasForeignKey(usc => usc.ShoppingCartId);
-
             builder.Entity<FamilyKitchenUserFavoriteProduct>()
               .HasKey(ff => new { ff.FamilyKitchenUserId, ff.ShopProductId });
 
@@ -181,6 +166,11 @@
                 .HasOne(ff => ff.ShopProduct)
                 .WithMany(u => u.FamilyKitchenUsersFavoriteProducts)
                 .HasForeignKey(ff => ff.ShopProductId);
+
+            builder.Entity<ShoppingCart>()
+                .HasOne(c => c.FamilyKitchenUser)
+                .WithOne(u => u.ShoppingCart)
+                .HasForeignKey<FamilyKitchenUser>(u => u.ShoppingCartId);
 
             // Disable cascade delete
             var foreignKeys = entityTypes

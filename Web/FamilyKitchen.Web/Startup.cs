@@ -25,8 +25,9 @@
     using Microsoft.Extensions.Hosting;
     using FamilyKitchen.Web.MappingConfiguration;
     using FamilyKitchen.Web.ElasticSearchConf;
-    using ProductElasticSearch.Services;
     using Microsoft.Extensions.DependencyInjection.Extensions;
+    using System;
+    using FamilyKitchen.Web.ExtensionsConf.ClaimConf;
 
     public class Startup
     {
@@ -43,17 +44,10 @@
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<FamilyKitchenUser>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 4;
-                options.Password.RequiredUniqueChars = 0;
-                options.Password.RequireUppercase = false;
-            })
+            services.AddDefaultIdentity<FamilyKitchenUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>();
 
             services.AddAuthentication()
                 //.AddGoogle(googleOptions =>
@@ -79,9 +73,27 @@
                 configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
+            services.AddResponseCaching();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+            });
+
             services.AddSignalR(options => options.EnableDetailedErrors = true);
+
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
+
             services.AddRazorPages();
-            services.AddSession();
             services.AddAutoMapper(cfg => cfg.AddProfile<FamilyKitchenProfile>(), typeof(Startup));
 
             services.AddSingleton(this.configuration);
@@ -92,15 +104,15 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddScoped<IEmailSender, NullMessageSender>();
-            services.AddScoped<ISettingsService, SettingsService>();
-            services.AddScoped<ICategoriesService, CategoriesService>();
-            services.AddScoped<IShopProductsService, ShopProductsService>();
-            services.AddScoped<IFoodResourcesService, FoodResourcesService>();
-            services.AddScoped<IRecipesService, RecipesService>();
-            services.AddScoped<ISubCategoriesService, SubCategoriesService>();
-            services.AddScoped<IShoppingCartsService, ShoppingCartsService>();
-            services.AddScoped<IFavoriteProductService, FavoriteProductService>();
+            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IShopProductsService, ShopProductsService>();
+            services.AddTransient<IFoodResourcesService, FoodResourcesService>();
+            services.AddTransient<IRecipesService, RecipesService>();
+            services.AddTransient<ISubCategoriesService, SubCategoriesService>();
+            services.AddTransient<IShoppingCartsService, ShoppingCartsService>();
+            services.AddTransient<IFavoriteProductService, FavoriteProductService>();
 
              Account account = new Account(
              this.configuration["Cloudinary:AppName"],
@@ -148,19 +160,22 @@
                 app.UseHsts();
             }
 
+            //app.UseResponseCompression();
+            //app.UseResponseCaching();
+            //app.UseHttpContextItemsMiddleware();
+
             app.UseHttpsRedirection();
-            app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+           
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(
                 endpoints =>
                     {
+                        //endpoints.MapHub<MyHub>("/hubRoute");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

@@ -193,6 +193,9 @@ namespace FamilyKitchen.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -214,6 +217,9 @@ namespace FamilyKitchen.Data.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("ShoppingCartId")
+                        .IsUnique();
+
                     b.ToTable("AspNetUsers");
                 });
 
@@ -230,21 +236,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.HasIndex("ShopProductId");
 
                     b.ToTable("FamilyKitchenUsersFavoriteProducts");
-                });
-
-            modelBuilder.Entity("FamilyKitchen.Data.Models.FamilyKitchenUserShoppingCart", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ShoppingCartId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "ShoppingCartId");
-
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("FamilyKitchenUsersShoppingCarts");
                 });
 
             modelBuilder.Entity("FamilyKitchen.Data.Models.FoodResource", b =>
@@ -555,9 +546,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
@@ -727,6 +715,12 @@ namespace FamilyKitchen.Data.Migrations
                     b.HasOne("FamilyKitchen.Data.Models.Family", "Family")
                         .WithMany("FamilyMembers")
                         .HasForeignKey("FamilyId");
+
+                    b.HasOne("FamilyKitchen.Data.Models.ShoppingCart", "ShoppingCart")
+                        .WithOne("FamilyKitchenUser")
+                        .HasForeignKey("FamilyKitchen.Data.Models.FamilyKitchenUser", "ShoppingCartId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FamilyKitchen.Data.Models.FamilyKitchenUserFavoriteProduct", b =>
@@ -740,21 +734,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.HasOne("FamilyKitchen.Data.Models.ShopProduct", "ShopProduct")
                         .WithMany("FamilyKitchenUsersFavoriteProducts")
                         .HasForeignKey("ShopProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FamilyKitchen.Data.Models.FamilyKitchenUserShoppingCart", b =>
-                {
-                    b.HasOne("FamilyKitchen.Data.Models.ShoppingCart", "ShoppingCart")
-                        .WithMany("FamilyKitchenUsersShoppingCarts")
-                        .HasForeignKey("ShoppingCartId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("FamilyKitchen.Data.Models.FamilyKitchenUser", "User")
-                        .WithMany("FamilyKitchenUsersShoppingCarts")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

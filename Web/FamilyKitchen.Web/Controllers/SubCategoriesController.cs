@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using FamilyKitchen.Data.Models;
     using FamilyKitchen.Services.Data;
     using FamilyKitchen.Web.ViewModels.SubCategories;
     using Microsoft.AspNetCore.Mvc;
@@ -29,7 +29,6 @@
                 SubCategory = this.subCategoriesService.GetSubcategoryById(id),
                 SubCategories = this.categoriesService.GetSubCategoriesByCategoryId(categoryId),
             };
-
             return this.View(viewModel);
         }
     }

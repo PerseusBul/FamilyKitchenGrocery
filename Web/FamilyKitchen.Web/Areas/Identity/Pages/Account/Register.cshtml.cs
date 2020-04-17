@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using FamilyKitchen.Data.Common.Repositories;
+using System.Security.Claims;
 
 namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
 {
@@ -24,17 +26,20 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
         private readonly UserManager<FamilyKitchenUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IRepository<IdentityUserClaim<string>> claimRepository;
 
         public RegisterModel(
             UserManager<FamilyKitchenUser> userManager,
             SignInManager<FamilyKitchenUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IRepository<IdentityUserClaim<string>> claimRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            this.claimRepository = claimRepository;
         }
 
         [BindProperty]
@@ -51,6 +56,11 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            [StringLength(8, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [RegularExpression("^[A-Z]+[a-zA-Z]*", ErrorMessage = "The {0} must be only from latin letters.")]
+            [Display(Name = "Nickname")]
+            public string Nickname { get; set; }
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -61,6 +71,10 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Phone]
+            [Display(Name = "Phone number")]
+            public string PhoneNumber { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,7 +89,7 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new FamilyKitchenUser { UserName = Input.Email, Email = Input.Email };
+                var user = new FamilyKitchenUser { UserName = Input.Email, Email = Input.Email, ShoppingCart = new ShoppingCart() };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -91,6 +105,8 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    await ClaimCreator(user, Input.Nickname, Input.PhoneNumber);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -110,6 +126,23 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task ClaimCreator(FamilyKitchenUser user, string nickname, string phone)
+        {
+            if (nickname != null)
+            {
+                var claim = new Claim("Nickname", Input.Nickname);
+
+                await _userManager.AddClaimAsync(user, claim);
+            }
+
+            if (phone != null)
+            {
+                var claim = new Claim("Phone", Input.PhoneNumber);
+
+                await _userManager.AddClaimAsync(user, claim);
+            }
         }
     }
 }
