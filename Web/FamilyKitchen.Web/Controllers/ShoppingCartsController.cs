@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using AutoMapper;
     using FamilyKitchen.Data.Common.Repositories;
     using FamilyKitchen.Data.Models;
@@ -16,19 +17,16 @@
         private readonly IShoppingCartsService cartsService;
         private readonly IShopProductsService shopProductsService;
         private readonly IDeletableEntityRepository<FamilyKitchenUser> userRepository;
-        private readonly IDeletableEntityRepository<ShopProduct> productRepository;
         private readonly IMapper mapper;
 
         public ShoppingCartsController(IShoppingCartsService cartsService,
                                        IShopProductsService shopProductsService,
                                        IDeletableEntityRepository<FamilyKitchenUser> userRepository,
-                                       IDeletableEntityRepository<ShopProduct> productRepository,
                                        IMapper mapper)
         {
             this.cartsService = cartsService;
             this.shopProductsService = shopProductsService;
             this.userRepository = userRepository;
-            this.productRepository = productRepository;
             this.mapper = mapper;
         }
 

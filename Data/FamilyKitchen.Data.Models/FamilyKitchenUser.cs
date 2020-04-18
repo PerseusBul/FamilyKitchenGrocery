@@ -17,6 +17,7 @@ namespace FamilyKitchen.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.FamilyKitchenUsersFavoriteProducts = new HashSet<FamilyKitchenUserFavoriteProduct>();
+            this.Orders = new HashSet<Order>();
         }
 
         // Audit info
@@ -38,6 +39,8 @@ namespace FamilyKitchen.Data.Models
         public ShoppingCart ShoppingCart { get; set; }
 
         public virtual IEnumerable<FamilyKitchenUserFavoriteProduct> FamilyKitchenUsersFavoriteProducts { get; set; }
+
+        public virtual IEnumerable<Order> Orders { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

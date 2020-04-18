@@ -4,14 +4,16 @@ using FamilyKitchen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FamilyKitchen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200418165124_Orders_OrderProfiles")]
+    partial class Orders_OrderProfiles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -495,27 +497,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.ToTable("OrderProfiles");
                 });
 
-            modelBuilder.Entity("FamilyKitchen.Data.Models.OrderShopProduct", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShopProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("OrderId", "ShopProductId");
-
-                    b.HasIndex("ShopProductId");
-
-                    b.ToTable("OrdersShopProducts");
-                });
-
             modelBuilder.Entity("FamilyKitchen.Data.Models.Recipe", b =>
                 {
                     b.Property<int>("Id")
@@ -931,21 +912,6 @@ namespace FamilyKitchen.Data.Migrations
                     b.HasOne("FamilyKitchen.Data.Models.OrderProfile", "OrderProfile")
                         .WithMany("Orders")
                         .HasForeignKey("OrderProfileId");
-                });
-
-            modelBuilder.Entity("FamilyKitchen.Data.Models.OrderShopProduct", b =>
-                {
-                    b.HasOne("FamilyKitchen.Data.Models.Order", "Order")
-                        .WithMany("OrdersShopProducts")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("FamilyKitchen.Data.Models.ShopProduct", "ShopProduct")
-                        .WithMany("OrdersShopProducts")
-                        .HasForeignKey("ShopProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("FamilyKitchen.Data.Models.ShopProduct", b =>

@@ -17,6 +17,7 @@
 
             this.ShopProductsSubCategories = new HashSet<ShopProductSubCategory>();
             this.FamilyKitchenUsersFavoriteProducts = new HashSet<FamilyKitchenUserFavoriteProduct>();
+            this.OrdersShopProducts = new HashSet<OrderShopProduct>();
         }
 
         public string TradeMark { get; set; }
@@ -38,5 +39,7 @@
         public virtual IEnumerable<ShopProductSubCategory> ShopProductsSubCategories { get; set; }
 
         public virtual IEnumerable<FamilyKitchenUserFavoriteProduct> FamilyKitchenUsersFavoriteProducts { get; set; }
+
+        public virtual IEnumerable<OrderShopProduct> OrdersShopProducts { get; set; }
     }
 }

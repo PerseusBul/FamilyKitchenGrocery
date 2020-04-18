@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FamilyKitchen.Web.ViewModels.ShoppingCarts
+﻿namespace FamilyKitchen.Web.ViewModels.ShoppingCarts
 {
+    using System.Collections.Generic;
+
     public class ListAllCartProductsViewModel
     {
         public List<CartProductViewModel> CartProducts { get; set; }

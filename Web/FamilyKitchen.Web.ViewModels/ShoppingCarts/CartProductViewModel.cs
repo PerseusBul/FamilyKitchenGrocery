@@ -1,10 +1,7 @@
-﻿using FamilyKitchen.Web.ViewModels.ShopProducts;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FamilyKitchen.Web.ViewModels.ShoppingCarts
+﻿namespace FamilyKitchen.Web.ViewModels.ShoppingCarts
 {
+    using FamilyKitchen.Web.ViewModels.ShopProducts;
+
     public class CartProductViewModel
     {
         public decimal Quantity { get; set; }
