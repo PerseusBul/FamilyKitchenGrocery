@@ -32,7 +32,7 @@
             this.mapper = mapper;
         }
 
-        public async Task<bool> AddProduct(int id, string username)
+        public async Task<bool> AddProduct(int id, string username, decimal quantity = 0)
         {
             var user = this.userRepository.All().Where(x => x.UserName == username).FirstOrDefault();
             var product = this.productRepository.All().Where(x => x.Id == id).FirstOrDefault();
@@ -52,17 +52,43 @@
                 return false;
             }
 
+            if (quantity <= 0)
+            {
+                quantity = 1;
+            }
+
             var cartProduct = new ShoppingCartShopProduct()
             {
                 ShopProductId = product.Id,
                 ShoppingCartId = user.ShoppingCartId,
-                Quantity = 1,
+                Quantity = quantity,
             };
 
             await this.productCartRepository.AddAsync(cartProduct);
             await this.productCartRepository.SaveChangesAsync();
 
             return true;
+        }
+
+        public void AddSessionCart(List<CartProductViewModel> session, string username)
+        {
+            var user = this.userRepository.All().Where(x => x.UserName == username).FirstOrDefault();
+            var entities = new List<ShoppingCartShopProduct>();
+
+            foreach (var product in session)
+            {
+                var cartProduct = new ShoppingCartShopProduct()
+                {
+                    ShopProductId = product.Details.Id,
+                    ShoppingCartId = user.ShoppingCartId,
+                    Quantity = product.Quantity,
+                };
+
+                entities.Add(cartProduct);
+            }
+
+            this.productCartRepository.AddRangeAsync(entities).GetAwaiter().GetResult();
+            this.productCartRepository.SaveChangesAsync().GetAwaiter().GetResult();
         }
 
         public ShoppingCartShopProduct GetProduct(int id, string username)

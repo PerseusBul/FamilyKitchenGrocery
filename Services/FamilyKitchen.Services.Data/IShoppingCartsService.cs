@@ -8,7 +8,9 @@
 
     public interface IShoppingCartsService
     {
-        Task<bool> AddProduct(int id, string username);
+        Task<bool> AddProduct(int id, string username, decimal quantity = 0);
+
+        void AddSessionCart(List<CartProductViewModel> session, string username);
 
         ShoppingCartShopProduct GetProduct(int id, string username);
 
