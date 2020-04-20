@@ -89,7 +89,7 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new FamilyKitchenUser { UserName = Input.Email, Email = Input.Email, ShoppingCart = new ShoppingCart() };
+                var user = new FamilyKitchenUser { UserName = Input.Email, Email = Input.Email, ShoppingCart = new ShoppingCart(), ClientCard = new ClientCard() };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -132,17 +132,21 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
         {
             if (nickname != null)
             {
-                var claim = new Claim("Nickname", Input.Nickname);
+                var claim = new Claim("Nickname", nickname);
 
                 await _userManager.AddClaimAsync(user, claim);
             }
 
             if (phone != null)
             {
-                var claim = new Claim("Phone", Input.PhoneNumber);
+                var claim = new Claim("Phone", phone);
 
                 await _userManager.AddClaimAsync(user, claim);
             }
+
+            var claimName = new Claim("Username", Input.Email);
+
+            await _userManager.AddClaimAsync(user, claimName);
         }
     }
 }

@@ -4,14 +4,16 @@ using FamilyKitchen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FamilyKitchen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200420003424_ClientCard")]
+    partial class ClientCard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,7 +123,7 @@ namespace FamilyKitchen.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("FamilyKitchenUserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -133,6 +135,10 @@ namespace FamilyKitchen.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FamilyKitchenUserId")
+                        .IsUnique()
+                        .HasFilter("[FamilyKitchenUserId] IS NOT NULL");
 
                     b.HasIndex("IsDeleted");
 
@@ -175,7 +181,7 @@ namespace FamilyKitchen.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ClientCardId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -240,10 +246,6 @@ namespace FamilyKitchen.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientCardId")
-                        .IsUnique()
-                        .HasFilter("[ClientCardId] IS NOT NULL");
 
                     b.HasIndex("FamilyId");
 
@@ -895,12 +897,15 @@ namespace FamilyKitchen.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("FamilyKitchen.Data.Models.ClientCard", b =>
+                {
+                    b.HasOne("FamilyKitchen.Data.Models.FamilyKitchenUser", "FamilyKitchenUser")
+                        .WithOne("ClientCard")
+                        .HasForeignKey("FamilyKitchen.Data.Models.ClientCard", "FamilyKitchenUserId");
+                });
+
             modelBuilder.Entity("FamilyKitchen.Data.Models.FamilyKitchenUser", b =>
                 {
-                    b.HasOne("FamilyKitchen.Data.Models.ClientCard", "ClientCard")
-                        .WithOne("FamilyKitchenUser")
-                        .HasForeignKey("FamilyKitchen.Data.Models.FamilyKitchenUser", "ClientCardId");
-
                     b.HasOne("FamilyKitchen.Data.Models.Family", "Family")
                         .WithMany("FamilyMembers")
                         .HasForeignKey("FamilyId");

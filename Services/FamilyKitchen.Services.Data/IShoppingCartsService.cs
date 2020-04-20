@@ -16,10 +16,12 @@
 
         Task<bool> DeleteProduct(int id, string username);
 
-        Task EditProduct(int id, string username, int quantity);
+        Task EditProduct(int id, string username, bool upOrder);
 
         IEnumerable<CartProductViewModel> GetAllProducts(string username);
 
-        bool DeleteAll(string username);
+        Task<bool> DeleteAll(string username);
+
+        Task<CartTotalViewModel> GetCartTotalParameters(string username);
     }
 }

@@ -1,0 +1,29 @@
+﻿@using FamilyKitchen.Web.ViewModels.ShoppingCarts
+@model CartTotalViewModel
+
+@{
+    ViewData["Title"] = "Default";
+}
+
+<div class="col-md-12 d-flex mb-5">
+    <div class="cart-detail cart-total p-3 p-md-4">
+        <h3 class="billing-heading mb-4">Cart Total</h3>
+        <p class="d-flex">
+            <span>Subtotal</span>
+            <span>$@Model.Subtotal</span>
+        </p>
+        <p class="d-flex">
+            <span>Delivery</span>
+            <span>$@Model.DeliveryPrice</span>
+        </p>
+        <p class="d-flex">
+            <span>Discount</span>
+            <span>$@Model.Discount</span>
+        </p>
+        <hr>
+        <p class="d-flex total-price">
+            <span>Total</span>
+            <span>$@Model.Total</span>
+        </p>
+    </div>
+</div>

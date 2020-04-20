@@ -18,18 +18,21 @@
         private readonly IDeletableEntityRepository<FamilyKitchenUser> userRepository;
         private readonly IDeletableEntityRepository<ShopProduct> productRepository;
         private readonly IRepository<ShoppingCartShopProduct> productCartRepository;
+        private readonly IDeletableEntityRepository<ClientCard> clientCardRepository;
         private readonly IMapper mapper;
 
         public ShoppingCartsService(IDeletableEntityRepository<ShoppingCart> cartRepository,
                                     IDeletableEntityRepository<FamilyKitchenUser> userRepository,
                                     IDeletableEntityRepository<ShopProduct> productRepository,
                                     IRepository<ShoppingCartShopProduct> productCartRepository,
+                                    IDeletableEntityRepository<ClientCard> clientCardRepository,
                                     IMapper mapper)
         {
             this.cartRepository = cartRepository;
             this.userRepository = userRepository;
             this.productRepository = productRepository;
             this.productCartRepository = productCartRepository;
+            this.clientCardRepository = clientCardRepository;
             this.mapper = mapper;
         }
 
@@ -138,7 +141,7 @@
             return true;
         }
 
-        public async Task EditProduct(int id, string username, int quantity)
+        public async Task EditProduct(int id, string username, bool upOrder)
         {
             var user = this.userRepository.All().Where(x => x.UserName == username).FirstOrDefault();
             var product = this.productRepository.All().Where(x => x.Id == id).FirstOrDefault();
@@ -159,14 +162,19 @@
                 return;
             }
 
-            if (quantity <= 0)
+            if (upOrder)
             {
-                quantity = 1;
+                cartProduct.Quantity++;
+            }
+            else
+            {
+                if (cartProduct.Quantity > 1)
+                {
+                    cartProduct.Quantity--;
+                }
             }
 
-            cartProduct.Quantity = quantity;
-
-            await this.productCartRepository.AddAsync(cartProduct);
+            this.productCartRepository.Update(cartProduct);
             await this.productCartRepository.SaveChangesAsync();
         }
 
@@ -193,7 +201,7 @@
             return result;
         }
 
-        public bool DeleteAll(string username)
+        public async Task<bool> DeleteAll(string username)
         {
             var user = this.userRepository.All().Where(x => x.UserName == username).FirstOrDefault();
 
@@ -210,7 +218,7 @@
                 .ToList()
                 .ForEach(entity => this.productCartRepository.Delete(entity));
 
-                this.productCartRepository.SaveChangesAsync().GetAwaiter().GetResult();
+                await this.productCartRepository.SaveChangesAsync();
             }
             catch (Exception)
             {
@@ -218,6 +226,66 @@
             }
 
             return true;
+        }
+
+        public async Task<CartTotalViewModel> GetCartTotalParameters(string username)
+        {
+            if (username == null)
+            {
+                var model = new CartTotalViewModel()
+                {
+                    Subtotal = 0,
+                    DeliveryPrice = 0,
+                    Discount = 0,
+                    Total = 0,
+                };
+
+                return model;
+            }
+
+            var user = this.userRepository.All().Where(x => x.UserName == username).FirstOrDefault();
+            var subTotal = this.GetSubtotal(username);
+            var clientDiscount = this.GetDiscountByCardId(user.ClientCardId);
+
+            if (user == null || subTotal == null || clientDiscount == null)
+            {
+                return null;
+            }
+
+            var subTotalOper = (decimal)subTotal;
+            var discount = Math.Round(subTotalOper * (decimal)clientDiscount / 100, 2);
+            var total = Math.Round(subTotalOper - discount + 0, 2);
+
+            var viewModel = new CartTotalViewModel()
+            {
+                Subtotal = subTotalOper,
+                DeliveryPrice = 0,
+                Discount = discount,
+                Total = total,
+            };
+
+            return viewModel;
+        }
+
+        private decimal? GetSubtotal(string username)
+        {
+            var productsAmounts = this.GetAllProducts(username);
+
+            if (productsAmounts == null)
+            {
+                return null;
+            }
+
+            var subTotal = productsAmounts.Select(x => x.CartProductTotal).Sum();
+
+            return subTotal;
+        }
+
+        private decimal? GetDiscountByCardId(string cardId)
+        {
+            var card = this.clientCardRepository.All().Where(c => c.Id == cardId).FirstOrDefault();
+
+            return card?.Discount;
         }
     }
 }

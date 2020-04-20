@@ -20,12 +20,10 @@ namespace FamilyKitchen.Data.Models
             this.Orders = new HashSet<Order>();
         }
 
-        // Audit info
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
 
-        // Deletable entity
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
@@ -37,6 +35,10 @@ namespace FamilyKitchen.Data.Models
         public int ShoppingCartId { get; set; }
 
         public ShoppingCart ShoppingCart { get; set; }
+
+        public string ClientCardId { get; set; }
+
+        public virtual ClientCard ClientCard { get; set; }
 
         public virtual IEnumerable<FamilyKitchenUserFavoriteProduct> FamilyKitchenUsersFavoriteProducts { get; set; }
 

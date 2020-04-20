@@ -5,7 +5,7 @@
             <div class="swiper-slide">
                 <div class="ftco-animate">
                     <div class="product">
-                        <a href="Details/@product.Id" class="img-prod">
+                        <a class="img-prod" asp-controller="ShopProducts" asp-action="Details" asp-route-id="@product.Id">
                             <img class="img-fluid" src=@product.ImageUrl alt=@product.Name>
                             @if (product.Discount > 0)
                             {

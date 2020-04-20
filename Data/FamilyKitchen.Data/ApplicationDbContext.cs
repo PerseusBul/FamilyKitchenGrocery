@@ -59,6 +59,8 @@
 
         public DbSet<OrderShopProduct> OrdersShopProducts { get; set; }
 
+        public DbSet<ClientCard> ClientCards { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -200,6 +202,11 @@
                 .HasOne(osp => osp.Order)
                 .WithMany(sp => sp.OrdersShopProducts)
                 .HasForeignKey(osp => osp.OrderId);
+
+            builder.Entity<ClientCard>()
+               .HasOne(c => c.FamilyKitchenUser)
+               .WithOne(u => u.ClientCard)
+               .HasForeignKey<FamilyKitchenUser>(u => u.ClientCardId);
 
             // Disable cascade delete
             var foreignKeys = entityTypes

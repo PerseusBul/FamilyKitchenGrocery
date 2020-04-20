@@ -1,0 +1,63 @@
+﻿@using FamilyKitchen.Web.ViewModels.Orders
+@model OrderPaymentInputModel
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-right">
+
+            @*</div>
+
+        <div class="row justify-content-left">*@
+            <div class="col-xl-5">
+                <div class="row mt-5 pt-3">
+                    @*<vc:check-out-total></vc:check-out-total>*@
+                    <div class="col-md-12">
+                        <div class="cart-detail p-3 p-md-4">
+                            <form asp-controller="Orders" asp-action="Index" method="post" id="payment">
+                                <h3 class="billing-heading mb-4">Payment Method</h3>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input type="radio" asp-for="PaymentMethod" value="BankTransfer" class="mr-2"> Direct Bank Tranfer</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input type="radio" asp-for="PaymentMethod" value="CreditCard" class="mr-2"> Credit Card</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input type="radio" asp-for="PaymentMethod" value="EPay" class="mr-2"> Epay</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" class="mr-2"> I have read and accept the terms and conditions</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p><a class="btn btn-primary py-3 px-4" id="application" href="/">Place an order</a></p>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- .col-md-8 -->
+            <div class="col-xl-5">
+                <div class="row mt-5 pt-3">
+                    <vc:check-out-total></vc:check-out-total>
+                </div>
+            </div> <!-- .col-md-8 -->
+        </div>
+    </div>
+</section> <!-- .section -->

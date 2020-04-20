@@ -149,7 +149,7 @@
             {
                 var action = this.cartsService.DeleteAll(this.User.Identity.Name);
 
-                if (!action)
+                if (!action.Result)
                 {
                     return this.RedirectToAction(nameof(GetCart));
                 }

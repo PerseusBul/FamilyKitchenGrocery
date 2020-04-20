@@ -1,8 +1,9 @@
 ﻿namespace FamilyKitchen.Web.ViewModels.ShopProducts
 {
+    using System;
+
     using FamilyKitchen.Data.Models;
     using FamilyKitchen.Services.Mapping;
-    using System;
 
     public class ShopProductViewModel : IMapFrom<ShopProduct>
     {
