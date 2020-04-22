@@ -7,12 +7,12 @@
         [Required]
         public int FoodResourceId { get; set; }
 
-        public FoodResource FoodResource { get; set; }
+        public virtual FoodResource FoodResource { get; set; }
 
         [Required]
         public int RecipeId { get; set; }
 
-        public Recipe Recipe { get; set; }
+        public virtual Recipe Recipe { get; set; }
 
         [Required]
         public decimal Quantity { get; set; }

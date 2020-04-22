@@ -43,7 +43,7 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-12 ftco-animate text-center">
-                    <p class="mb-0 bread"><span class="mr-2"><a href="/FavoriteProducts/List">Favorite</a></span> <span>Products</span></p>
+                    <p class="mb-0 bread"><span class="mr-2"><a asp-controller="FavoriteProducts" asp-action="List">Favorite</a></span> <span>Products</span></p>
                     <h1 class="breadcrumbs">TAKE ALL!</h1>
                 </div>
             </div>
@@ -78,8 +78,10 @@
     <script src="~/js/main.js"></script>
     <script src="~/js/facebook.setup.js"></script>
     <script src="~/js/swiper-action.js"></script>
+    <script src="~/js/subscriber.js"></script>
     @*<script src="~/lib/signalr/dist/browser/signalr.min.js"></script>*@
     <script src="~/lib/signalr@3.1.3/dist/browser/signalr.min.js"></script>
     @this.RenderSection("Scripts", required: false)
 </body>
 </html>
+

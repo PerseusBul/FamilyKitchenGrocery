@@ -4,10 +4,10 @@
     {
         public string FamilyKitchenUserId { get; set; }
 
-        public FamilyKitchenUser FamilyKitchenUser { get; set; }
+        public virtual FamilyKitchenUser FamilyKitchenUser { get; set; }
 
         public int ShopProductId { get; set; }
 
-        public ShopProduct ShopProduct { get; set; }
+        public virtual ShopProduct ShopProduct { get; set; }
     }
 }

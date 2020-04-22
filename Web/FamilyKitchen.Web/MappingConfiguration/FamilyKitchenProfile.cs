@@ -7,6 +7,7 @@
 
     using AutoMapper;
     using FamilyKitchen.Data.Models;
+    using FamilyKitchen.Web.ViewModels.Orders;
     using FamilyKitchen.Web.ViewModels.ShopProducts;
     using FamilyKitchen.Web.ViewModels.SubCategories;
 
@@ -18,6 +19,7 @@
             this.CreateMap<SubCategory, SubCategoryViewModel>()
                 .ForMember(x => x.Products, y => y
                 .MapFrom(src => src.ShopProductsSubCategories.Select(spsc => spsc.ShopProduct).AsQueryable()));
+            this.CreateMap<OrderProfileInputModel, OrderProfile>();
         }
     }
 }

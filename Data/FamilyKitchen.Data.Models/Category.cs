@@ -18,6 +18,6 @@
         [Required]
         public string Name { get; set; }
 
-        public IEnumerable<SubCategory> SubCategories { get; set; }
+        public virtual IEnumerable<SubCategory> SubCategories { get; set; }
     }
 }

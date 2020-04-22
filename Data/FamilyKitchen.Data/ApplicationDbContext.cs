@@ -61,6 +61,8 @@
 
         public DbSet<ClientCard> ClientCards { get; set; }
 
+        public DbSet<Subscriber> Subscribers { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

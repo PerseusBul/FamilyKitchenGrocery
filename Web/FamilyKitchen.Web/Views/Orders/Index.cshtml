@@ -1,14 +1,11 @@
 ﻿@using FamilyKitchen.Web.ViewModels.Orders
 @model OrderProfileInputModel
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-    First Name,Last Name
-*@
+
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-7 ftco-animate">
-                @*!!!*@<form class="billing-form" id="orderProfile" method="post" asp-controller="Orders" asp-action="Index">
+                <form class="billing-form" id="orderProfile" method="post" asp-controller="Orders" asp-action="Index">
                     <h3 class="mb-4 billing-heading">Billing Details</h3>
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="row align-items-end">
@@ -95,8 +92,8 @@
                                 </div>
                             </div>
                         </div>
-                        <p><a class="btn btn-primary py-3 px-4" id="application" asp-controller="Orders" asp-action="Payment">Next step</a></p>
-                        @*<input type="submit" class="btn btn-primary" name="name" value="" />*@
+                        @*<p><a class="btn btn-primary py-3 px-4">Next step</a></p>*@
+                        <input type="submit" class="btn btn-primary" name="name" value="Next step" />  @* id="application" asp-controller="Orders" asp-action="Payment"*@
                     </div>
                 </form><!-- END -->
             </div>

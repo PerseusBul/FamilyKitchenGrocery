@@ -55,3 +55,27 @@ document.getElementById("submit").addEventListener("click", e => {
         .then(response => response.text())
         .then(id => connection.invoke("GetUpdateForOrder", parseInt(id)));
 });
+
+// Subscriber
+//function sendSubscribe() {
+//    var token = $("#subscribeForm input[name=__RequestVerificationToken]").val();
+//    var subscriber = $("#subscribedEmail").val();
+//    var json = { Subscriber: subscriber };
+//    console.log(json);
+
+//    $.ajax({
+//        url: "/subscribe",
+//        type: "POST",
+//        data: JSON.stringify(json),
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        headers: { 'X-CSRF-TOKEN': token },
+//        success: function (data) {
+//            $("#subscribedEmail").val(data.message);
+//        }
+//    });
+//}
+//$('#subscribedEmail').click(function (e) {
+
+//    e.preventDefault();
+//});

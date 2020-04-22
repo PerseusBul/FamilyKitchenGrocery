@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FamilyKitchen.Data.Models.Enums
+﻿namespace FamilyKitchen.Data.Models.Enums
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public enum PaymentMethod
     {
         BankTransfer = 3,

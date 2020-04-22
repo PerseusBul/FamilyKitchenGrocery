@@ -70,7 +70,7 @@
 
             services.AddControllersWithViews(configure =>
             {
-               configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
             services.AddResponseCaching();
@@ -114,6 +114,8 @@
             services.AddTransient<IShoppingCartsService, ShoppingCartsService>();
             services.AddTransient<IFavoriteProductService, FavoriteProductService>();
             services.AddTransient<IFamilyKitchenUsersService, FamilyKitchenUsersService>();
+            services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<ISubscribersService, SubscribersService>();
 
             Account account = new Account(
              this.configuration["Cloudinary:AppName"],

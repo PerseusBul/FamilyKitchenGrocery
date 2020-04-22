@@ -1,17 +1,18 @@
-﻿using FamilyKitchen.Data.Common.Models;
-using FamilyKitchen.Data.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace FamilyKitchen.Data.Models
+﻿namespace FamilyKitchen.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using FamilyKitchen.Data.Common.Models;
+    using FamilyKitchen.Data.Models.Enums;
+
     public class Order : BaseDeletableModel<int>
     {
         public Order()
         {
             this.OrdersShopProducts = new HashSet<OrderShopProduct>();
+            this.DeliveryPrice = 6.99m;
         }
 
         [Required]
@@ -23,7 +24,7 @@ namespace FamilyKitchen.Data.Models
 
         public DateTime? OrderDate { get; set; }
 
-        public string InvoiceNumber { get; set; }
+        public string InvoiceNumber => $"{this.Id}".PadLeft(10, '0');
 
         public string EasyPayNumber { get; set; }
 

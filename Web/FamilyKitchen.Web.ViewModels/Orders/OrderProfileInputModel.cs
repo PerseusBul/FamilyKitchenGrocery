@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FamilyKitchen.Data.Models;
+using FamilyKitchen.Services.Mapping;
+using System.ComponentModel.DataAnnotations;
 
 namespace FamilyKitchen.Web.ViewModels.Orders
 {
-    public class OrderProfileInputModel
+    public class OrderProfileInputModel : IMapTo<OrderProfile>
     {
         [Required]
         [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]

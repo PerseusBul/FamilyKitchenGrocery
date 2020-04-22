@@ -3,6 +3,5 @@
     public class OrderPaymentInputModel
     {
         public string PaymentMethod { get; set; }
-
     }
 }

@@ -30,11 +30,11 @@ namespace FamilyKitchen.Data.Models
 
         public string FamilyId { get; set; }
 
-        public Family Family { get; set; }
+        public virtual Family Family { get; set; }
 
         public int ShoppingCartId { get; set; }
 
-        public ShoppingCart ShoppingCart { get; set; }
+        public virtual ShoppingCart ShoppingCart { get; set; }
 
         public string ClientCardId { get; set; }
 
