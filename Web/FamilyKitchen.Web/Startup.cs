@@ -1,7 +1,9 @@
 ﻿namespace FamilyKitchen.Web
 {
+    using System;
     using System.Reflection;
-    using Nest;
+
+    using AutoMapper;
     using CloudinaryDotNet;
     using FamilyKitchen.Data;
     using FamilyKitchen.Data.Common;
@@ -12,9 +14,9 @@
     using FamilyKitchen.Services.Data;
     using FamilyKitchen.Services.Mapping;
     using FamilyKitchen.Services.Messaging;
+    using FamilyKitchen.Web.ElasticSearchConf;
+    using FamilyKitchen.Web.MappingConfiguration;
     using FamilyKitchen.Web.ViewModels;
-
-    using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -22,12 +24,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using FamilyKitchen.Web.MappingConfiguration;
-    using FamilyKitchen.Web.ElasticSearchConf;
     using Microsoft.Extensions.DependencyInjection.Extensions;
-    using System;
-    using FamilyKitchen.Web.ExtensionsConf.ClaimConf;
+    using Microsoft.Extensions.Hosting;
+    using Nest;
 
     public class Startup
     {
@@ -46,15 +45,9 @@
 
             services.AddDefaultIdentity<FamilyKitchenUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication()
-                //.AddGoogle(googleOptions =>
-                // {
-                //     googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
-                //     googleOptions.ClientSecret = this.configuration["Authentication:ClientSecret"];
-                // })
                 .AddFacebook(facebookOptions =>
                 {
                     facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
@@ -104,7 +97,7 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IShopProductsService, ShopProductsService>();
@@ -125,8 +118,8 @@
             Cloudinary cloudinary = new Cloudinary(account);
             services.AddSingleton(cloudinary);
 
-            //services.AddSingleton<IProductService, ElasticSearchProductService>();
-            //services.Configure<ProductSettings>(configuration.GetSection("shopProducts"));
+            // services.AddSingleton<IProductService, ElasticSearchProductService>();
+            // services.Configure<ProductSettings>(configuration.GetSection("shopProducts"));
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddElasticsearch(this.configuration);
@@ -163,10 +156,9 @@
                 app.UseHsts();
             }
 
-            //app.UseResponseCompression();
-            //app.UseResponseCaching();
-            //app.UseHttpContextItemsMiddleware();
-
+            // app.UseResponseCompression();
+            // app.UseResponseCaching();
+            // app.UseHttpContextItemsMiddleware();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -177,7 +169,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        //endpoints.MapHub<MyHub>("/hubRoute");
+                        // endpoints.MapHub<MyHub>("/hubRoute");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

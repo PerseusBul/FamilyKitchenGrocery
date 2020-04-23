@@ -1,11 +1,12 @@
-﻿using FamilyKitchen.Services.Data;
-using FamilyKitchen.Web.ViewModels.ShopProducts;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-
-namespace FamilyKitchen.Web.Controllers
+﻿namespace FamilyKitchen.Web.Controllers
 {
+    using System.Linq;
+
+    using FamilyKitchen.Services.Data;
+    using FamilyKitchen.Web.ViewModels.ShopProducts;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     [Authorize]
     public class FavoriteProductsController : BaseController
     {
@@ -35,7 +36,7 @@ namespace FamilyKitchen.Web.Controllers
                 return this.RedirectToPage("/Shared/Error");
             }
 
-            return this.RedirectToAction(nameof(List));
+            return this.RedirectToAction(nameof(this.List));
         }
 
         public IActionResult Delete(int id)
@@ -47,7 +48,7 @@ namespace FamilyKitchen.Web.Controllers
                 return this.RedirectToPage("/Shared/Error");
             }
 
-            return this.RedirectToAction(nameof(List));
+            return this.RedirectToAction(nameof(this.List));
         }
     }
 }

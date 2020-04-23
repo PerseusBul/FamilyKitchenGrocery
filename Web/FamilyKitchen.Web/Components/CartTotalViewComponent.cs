@@ -14,7 +14,6 @@
 
         public IViewComponentResult Invoke()
         {
-
             var viewModel = this.shoppingCartsService.GetCartTotalParameters(this.User.Identity.Name).Result;
 
             return this.View(viewModel);

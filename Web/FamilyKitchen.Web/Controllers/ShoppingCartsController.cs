@@ -20,9 +20,9 @@
         private readonly IMapper mapper;
 
         public ShoppingCartsController(IShoppingCartsService cartsService,
-                                       IShopProductsService shopProductsService,
-                                       IDeletableEntityRepository<FamilyKitchenUser> userRepository,
-                                       IMapper mapper)
+                                        IShopProductsService shopProductsService,
+                                        IDeletableEntityRepository<FamilyKitchenUser> userRepository,
+                                        IMapper mapper)
         {
             this.cartsService = cartsService;
             this.shopProductsService = shopProductsService;
@@ -74,7 +74,7 @@
                     return this.Redirect("/");
                 }
 
-                return this.RedirectToAction(nameof(GetCart));
+                return this.RedirectToAction(nameof(this.GetCart));
             }
 
             var sessionCart = SessionExtensions
@@ -97,7 +97,7 @@
             SessionExtensions
                 .SetDataObject<List<CartProductViewModel>>(this.HttpContext.Session, "shoppingCart", sessionCart);
 
-            return this.RedirectToAction(nameof(GetCart));
+            return this.RedirectToAction(nameof(this.GetCart));
         }
 
         public IActionResult Add(int id)
@@ -111,7 +111,7 @@
                     return this.Redirect("/");
                 }
 
-                return this.RedirectToAction(nameof(GetCart));
+                return this.RedirectToAction(nameof(this.GetCart));
             }
 
             var sessionCart = SessionExtensions
@@ -140,7 +140,7 @@
             SessionExtensions
                 .SetDataObject<List<CartProductViewModel>>(this.HttpContext.Session, "shoppingCart", sessionCart);
 
-            return this.RedirectToAction(nameof(GetCart));
+            return this.RedirectToAction(nameof(this.GetCart));
         }
 
         public IActionResult DeleteCart(int id)
@@ -151,7 +151,7 @@
 
                 if (!action.Result)
                 {
-                    return this.RedirectToAction(nameof(GetCart));
+                    return this.RedirectToAction(nameof(this.GetCart));
                 }
 
                 return this.Redirect("/");
@@ -184,13 +184,12 @@
                 Discount = 10,
             };
 
-            var user = userRepository.All().Where(x => x.Id == "d3d03427-f9fa-43c2-b88b-5695decf3326").FirstOrDefault();
+            var user = this.userRepository.All().Where(x => x.Id == "d3d03427-f9fa-43c2-b88b-5695decf3326").FirstOrDefault();
 
             var model = new List<ShopProductViewModel>() { product };
             SessionExtensions.SetDataObject<List<ShopProductViewModel>>(this.HttpContext.Session, "product", model);
             var backProduct = SessionExtensions.GetDataObject<List<ShopProductViewModel>>(this.HttpContext.Session, "product");
             return this.View();
         }
-
     }
 }

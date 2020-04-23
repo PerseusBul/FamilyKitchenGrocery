@@ -15,7 +15,6 @@
 
     public class CategoriesServiceTests
     {
-
         [Fact]
         public async Task CorrectInputToGettingByNameShouldReturnTrue()
         {

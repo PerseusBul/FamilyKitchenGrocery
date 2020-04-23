@@ -1,7 +1,5 @@
 ﻿namespace FamilyKitchen.Web.Controllers
 {
-    using System.Threading.Tasks;
-
     using FamilyKitchen.Services.Data;
     using FamilyKitchen.Web.ViewModels.ShopProducts;
     using Microsoft.AspNetCore.Mvc;

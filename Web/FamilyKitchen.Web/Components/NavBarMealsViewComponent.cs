@@ -1,6 +1,5 @@
 ﻿namespace FamilyKitchen.Web.Components
 {
-
     using FamilyKitchen.Services.Data;
     using FamilyKitchen.Web.ViewModels.Categories;
     using Microsoft.AspNetCore.Mvc;

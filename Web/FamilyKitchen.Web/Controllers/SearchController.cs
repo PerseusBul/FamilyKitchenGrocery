@@ -35,6 +35,5 @@
 
             return this.Ok(response.Documents);
         }
-
     }
 }

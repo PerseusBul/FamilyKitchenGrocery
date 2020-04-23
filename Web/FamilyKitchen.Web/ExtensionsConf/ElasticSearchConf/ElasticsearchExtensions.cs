@@ -32,7 +32,7 @@
             settings
                 .DefaultMappingFor<Product>(m => m);
 
-            //settings
+            // settings
             //    .DefaultMappingFor<ShopProduct>(m => m
             //    .Ignore(p => p.Price)
             //    .Ignore(p => p.Availability)
@@ -52,7 +52,7 @@
             //    .Ignore(p => p.RecipeId)
             //    .Ignore(p => p.ShoppingCartsShopProducts)
             //    .Ignore(p => p.ShopProductsSubCategories)
-            //);
+            // );
         }
 
         private static void CreateIndex(IElasticClient client, string indexName)

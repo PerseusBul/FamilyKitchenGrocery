@@ -1,8 +1,5 @@
 ﻿namespace FamilyKitchen.Services.Data.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using Xunit;
 
     public class ShoppingCartsServiceTests

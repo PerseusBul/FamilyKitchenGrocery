@@ -2,17 +2,18 @@
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Threading.Tasks;
+
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using FamilyKitchen.Services.Data;
     using FamilyKitchen.Web.CloudinaryConf;
     using FamilyKitchen.Web.ViewModels;
     using FamilyKitchen.Web.ViewModels.Categories;
-    using CloudinaryDotNet;
-    using CloudinaryDotNet.Actions;
+    using FamilyKitchen.Web.ViewModels.ShopProducts;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using FamilyKitchen.Web.ViewModels.ShopProducts;
-    using System.Linq;
 
     public class HomeController : BaseController
     {
@@ -60,14 +61,14 @@
 
             return this.Redirect("/");
 
-            //var uploadParams = new ImageUploadParams()
-            //{
+            // var uploadParams = new ImageUploadParams()
+            // {
             //    File = new FileDescription(@"D:\DemoProject\DataImports\product_1.jpg"),
-            //};
+            // };
 
-            //var uploadResult = await this.cloudinary.UploadAsync(uploadParams);
+            // var uploadResult = await this.cloudinary.UploadAsync(uploadParams);
 
-            //return this.Redirect("/");
+            // return this.Redirect("/");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

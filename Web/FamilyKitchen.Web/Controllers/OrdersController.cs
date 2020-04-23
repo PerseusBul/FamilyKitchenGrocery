@@ -1,17 +1,8 @@
 ﻿namespace FamilyKitchen.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using FamilyKitchen.Data.Models;
     using FamilyKitchen.Services.Data;
-    using FamilyKitchen.Web.ExtensionsConf.SessionConf;
     using FamilyKitchen.Web.ViewModels.Orders;
-    using FamilyKitchen.Web.ViewModels.ShoppingCarts;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
@@ -32,9 +23,9 @@
         [HttpPost]
         public IActionResult Index(OrderProfileInputModel input)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction(nameof(Index));
+                return this.RedirectToAction(nameof(this.Index));
             }
 
             var sessionOrder = input;
@@ -42,7 +33,7 @@
             ExtensionsConf.SessionConf.SessionExtensions
                .SetDataObject<OrderProfileInputModel>(this.HttpContext.Session, "sessionOrder", sessionOrder);
 
-            return this.RedirectToAction(nameof(PaymentMethod));
+            return this.RedirectToAction(nameof(this.PaymentMethod));
         }
 
         public IActionResult PaymentMethod()
@@ -53,22 +44,21 @@
         [HttpPost]
         public IActionResult PaymentMethod(OrderPaymentInputModel input)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction(nameof(Index));
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            //var sessionPayWay = input;
+            // var sessionPayWay = input;
 
-            //SessionExtensions
+            // SessionExtensions
             //   .SetDataObject<OrderPaymentInputModel>(this.HttpContext.Session, "sessionPayWay", sessionPayWay);
-
             var sessionOrderProfile = ExtensionsConf.SessionConf.SessionExtensions
                 .GetDataObject<OrderProfileInputModel>(this.HttpContext.Session, "sessionOrder");
 
-            if (sessionOrderProfile==null)
+            if (sessionOrderProfile == null)
             {
-                return this.RedirectToAction(nameof(Index));
+                return this.RedirectToAction(nameof(this.Index));
             }
 
             var actionOrder = this.ordersService
@@ -76,12 +66,10 @@
 
             if (!actionOrder.Result)
             {
-                return this.RedirectToAction(nameof(Index));
+                return this.RedirectToAction(nameof(this.Index));
             }
 
-            //this.session.Clear();
-
-            return this.RedirectToAction(nameof(PayArea));
+            return this.RedirectToAction(nameof(this.PayArea));
         }
 
         public IActionResult PayArea()

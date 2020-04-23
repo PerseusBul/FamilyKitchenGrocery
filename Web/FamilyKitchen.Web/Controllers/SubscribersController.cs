@@ -1,15 +1,13 @@
-﻿using FamilyKitchen.Data.Models;
-using FamilyKitchen.Services.Data;
-using FamilyKitchen.Web.ViewModels.Subscribers;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FamilyKitchen.Web.Controllers
+﻿namespace FamilyKitchen.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using FamilyKitchen.Data.Models;
+    using FamilyKitchen.Services.Data;
+    using FamilyKitchen.Web.ViewModels.Subscribers;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     [ApiController]
     [Route("[controller]")]
     public class SubscribersController : ControllerBase
@@ -24,14 +22,13 @@ namespace FamilyKitchen.Web.Controllers
             this.subscribersService = subscribersService;
         }
 
-
         [HttpPost]
         public async Task<ActionResult<SubscribersResponseModel>> Subscribe(SubscribersInputModel input)
         {
             var username = this.userManager.GetUserName(this.User);
             var message = "Try again!";
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return new SubscribersResponseModel() { Message = message };
             }
@@ -43,7 +40,7 @@ namespace FamilyKitchen.Web.Controllers
                 message = "Thank you!";
             }
 
-            return new SubscribersResponseModel() { Message = message};
+            return new SubscribersResponseModel() { Message = message };
         }
     }
 }

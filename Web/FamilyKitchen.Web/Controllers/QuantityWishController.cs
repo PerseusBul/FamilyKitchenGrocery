@@ -1,17 +1,13 @@
-﻿using FamilyKitchen.Data.Models;
-using FamilyKitchen.Services.Data;
-using FamilyKitchen.Web.ViewModels.QuantityWish;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace FamilyKitchen.Web.Controllers
+﻿namespace FamilyKitchen.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using FamilyKitchen.Data.Models;
+    using FamilyKitchen.Services.Data;
+    using FamilyKitchen.Web.ViewModels.QuantityWish;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     [ApiController]
     [Route("[controller]")]
     public class QuantityWishController : ControllerBase

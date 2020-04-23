@@ -1,31 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using FamilyKitchen.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
-using FamilyKitchen.Data.Common.Repositories;
-using System.Security.Claims;
-
-namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
+﻿namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Text;
+    using System.Text.Encodings.Web;
+    using System.Threading.Tasks;
+
+    using FamilyKitchen.Data.Common.Repositories;
+    using FamilyKitchen.Data.Models;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.WebUtilities;
+    using Microsoft.Extensions.Logging;
+
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<FamilyKitchenUser> _signInManager;
-        private readonly UserManager<FamilyKitchenUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly SignInManager<FamilyKitchenUser> signInManager;
+        private readonly UserManager<FamilyKitchenUser> userManager;
+        private readonly ILogger<RegisterModel> logger;
+        private readonly IEmailSender emailSender;
         private readonly IRepository<IdentityUserClaim<string>> claimRepository;
 
         public RegisterModel(
@@ -35,10 +35,10 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
             IEmailSender emailSender,
             IRepository<IdentityUserClaim<string>> claimRepository)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _logger = logger;
-            _emailSender = emailSender;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.logger = logger;
+            this.emailSender = emailSender;
             this.claimRepository = claimRepository;
         }
 
@@ -79,53 +79,54 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            this.ReturnUrl = returnUrl;
+            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            returnUrl = returnUrl ?? this.Url.Content("~/");
+            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (this.ModelState.IsValid)
             {
-                var user = new FamilyKitchenUser { UserName = Input.Email, Email = Input.Email, ShoppingCart = new ShoppingCart(), ClientCard = new ClientCard() };
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var user = new FamilyKitchenUser { UserName = this.Input.Email, Email = this.Input.Email, ShoppingCart = new ShoppingCart(), ClientCard = new ClientCard() };
+                var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    this.logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
+                    var callbackUrl = this.Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
                         values: new { area = "Identity", userId = user.Id, code = code },
-                        protocol: Request.Scheme);
+                        protocol: this.Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await this.emailSender
+                        .SendEmailAsync(this.Input.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await ClaimCreator(user, Input.Nickname, Input.PhoneNumber);
+                    await this.ClaimCreator(user, this.Input.Nickname, this.Input.PhoneNumber);
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    if (this.userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
+                        return this.RedirectToPage("RegisterConfirmation", new { email = this.Input.Email });
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        await this.signInManager.SignInAsync(user, isPersistent: false);
+                        return this.LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    this.ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return Page();
+            return this.Page();
         }
 
         private async Task ClaimCreator(FamilyKitchenUser user, string nickname, string phone)
@@ -134,19 +135,19 @@ namespace FamilyKitchen.Web.Areas.Identity.Pages.Account
             {
                 var claim = new Claim("Nickname", nickname);
 
-                await _userManager.AddClaimAsync(user, claim);
+                await this.userManager.AddClaimAsync(user, claim);
             }
 
             if (phone != null)
             {
                 var claim = new Claim("Phone", phone);
 
-                await _userManager.AddClaimAsync(user, claim);
+                await this.userManager.AddClaimAsync(user, claim);
             }
 
-            var claimName = new Claim("Username", Input.Email);
+            var claimName = new Claim("Username", this.Input.Email);
 
-            await _userManager.AddClaimAsync(user, claimName);
+            await this.userManager.AddClaimAsync(user, claimName);
         }
     }
 }
