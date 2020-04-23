@@ -15,7 +15,7 @@
 
         public IActionResult Details(int id)
         {
-            var viewModel = new ListAllSubCategoriesViewModel()
+            var viewModel = new ListAllSubCategoriesViewModel
             {
                 SubCategories = this.categoriesService.GetSubCategoriesByCategoryId(id),
                 Toggler = id <= 12 ? true : false,

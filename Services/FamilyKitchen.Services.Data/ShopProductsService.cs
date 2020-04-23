@@ -145,7 +145,7 @@
                 RecipeId = x.Id,
             }).ToList();
 
-            var indexManyResponse = this.elasticClient.IndexMany(products);
+           // var indexManyResponse = this.elasticClient.IndexMany(products);
             return products;
         }
     }

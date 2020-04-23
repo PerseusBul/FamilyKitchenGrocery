@@ -18,7 +18,7 @@ namespace FamilyKitchen.Web.Controllers
 
         public IActionResult List()
         {
-            var viewModel = new ListAllProductsViewModel()
+            var viewModel = new ListAllProductsViewModel
             {
                 Products = this.favoriteProductService.ListAll<ShopProductViewModel>(this.User.Identity.Name).ToList(),
             };

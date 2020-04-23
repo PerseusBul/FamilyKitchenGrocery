@@ -1,4 +1,5 @@
-﻿using FamilyKitchen.Web.ViewModels.SubCategories;
+﻿using FamilyKitchen.Data.Models;
+using FamilyKitchen.Web.ViewModels.SubCategories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,6 @@ namespace FamilyKitchen.Services.Data
 
         IEnumerable<SubCategoryViewModel> GetSubCategoriesByCategoryId(int id);
 
-        T GetByName<T>(string name);
+        Category GetByName(string name);
     }
 }

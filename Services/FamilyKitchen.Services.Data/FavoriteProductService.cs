@@ -33,7 +33,6 @@
                 .Where(x => x.FamilyKitchenUserId == user.Id)
                 .Select(x => x.ShopProduct);
 
-
             return query.To<T>().ToList();
         }
 
@@ -48,7 +47,7 @@
                 return result;
             }
 
-            var favoriteProduct = new FamilyKitchenUserFavoriteProduct()
+            var favoriteProduct = new FamilyKitchenUserFavoriteProduct
             {
                 FamilyKitchenUserId = user.Id,
                 ShopProductId = product.Id,

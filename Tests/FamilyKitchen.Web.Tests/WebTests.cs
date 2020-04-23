@@ -9,29 +9,50 @@
 
     public class WebTests : IClassFixture<WebApplicationFactory<Startup>>
     {
-        private readonly WebApplicationFactory<Startup> server;
-
-        public WebTests(WebApplicationFactory<Startup> server)
+        [Fact]
+        public async Task IndexPageShouldHaveBodyTag()
         {
-            this.server = server;
-        }
+            var serverFactory = new WebApplicationFactory<Startup>();
+            var client = serverFactory.CreateClient();
 
-        [Fact(Skip = "Example test. Disabled for CI.")]
-        public async Task IndexPageShouldReturnStatusCode200WithTitle()
-        {
-            var client = this.server.CreateClient();
             var response = await client.GetAsync("/");
-            response.EnsureSuccessStatusCode();
-            var responseContent = await response.Content.ReadAsStringAsync();
-            Assert.Contains("<title>", responseContent);
+            var responseAsString = await response.Content.ReadAsStringAsync();
+            Assert.Contains("<body class=\"goto-here\">", responseAsString);
         }
 
-        [Fact(Skip = "Example test. Disabled for CI.")]
-        public async Task AccountManagePageRequiresAuthorization()
+        [Fact]
+        public async Task AboutPageShouldReturnStatusCodeOK()
         {
-            var client = this.server.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
-            var response = await client.GetAsync("Identity/Account/Manage");
-            Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+            var serverFactory = new WebApplicationFactory<Startup>();
+            var client = serverFactory.CreateClient();
+
+            var response = await client.GetAsync("/Home/About");
+
+            Assert.Equal(HttpStatusCode.OK, response.EnsureSuccessStatusCode().StatusCode);
         }
+
+        [Fact]
+        public async Task HomePageResponseShouldHaveCacheControlHeader()
+        {
+            var serverFactory = new WebApplicationFactory<Startup>();
+            var client = serverFactory.CreateClient();
+
+            var response = await client.GetAsync("/");
+
+            Assert.True(response.Headers.Contains("Cache-Control"));
+        }
+
+        [Fact]
+        public async Task HomePageRequestUriShouldBeLocalhost()
+        {
+            var serverFactory = new WebApplicationFactory<Startup>();
+            var client = serverFactory.CreateClient();
+
+            var response = await client.GetAsync("/");
+
+            var res = response.RequestMessage.Properties.ToString();
+            Assert.Equal("http://localhost/", response.RequestMessage.RequestUri.ToString());
+        }
+
     }
 }

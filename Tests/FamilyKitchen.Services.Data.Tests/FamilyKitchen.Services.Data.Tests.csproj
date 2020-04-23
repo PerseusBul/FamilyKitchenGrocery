@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.13.1" />
@@ -27,8 +28,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\FamilyKitchen.Data.Common\FamilyKitchen.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\FamilyKitchen.Data.Models\FamilyKitchen.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\FamilyKitchen.Data\FamilyKitchen.Data.csproj" />
+    <ProjectReference Include="..\..\FamilyKitchen.Common\FamilyKitchen.Common.csproj" />
     <ProjectReference Include="..\..\Services\FamilyKitchen.Services.Data\FamilyKitchen.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\FamilyKitchen.Services.Mapping\FamilyKitchen.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\FamilyKitchen.Services\FamilyKitchen.Services.csproj" />
+    <ProjectReference Include="..\..\Web\FamilyKitchen.Web\FamilyKitchen.Web.csproj" />
   </ItemGroup>
 
 </Project>

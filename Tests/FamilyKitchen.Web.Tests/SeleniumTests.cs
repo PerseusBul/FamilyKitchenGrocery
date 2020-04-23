@@ -3,7 +3,7 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Remote;
-
+    using System;
     using Xunit;
 
     public class SeleniumTests : IClassFixture<SeleniumServerFactory<Startup>>
@@ -19,7 +19,8 @@
             var opts = new ChromeOptions();
             opts.AddArgument("--headless"); // Optional, comment this out if you want to SEE the browser window
             opts.AddArgument("no-sandbox");
-            this.browser = new RemoteWebDriver(opts);
+            var uri = new Uri("http://127.0.0.1:4448/wd/hub");
+            this.browser = new RemoteWebDriver(uri, opts);
         }
 
         [Fact(Skip = "Example test. Disabled for CI.")]

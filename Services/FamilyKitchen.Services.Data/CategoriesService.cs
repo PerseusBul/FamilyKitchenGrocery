@@ -28,7 +28,7 @@
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
             IQueryable<Category> query =
-                this.categoriesRepository.All(); // .OrderBy(x => x.Name)
+                this.categoriesRepository.All();
             if (count.HasValue)
             {
                 query = query.Take(count.Value);
@@ -49,7 +49,7 @@
         public IEnumerable<T> GetAllProductCategories<T>()
         {
             IQueryable<Category> query =
-                this.categoriesRepository.All().Where(x => x.Id <= 12); // .OrderBy(x => x.Name)
+                this.categoriesRepository.All().Where(x => x.Id <= 12);
 
             return query.To<T>().ToList();
         }
@@ -65,10 +65,10 @@
             return subCategories;
         }
 
-        public T GetByName<T>(string name)
+        public Category GetByName(string name)
         {
             var category = this.categoriesRepository.All().Where(x => x.Name == name)
-                .To<T>().FirstOrDefault();
+               .FirstOrDefault();
             return category;
         }
     }
