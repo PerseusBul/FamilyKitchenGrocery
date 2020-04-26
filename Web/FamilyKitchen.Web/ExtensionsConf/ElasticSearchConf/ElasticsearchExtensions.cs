@@ -3,7 +3,7 @@
     using System;
 
     using FamilyKitchen.Data.Models;
-    using FamilyKitchen.Web.ElasticSearchConf.Модел;
+    using FamilyKitchen.Web.ElasticSearchConf.Model;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Nest;

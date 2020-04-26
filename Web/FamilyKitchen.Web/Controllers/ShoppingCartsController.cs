@@ -172,24 +172,5 @@
 
             return this.Redirect("/");
         }
-
-        // TODO delete
-        public IActionResult GetCartInitial()
-        {
-            var product = new ShopProductViewModel()
-            {
-                Id = 2,
-                Name = "Bear",
-                Price = 2,
-                Discount = 10,
-            };
-
-            var user = this.userRepository.All().Where(x => x.Id == "d3d03427-f9fa-43c2-b88b-5695decf3326").FirstOrDefault();
-
-            var model = new List<ShopProductViewModel>() { product };
-            SessionExtensions.SetDataObject<List<ShopProductViewModel>>(this.HttpContext.Session, "product", model);
-            var backProduct = SessionExtensions.GetDataObject<List<ShopProductViewModel>>(this.HttpContext.Session, "product");
-            return this.View();
-        }
     }
 }

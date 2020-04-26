@@ -1,7 +1,8 @@
 ﻿namespace FamilyKitchen.Web.ViewModels.ShoppingCarts
 {
-    using FamilyKitchen.Web.ViewModels.ShopProducts;
     using System;
+
+    using FamilyKitchen.Web.ViewModels.ShopProducts;
 
     public class CartProductViewModel
     {

@@ -14,6 +14,8 @@
 
         public string ImageUrl => $"/images/product_{this.Id}.jpg";
 
+        public bool RecipeIsPrivate { get; set; }
+
         public string Producer { get; set; }
 
         public string Trademark { get; set; }

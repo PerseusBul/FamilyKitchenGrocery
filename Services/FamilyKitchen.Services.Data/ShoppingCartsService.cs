@@ -230,19 +230,6 @@
 
         public async Task<CartTotalViewModel> GetCartTotalParameters(string username)
         {
-            if (username == null)
-            {
-                var model = new CartTotalViewModel()
-                {
-                    Subtotal = 0,
-                    DeliveryPrice = 0,
-                    Discount = 0,
-                    Total = 0,
-                };
-
-                return model;
-            }
-
             var user = this.userRepository.All().Where(x => x.UserName == username).FirstOrDefault();
             var subTotal = this.GetSubtotal(username);
             var clientDiscount = this.GetDiscountByCardId(user.ClientCardId);
@@ -256,7 +243,7 @@
             var discount = Math.Round(subTotalOper * (decimal)clientDiscount / 100, 2);
             var total = Math.Round(subTotalOper - discount + 0, 2);
 
-            var viewModel = new CartTotalViewModel()
+            var viewModel = new CartTotalViewModel
             {
                 Subtotal = subTotalOper,
                 DeliveryPrice = 0,

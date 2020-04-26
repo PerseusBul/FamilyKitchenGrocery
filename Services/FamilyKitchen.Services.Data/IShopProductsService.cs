@@ -1,8 +1,10 @@
 ﻿namespace FamilyKitchen.Services.Data
 {
-    using FamilyKitchen.Data.Models;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
+
+    using FamilyKitchen.Data.Models;
 
     public interface IShopProductsService
     {
@@ -18,6 +20,8 @@
 
         Task Delete(ShopProduct product);
 
-        Task Add(ShopProduct product);
+        Task<bool> Add(ShopProduct product);
+
+        IEnumerable<ShopProduct> ProduceNewKitchenProducts(IQueryable<Recipe> meals);
     }
 }

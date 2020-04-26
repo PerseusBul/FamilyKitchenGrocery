@@ -717,6 +717,12 @@
     <Content Update="wwwroot\images\product_99.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\js\slider.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\subscriber.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\seedData\allergens.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

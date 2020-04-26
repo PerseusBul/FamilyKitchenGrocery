@@ -1,4 +1,4 @@
-﻿namespace FamilyKitchen.Web.ElasticSearchConf.Модел
+﻿namespace FamilyKitchen.Web.ElasticSearchConf.Model
 {
     using System;
     using System.Collections.Generic;

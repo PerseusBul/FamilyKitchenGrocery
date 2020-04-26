@@ -42,25 +42,27 @@
         public IEnumerable<T> GetAllMeals<T>()
         {
             IQueryable<ShopProduct> query =
-               this.productsRepository.All().Where(x => x.RecipeId != null);
+               this.productsRepository.All().Where(x => x.RecipeId != null && x.Recipe.IsPrivate == false);
 
-            IQueryable<Recipe> recipes =
-               this.recipeRepository.All();
+            //IQueryable<Recipe> recipes =
+            //   this.recipeRepository.All();
 
-            if (query.Count() < recipes.Count())
-            {
-                var newRecipes = recipes.Where(x => !query.Any(y => y.RecipeId == x.Id)).AsQueryable();
+            //if (query.ToList().Count() < recipes.ToList().Count())
+            //{
+            //    var newRecipes = recipes.Where(x => !query.Any(y => y.RecipeId == x.Id)).AsQueryable();
 
-                var newMeals = this.ProduceNewKitchenProducts(newRecipes);
+            //    var newMeals = this.ProduceNewKitchenProducts(newRecipes);
 
-                this.productsRepository.AddRangeAsync(newMeals).GetAwaiter().GetResult();
-                this.productsRepository.SaveChangesAsync().GetAwaiter().GetResult();
+            //    this.productsRepository.AddRangeAsync(newMeals).GetAwaiter().GetResult();
+            //    this.productsRepository.SaveChangesAsync().GetAwaiter().GetResult();
 
-                query =
-               this.productsRepository.All().Where(x => x.RecipeId != null);
-            }
+            //    query =
+            //   this.productsRepository.All().Where(x => x.RecipeId != null);
+            //}
 
-            return query.Where(x => x.Recipe.IsPrivate == false).To<T>().ToList();
+            // return query.Where(x => x.Recipe.IsPrivate == false).To<T>().ToList();
+
+            return query.To<T>().ToList();
         }
 
         public IEnumerable<T> GetAllProducts<T>()
@@ -80,20 +82,22 @@
             return product;
         }
 
-        public async Task Add(ShopProduct product)
+        public async Task<bool> Add(ShopProduct product)
         {
             var isExist = this.productsRepository
                 .All()
-                .Any(p => p.Name == product.Name || p.EANCode == product.EANCode);
+                .Any(p => p.Name == product.Name && p.EANCode == product.EANCode);
 
             if (isExist || product == null)
             {
-                return;
+                return false;
             }
 
             await this.productsRepository.AddAsync(product);
             await this.productsRepository.SaveChangesAsync();
-           // await this.elasticClient.IndexDocumentAsync<ShopProduct>(product);
+            // await this.elasticClient.IndexDocumentAsync<ShopProduct>(product);
+
+            return true;
         }
 
         public async Task Delete(ShopProduct product)
@@ -128,14 +132,14 @@
             // await this.elasticClient.UpdateAsync<ShopProduct>(product, u => u.Doc(product));
         }
 
-        private IEnumerable<ShopProduct> ProduceNewKitchenProducts(IQueryable<Recipe> meals)
+        public IEnumerable<ShopProduct> ProduceNewKitchenProducts(IQueryable<Recipe> meals)
         {
             Random number = new Random();
 
             var products = meals.Select(x => new ShopProduct
             {
                 Name = x.Name,
-                Price = Math.Round(x.FoodResourcesRecipes.Select(y => y.FoodResource.Price * y.Quantity).Sum() * 1.2m, 2),
+                Price = Math.Round(x.FoodResourcesRecipes.Select(y => y.FoodResource.Price * y.Quantity).Sum() * 3m, 2),
                 Availability = x.IsPrivate == true ? (int)x.Size : (int)x.Size * 10,
                 ExpireDate = DateTime.UtcNow.AddDays(30),
                 MetricSystemUnit = MetricSystemUnit.kg,

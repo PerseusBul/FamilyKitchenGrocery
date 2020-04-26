@@ -15,6 +15,8 @@
 
         public decimal Discount { get; set; }
 
+        public bool RecipeIsPrivate { get; set; }
+
         public string ImageUrl => $"/images/product_{this.Id}.jpg";
 
         public decimal SalePrice => Math.Round(this.Price - (this.Price * this.Discount / 100), 2);

@@ -1,0 +1,149 @@
+﻿@using FamilyKitchen.Web.ViewModels.Recipes
+@model TotalRecipeViewModel
+@{
+    ViewData["Title"] = "Make Custom Recipe of " + Model.Name;
+}
+
+    <h1 class="text-success"> @ViewData["Title"]</h1>
+<section class="ftco-section">
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Product name</th>
+                    <th scope="col">Quantity changer</th>
+                    <th scope="col">Current orrection (%)</th>
+                    <th scope="col">Base quantity part (%)</th>
+                    <th scope="col">Custom Recipe (%)</th>
+                    <th scope="col">Original Recipe (%)</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                @foreach (var resource in Model.RecipeFoodResources)
+                {
+                    <tr>
+                        <th scope="row"><label for="@resource.Name" class="text-success text-center font-weight-normal align-bottom"><strong>@resource.Name&emsp;</strong></label></th>
+                        <td><input type="range" min="-20" max="20" value="0" class="slider" name="@resource.Name" id="myRange"></td>
+                        <td><span id="correction" class="text-danger">0</span></td>
+                        <td><span id="quantity">@resource.PercentagePart</span></td>
+                        <td><span id="newValue" class="text-success">0</span></td>
+                        <td><span id="recipe">@resource.PercentagePart</span></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <form id="tokenGenerator" method="post"></form>
+    </div>
+    <div class="container">
+        <div class="col-lg-6 ftco-animate">
+            <div class="row">
+                <span>
+                    <p><a class="btn btn-black pull-right py-2 px-3" id="createRecipe" onclick="recipeCreate(@Model.Id)">Create</a></p>
+                </span>
+                <span>
+                    <p><a class="btn btn-black pull-right py-2 px-3" id="customRecipeDetails" href="#" style="display:none">New Recipe Details</a></p>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        var tableBody = document.getElementById("tableBody");
+
+        var changes = Array.from(tableBody.querySelectorAll('tr'));
+
+        for (let i = 0; i < changes.length; i++) {
+            changes[i].onchange = startProcess;
+        }
+
+        function startProcess(e) {
+            prepareTableState();
+            let input = e.target;
+            let koef = CalculateK(input);
+            CalculateNewValues(koef, input)
+            console.log(koef);
+        }
+
+        function prepareTableState() {
+            tableBody.querySelectorAll('#correction').forEach(x => x.innerText = 0);
+            let newValues = Array.from(tableBody.querySelectorAll('#newValue'));
+
+            if (+newValues[0].innerText > 0) {
+                newValues.forEach(x => x.parentNode.previousSibling.previousSibling.firstChild.innerText = x.innerText);
+            }
+        }
+
+        function CalculateK(input) {
+            let row = input.parentNode.parentNode;
+            let quantityElement = row.querySelector('#quantity');
+            let quantity = Number(quantityElement.innerText);
+            let newQuantity = quantity + Number((quantity * Number(input.value) / 100).toFixed(2));
+            row.querySelector('#newValue').innerText = newQuantity.toFixed(2);
+            row.querySelector('#correction').innerText = input.value;
+            let koef = (100 - newQuantity) / (100 - quantity);
+
+            return koef;
+        }
+
+        function CalculateNewValues(koef, input) {
+            let values = Array.from(tableBody.querySelectorAll('#quantity'));
+            values = values.filter(x => x.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.firstChild.getAttribute("name") != input.getAttribute("name"));
+
+            values.forEach(x => x.parentNode.nextSibling.nextSibling.firstChild.innerText = (Number(x.innerText) * koef).toFixed(2));
+        }
+
+        function customRecipeJson() {
+            let inputs = Array.from(tableBody.querySelectorAll('input'));
+            let names = inputs.map(x => x.getAttribute("name"));
+            let newValues = Array.from(tableBody.querySelectorAll('#newValue'));
+            let values = newValues.map(x => +x.innerText);
+            let jsonRaw = [];
+
+            if (names.length == values.length) {
+                for (let i = 0; i < names.length; i++) {
+                    let oper = { name: names[i], value: values[i] };
+
+                    jsonRaw.push(oper);
+                }
+            }
+
+            return jsonRaw;
+        }
+
+        function recipeCreate(recipeId) {
+            let token = $("#tokenGenerator input[name=__RequestVerificationToken]").val();
+            let json = { recipeId: recipeId, resources: customRecipeJson() }
+
+            $.ajax({
+                url: "/customRecipes",
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: { 'X-CSRF-TOKEN': token },
+                success: function (data) {
+                    let btnCreate = document.getElementById("createRecipe");
+                    let btnDetails = document.getElementById("customRecipeDetails");
+
+                    btnCreate.style = "display:none";
+                    btnDetails.style = "display:block";
+                    let id = data.recipeId
+                    btnDetails.setAttribute("href", `/Recipes/Order/${id}`);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            $('#createRecipe').click(function (e) {
+
+                e.preventDefault();
+            });
+        });
+    </script>
+}

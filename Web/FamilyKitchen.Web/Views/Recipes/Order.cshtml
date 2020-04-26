@@ -1,0 +1,153 @@
+﻿@using FamilyKitchen.Web.ViewModels.Recipes
+@model TotalRecipeViewModel
+@{
+    ViewData["Title"] = "Recipe Details";
+}
+
+<h1 class="text-success">@ViewData["Title"]</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<body class="goto-here">
+    <h2>@Model.Name</h2>
+    <div class="col-lg-6 mb-5 ftco-animate">
+        <div class="form-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Product name</th>
+                        <th scope="col">Resourse Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    @foreach (var resource in Model.RecipeFoodResources)
+                    {
+                        <tr>
+                            <th scope="row"><label for="@resource.Name" class="text-success text-center font-weight-normal align-bottom"><strong>@resource.Name&emsp;</strong></label></th>
+                            <td><span id="newValue" class="text-success">@resource.Quantity</span></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-container">
+        <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+            <h3>Allergens</h3>
+            <div class="rating d-flex">
+                <p class="text-left mr-4">
+                    @foreach (var allergen in Model.Allergens)
+                    {
+                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                        <span class="text-danger">@allergen</span>
+                    }
+                </p>
+            </div>
+            <p class="price"><span>Summary</span></p>
+            <p>
+                @Model.Summary
+            </p>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="form-group d-flex">
+                        <div class="select-wrap">
+                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                            <select name="" id="" class="form-control">
+                                <option value="@Model.Size">@Model.Size</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <form method="post" id="tokenGen"></form>
+    <div class="col-lg-6 mb-5 ftco-animate">
+        <div class="form-container">
+            <h4>Nutrients</h4>
+            <thead>
+                <tr>
+                    <th class="text-success" scope="col">Nutrient | </th>
+                    <th scope="col">Quantity (mg/kg)</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr>
+                    <th scope="row"><label for="Fats" class="text-success text-center font-weight-normal align-bottom"><strong>Fats</strong></label></th>
+                    <td><span id="newValue" class="text-dark">@Model.Nutrients.Fats</span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="SaturatedFats" class="text-success text-center font-weight-normal align-bottom"><strong>SaturatedFats</strong></label></th>
+                    <td><span id="newValue" class="text-dark">@Model.Nutrients.SaturatedFats</span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="Energy" class="text-success text-center font-weight-normal align-bottom"><strong>Energy</strong></label></th>
+                    <td><span id="newValue" class="text-dark">@Model.Nutrients.Energy</span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="Protein" class="text-success text-center font-weight-normal align-bottom"><strong>Protein</strong></label></th>
+                    <td><span id="newValue" class="text-dark">@Model.Nutrients.Protein</span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="Sodium" class="text-success text-center font-weight-normal align-bottom"><strong>Sodium</strong></label></th>
+                    <td><span id="newValue" class="text-dark">@Model.Nutrients.Sodium</span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="Carbohydrate" class="text-success text-center font-weight-normal align-bottom"><strong>Carbohydrate</strong></label></th>
+                    <td><span id="newValue" class="text-dark">@Model.Nutrients.Carbohydrate</span></td>
+                </tr>
+            </tbody>
+
+        </div>
+    </div>
+    <div class="form-container">
+        <div class="row">
+            <span>
+                <p><a class="btn btn-black pull-right py-2 px-3" id="makeItYours" onclick="sendRecipe(@Model.Id)">Make It Your Recipe</a></p>
+            </span>
+            <span>
+                <p><a class="btn btn-black py-2 px-3" id="addToCart" href="" style="display:none">Add to Cart</a></p>
+            </span>
+        </div>
+    </div>
+</body>
+</html>
+
+@section Scripts {
+    <script>
+        function sendRecipe(recipeId) {
+            let token = $("#tokenGen input[name=__RequestVerificationToken]").val();
+            let json = { recipeId: recipeId };
+            console.log(token);
+            console.log(json)
+            $.ajax({
+                url: "/confirmRecipe",
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: { 'X-CSRF-TOKEN': token },
+                success: function (data) {
+                    let makeItYours = document.getElementById("makeItYours");
+                    let addToCart = document.getElementById("addToCart");
+
+                    makeItYours.style = "display:none";
+                    addToCart.style = "display:block";
+                    let id = data.productId
+                    addToCart.setAttribute("href", `/ShoppingCarts/Add/${id}`);
+                }
+            });
+        }
+
+        //$(document).ready(function () {
+
+        //    $('#makeItYours').click(function (e) {
+
+        //        e.preventDefault();
+        //    });
+        //});
+    </script>
+}
+

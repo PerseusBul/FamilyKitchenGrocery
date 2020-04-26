@@ -15,7 +15,6 @@
             this.CreatedOn = DateTime.UtcNow;
             this.IsDeleted = false;
             this.FoodResourcesRecipes = new HashSet<FoodResourceRecipe>();
-            //this.FavoritedBy = new HashSet<UserFavoriteRecipe>()
         }
 
         [Required]
@@ -32,14 +31,7 @@
 
         public bool? IsPrivate { get; set; }
 
-        // TODO calculate it in the constructor or may be in any service from NutritionDeclaration of the KitchenProducts
-        [NotMapped]
-        public NutritionDeclaration Nutrients { get; }// => GetNutritionDeclaration(this.Id);
-
-        // TODO calculate it in the constructor or may be in any service from NutritionDeclaration of the KitchenProducts
-        public IEnumerable<string> ListAllergens { get; }
-
-        // public IEnumerable<UserFavoriteRecipe> FavoritedBy { get; set; }
+        public string Creator { get; set; }
 
         public virtual IEnumerable<FoodResourceRecipe> FoodResourcesRecipes { get; set; }
     }

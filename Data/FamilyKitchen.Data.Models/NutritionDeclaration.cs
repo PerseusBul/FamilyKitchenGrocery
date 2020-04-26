@@ -29,6 +29,6 @@
 
         public virtual ICollection<FoodResource> FoodResources { get; set; }
 
-        //public virtual ICollection<ShopProduct> ShopProducts { get; set; }
+        // public virtual ICollection<ShopProduct> ShopProducts { get; set; }
     }
 }

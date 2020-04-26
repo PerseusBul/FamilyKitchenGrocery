@@ -119,7 +119,7 @@
             services.AddSingleton(cloudinary);
 
             // services.AddSingleton<IProductService, ElasticSearchProductService>();
-            // services.Configure<ProductSettings>(configuration.GetSection("shopProducts"));
+            // services.Configure<ProductSettings>(configuration.GetSection("shopproducts"));
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddElasticsearch(this.configuration);

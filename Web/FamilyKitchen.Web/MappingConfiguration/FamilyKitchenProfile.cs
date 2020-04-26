@@ -15,7 +15,8 @@
     {
         public FamilyKitchenProfile()
         {
-            this.CreateMap<ShopProduct, ShopProductViewModel>();
+            this.CreateMap<ShopProduct, ShopProductViewModel>()
+                .ForMember(x => x.RecipeIsPrivate, y => y.MapFrom(z => z.Recipe.IsPrivate));
             this.CreateMap<SubCategory, SubCategoryViewModel>()
                 .ForMember(x => x.Products, y => y
                 .MapFrom(src => src.ShopProductsSubCategories.Select(spsc => spsc.ShopProduct).AsQueryable()));

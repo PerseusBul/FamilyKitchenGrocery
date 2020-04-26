@@ -11,6 +11,10 @@
 
         public decimal Price { get; set; }
 
+        public decimal Quantity { get; set; }
+
         public string ImageUrl => $"/images/product_{this.Id}.jpg";
+
+        public decimal PercentagePart { get; set; }
     }
 }

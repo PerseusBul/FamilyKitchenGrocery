@@ -13,7 +13,7 @@
             this.CreatedOn = DateTime.UtcNow;
             this.ShoppingCartsShopProducts = new HashSet<ShoppingCartShopProduct>();
 
-            //this.ExpireDate = this.CreatedOn.AddMonths(2);
+            this.ExpireDate = this.CreatedOn.AddMonths(2);
 
             this.ShopProductsSubCategories = new HashSet<ShopProductSubCategory>();
             this.FamilyKitchenUsersFavoriteProducts = new HashSet<FamilyKitchenUserFavoriteProduct>();
@@ -27,7 +27,6 @@
 
         public int? RecipeId { get; set; }
 
-        // TODO change name to content via attribute
         public Recipe Recipe { get; set; }
 
         public int? NutritionDeclarationId { get; set; }
