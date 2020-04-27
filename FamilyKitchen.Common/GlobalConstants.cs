@@ -6,6 +6,10 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string FamilyHeadRoleName = "FamilyHead";
+
+        public const string FamilyMemberRoleName = "FamilyMember";
+
         public const string ImageUrlPattern = "/images/product_{this.Id}.jpg";
     }
 }

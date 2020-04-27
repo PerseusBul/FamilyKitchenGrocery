@@ -1,0 +1,27 @@
+﻿@using FamilyKitchen.Web.ViewModels.Families
+@model FamilyBaseInputModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="text-success">@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-controller="Families" asp-action="Delete" method="post">
+            <h4>Your family account</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.FamilyHead"></label>
+                <input asp-for="@Model.FamilyHead" class="form-control"  placeholder="@Model.FamilyHead"/>
+                <span asp-validation-for="@Model.FamilyHead" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.FamilyNickname"></label>
+                <input asp-for="@Model.FamilyNickname" class="form-control" placeholder="@Model.FamilyNickname"/>
+                <span asp-validation-for="@Model.FamilyNickname" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-black py-2 px-3">Delete Account</button>
+        </form>
+    </div>
+</div>

@@ -109,11 +109,12 @@
             services.AddTransient<IFamilyKitchenUsersService, FamilyKitchenUsersService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<ISubscribersService, SubscribersService>();
+            services.AddTransient<IFamiliesService, FamiliesService>();
 
             Account account = new Account(
-             this.configuration["Cloudinary:AppName"],
-             this.configuration["Cloudinary:AppKey"],
-             this.configuration["Cloudinary:AppSecret"]);
+            this.configuration["Cloudinary:AppName"],
+            this.configuration["Cloudinary:AppKey"],
+            this.configuration["Cloudinary:AppSecret"]);
 
             Cloudinary cloudinary = new Cloudinary(account);
             services.AddSingleton(cloudinary);

@@ -9,6 +9,7 @@
         public ClientCard()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.CreatedOn = DateTime.UtcNow;
         }
 
         [Range(0, 40)]

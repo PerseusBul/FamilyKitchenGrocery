@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\FamilyKitchen.Data.Common\FamilyKitchen.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\FamilyKitchen.Data.Models\FamilyKitchen.Data.Models.csproj" />
+    <ProjectReference Include="..\..\FamilyKitchen.Common\FamilyKitchen.Common.csproj" />
     <ProjectReference Include="..\..\Web\FamilyKitchen.Web.ViewModels\FamilyKitchen.Web.ViewModels.csproj" />
     <ProjectReference Include="..\FamilyKitchen.Services.Mapping\FamilyKitchen.Services.Mapping.csproj" />
   </ItemGroup>

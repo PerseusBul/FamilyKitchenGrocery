@@ -191,10 +191,10 @@
                 this.productCartRepository
                 .All()
                 .Where(cp => cp.ShoppingCartId == user.ShoppingCartId)
-                .Select(cp => new CartProductViewModel()
+                .Select(p => new CartProductViewModel()
                 {
-                    Quantity = cp.Quantity,
-                    Details = this.mapper.Map<ShopProductViewModel>(cp.ShopProduct),
+                    Quantity = p.Quantity,
+                    Details = this.mapper.Map<ShopProductViewModel>(p.ShopProduct),
                 })
                 .ToList();
 

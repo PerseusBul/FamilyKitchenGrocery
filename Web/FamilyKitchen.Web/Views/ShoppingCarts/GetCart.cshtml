@@ -32,7 +32,7 @@
                                     <tr class="text-center">
                                         <td class="product-remove"><a asp-controller="ShoppingCarts" asp-action="DeleteCartProduct" asp-route-id="@product.Details.Id"><span class="ion-ios-close"></span></a></td>
                                         <td class="image-prod">
-                                            @if (@product.Details.RecipeIsPrivate == true)
+                                            @if (product.Details.RecipeIsPrivate == true)
                                             {
                                                 <img class="img-fluid" src="~/images/image_3.jpg" alt=@product.Details.Name>
                                             }

@@ -7,7 +7,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
+    using FamilyKitchen.Common;
     using FamilyKitchen.Data.Common.Repositories;
     using FamilyKitchen.Data.Models;
     using Microsoft.AspNetCore.Authentication;
@@ -145,9 +145,7 @@
                 await this.userManager.AddClaimAsync(user, claim);
             }
 
-            var claimName = new Claim("Username", this.Input.Email);
-
-            await this.userManager.AddClaimAsync(user, claimName);
+            await this.userManager.AddToRoleAsync(user, GlobalConstants.FamilyMemberRoleName);
         }
     }
 }

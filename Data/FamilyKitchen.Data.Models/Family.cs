@@ -10,6 +10,8 @@
         public Family()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.FamilyMembers = new HashSet<FamilyKitchenUser>();
+            this.CreatedOn = DateTime.UtcNow;
         }
 
         public string Name { get; set; }

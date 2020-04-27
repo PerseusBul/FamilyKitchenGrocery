@@ -14,13 +14,26 @@
                 <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
                 <li class="nav-item"><a class="nav-link text-success" asp-controller="ShopProducts" asp-action="AllProducts">Shop</a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">About</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a></li>
             </ul>
           
             <partial name="~/Views/Shared/Partial/_LoginPartial.cshtml" />
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item cta cta-colored"><a class="nav-link" asp-controller="ShoppingCarts" asp-action="GetCart"><span class="icon-shopping_cart"></span>[0]</a></li>
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle text-success" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Family Account</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        @if (this.User.IsInRole(GlobalConstants.FamilyHeadRoleName))
+                        {
+                            <a class="dropdown-item" asp-controller="Families" asp-action="Create">Create Family Account</a>
+                            <a class="dropdown-item" asp-controller="Families" asp-action="Add">Add Member</a>
+                            <a class="dropdown-item" asp-controller="Families" asp-action="Remove">Remove Member</a>
+                            <a class="dropdown-item" asp-controller="Families" asp-action="Delete">Delete Family Account</a>
+                        }
+                        <a class="dropdown-item" asp-controller="Families" asp-action="Get">Pull The Family Cart <span class="icon-shopping_cart"></span></a>
+                        <a class="dropdown-item" asp-controller="Families" asp-action="Get">Push The Family Cart <span class="icon-shopping_cart"></span></a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
