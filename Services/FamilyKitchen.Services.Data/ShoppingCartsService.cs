@@ -254,6 +254,85 @@
             return viewModel;
         }
 
+        public async Task<bool> GetFamilyCart(FamilyKitchenUser moderator, FamilyKitchenUser member)
+        {
+            if (moderator == null || member == null)
+            {
+                return false;
+            }
+
+            var moderatorCart = this.productCartRepository.All().Where(x => x.ShoppingCartId == moderator.ShoppingCartId).ToList();
+            if (moderatorCart == null)
+            {
+                return false;
+            }
+
+            var memberCart = moderatorCart.Select(mc => new ShoppingCartShopProduct
+            {
+                ShoppingCartId = member.ShoppingCartId,
+                ShopProductId = mc.ShopProductId,
+                Quantity = mc.Quantity,
+            }).ToList();
+
+            foreach (var entity in memberCart)
+            {
+                if (this.productCartRepository.All().Any(x => x.ShoppingCartId == entity.ShoppingCartId && x.ShopProductId == entity.ShopProductId))
+                {
+                    this.productCartRepository.Update(entity);
+                }
+                else
+                {
+                    await this.productCartRepository.AddAsync(entity);
+                }
+            }
+
+            await this.productCartRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> ReturnFamilyCart(FamilyKitchenUser moderator, FamilyKitchenUser member)
+        {
+            if (moderator == null || member == null)
+            {
+                return false;
+            }
+
+            var memberCart = this.productCartRepository.All().Where(x => x.ShoppingCartId == member.ShoppingCartId).ToList();
+            if (memberCart == null)
+            {
+                return false;
+            }
+
+            var moderatorCart = memberCart.Select(mc => new ShoppingCartShopProduct
+            {
+                ShoppingCartId = moderator.ShoppingCartId,
+                ShopProductId = mc.ShopProductId,
+                Quantity = mc.Quantity,
+            }).ToList();
+
+            foreach (var entity in moderatorCart)
+            {
+                if (this.productCartRepository.All().Any(x => x.ShoppingCartId == entity.ShoppingCartId && x.ShopProductId == entity.ShopProductId))
+                {
+                    this.productCartRepository.Update(entity);
+                }
+                else
+                {
+                    await this.productCartRepository.AddAsync(entity);
+                }
+            }
+
+            foreach (var entity in memberCart)
+            {
+                this.productCartRepository.Delete(entity);
+            }
+
+            await this.productCartRepository.SaveChangesAsync();
+
+            return true;
+        }
+
         private decimal? GetSubtotal(string username)
         {
             var productsAmounts = this.GetAllProducts(username);

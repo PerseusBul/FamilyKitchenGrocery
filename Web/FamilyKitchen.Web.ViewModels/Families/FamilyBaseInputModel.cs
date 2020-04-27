@@ -7,7 +7,7 @@
         [Required]
         [EmailAddress]
         [Display(Name = "Family Member Username")]
-        public string FamilyHead { get; set; }
+        public string FamilyMember { get; set; }
 
         [Required]
         [Display(Name = "Family Nickname")]

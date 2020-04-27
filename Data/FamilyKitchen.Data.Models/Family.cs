@@ -16,6 +16,8 @@
 
         public string Name { get; set; }
 
+        public string Moderator { get; set; }
+
         public virtual IEnumerable<FamilyKitchenUser> FamilyMembers { get; set; }
     }
 }

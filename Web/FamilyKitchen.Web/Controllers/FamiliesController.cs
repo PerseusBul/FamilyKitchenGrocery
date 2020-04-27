@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     [Authorize(Roles = GlobalConstants.FamilyHeadRoleName)]
     public class FamiliesController : BaseController
@@ -23,7 +24,7 @@
         }
 
         [HttpPost]
-        public IActionResult Create(FamilyCreateInputModel input)
+        public async Task<IActionResult> Create(FamilyCreateInputModel input)
         {
             var members = new List<string>();
 
@@ -42,9 +43,9 @@
                 members.Add(input.FamilyMemberFourth);
             }
 
-            var action = this.familiesService.CreateFamily(this.User.Identity.Name, input.FamilyNickname, members);
+            var action = await this.familiesService.CreateFamily(this.User.Identity.Name, input.FamilyNickname, members);
 
-            if (!action.Result)
+            if (!action)
             {
                 return this.BadRequest();
             }
@@ -54,14 +55,20 @@
 
         public IActionResult Add()
         {
-            var trai = this.familiesService.AddMember("Az", "Toi");
             return this.View();
         }
 
         [HttpPost]
-        public IActionResult Add(FamilyBaseInputModel input)
+        public async Task<IActionResult> Add(FamilyBaseInputModel input)
         {
-            return this.View();
+            var action = await this.familiesService.AddMember(this.User.Identity.Name, input.FamilyNickname, input.FamilyMember);
+
+            if (!action)
+            {
+                return this.BadRequest();
+            }
+
+            return this.Redirect("/");
         }
 
         public IActionResult Remove()
@@ -70,38 +77,99 @@
         }
 
         [HttpPost]
-        public IActionResult Remove(FamilyBaseInputModel input)
+        public async Task<IActionResult> Remove(FamilyBaseInputModel input)
         {
-            return this.View();
+            var action = await this.familiesService.RemoveMember(this.User.Identity.Name, input.FamilyNickname, input.FamilyMember);
+
+            if (!action)
+            {
+                return this.BadRequest();
+            }
+
+            return this.Redirect("/");
         }
 
         public IActionResult Delete()
         {
-            var viewModel = new FamilyBaseInputModel
+            var username = this.User.Identity.Name;
+            var familyName = this.familiesService.GetFamilyName(username);
+
+            var model = new FamilyBaseInputModel
             {
-                FamilyHead = "silvia.peicheva@gmail.com",
-                FamilyNickname = "Smirfs",
+                FamilyNickname = familyName,
+                FamilyMember = string.Empty,
             };
 
-            return this.View(viewModel);
+            return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult Delete(FamilyBaseInputModel input)
+        public async Task<IActionResult> Delete(FamilyBaseInputModel input)
         {
+            var action = await this.familiesService.DeleteFamily(this.User.Identity.Name, input.FamilyNickname);
+
+            if (!action)
+            {
+                return this.BadRequest();
+            }
+
             return this.Redirect("/");
         }
 
         [AllowAnonymous]
-        public IActionResult GetCart()
+        public IActionResult Get()
         {
-            return this.View();
+            var userMemberName = this.User.Identity.Name;
+            var action = this.familiesService.GetFamilyCart(userMemberName);
+
+            if (!action.Result)
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction("GetCart", "ShoppingCarts");
         }
 
         [AllowAnonymous]
         public IActionResult ReturnCart()
         {
-            return this.View();
+            var userMemberName = this.User.Identity.Name;
+            var action = this.familiesService.ReturnFamilyCart(userMemberName);
+
+            if (!action.Result)
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Leave()
+        {
+            var username = this.User.Identity.Name;
+            var familyName = this.familiesService.GetFamilyName(username);
+
+            var model = new FamilyBaseInputModel
+            {
+                FamilyNickname = familyName,
+                FamilyMember = string.Empty,
+            };
+
+            return this.View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Leave(FamilyBaseInputModel input)
+        {
+            var action = await this.familiesService.LeaveFamily(this.User.Identity.Name, input.FamilyNickname);
+
+            if (!action)
+            {
+                return this.BadRequest();
+            }
+
+            return this.Redirect("/");
         }
     }
 }

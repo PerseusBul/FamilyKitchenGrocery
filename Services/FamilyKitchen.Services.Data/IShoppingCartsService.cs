@@ -23,5 +23,9 @@
         Task<bool> DeleteAll(string username);
 
         Task<CartTotalViewModel> GetCartTotalParameters(string username);
+
+        Task<bool> GetFamilyCart(FamilyKitchenUser moderator, FamilyKitchenUser member);
+
+        Task<bool> ReturnFamilyCart(FamilyKitchenUser moderator, FamilyKitchenUser member);
     }
 }

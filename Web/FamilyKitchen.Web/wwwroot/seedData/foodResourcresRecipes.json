@@ -1,187 +1,967 @@
-[{"FoodResourceId":73,"RecipeId":1,"Quantity":0.8},
-    {"FoodResourceId":29,"RecipeId":1,"Quantity":0.02},
-    {"FoodResourceId":76,"RecipeId":1,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":1,"Quantity":0.02},
-    {"FoodResourceId":11,"RecipeId":1,"Quantity":0.04},
-    {"FoodResourceId":84,"RecipeId":1,"Quantity":0.1},
-    {"FoodResourceId":9,"RecipeId":1,"Quantity":0.1},
-    {"FoodResourceId":94,"RecipeId":1,"Quantity":0.02},
-    {"FoodResourceId":1,"RecipeId":1,"Quantity":0.6},
-    {"FoodResourceId":144,"RecipeId":1,"Quantity":0.3},
-    {"FoodResourceId":2,"RecipeId":2,"Quantity":0.85},
-    {"FoodResourceId":29,"RecipeId":2,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":2,"Quantity":0.02},
-    {"FoodResourceId":9,"RecipeId":2,"Quantity":0.08},
-    {"FoodResourceId":91,"RecipeId":2,"Quantity":0.2},
-    {"FoodResourceId":77,"RecipeId":2,"Quantity":1},
-    {"FoodResourceId":84,"RecipeId":2,"Quantity":0.1},
-    {"FoodResourceId":97,"RecipeId":3,"Quantity":0.8},
-    {"FoodResourceId":130,"RecipeId":3,"Quantity":0.3},
-    {"FoodResourceId":9,"RecipeId":3,"Quantity":0.12},
-    {"FoodResourceId":29,"RecipeId":3,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":3,"Quantity":0.02},
-    {"FoodResourceId":1,"RecipeId":4,"Quantity":0.6},
-    {"FoodResourceId":90,"RecipeId":4,"Quantity":0.2},
-    {"FoodResourceId":70,"RecipeId":4,"Quantity":0.2},
-    {"FoodResourceId":107,"RecipeId":4,"Quantity":4},
-    {"FoodResourceId":60,"RecipeId":4,"Quantity":0.5},
-    {"FoodResourceId":69,"RecipeId":4,"Quantity":0.3},
-    {"FoodResourceId":111,"RecipeId":4,"Quantity":0.2},
-    {"FoodResourceId":102,"RecipeId":5,"Quantity":0.4},
-    {"FoodResourceId":97,"RecipeId":5,"Quantity":0.4},
-    {"FoodResourceId":91,"RecipeId":5,"Quantity":0.2},
-    {"FoodResourceId":128,"RecipeId":5,"Quantity":0.2},
-    {"FoodResourceId":9,"RecipeId":5,"Quantity":0.5},
-    {"FoodResourceId":105,"RecipeId":6,"Quantity":0.6},
-    {"FoodResourceId":29,"RecipeId":6,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":6,"Quantity":0.02},
-    {"FoodResourceId":91,"RecipeId":6,"Quantity":0.2},
-    {"FoodResourceId":103,"RecipeId":6,"Quantity":0.1},
-    {"FoodResourceId":1,"RecipeId":6,"Quantity":0.6},
-    {"FoodResourceId":90,"RecipeId":6,"Quantity":0.4},
-    {"FoodResourceId":97,"RecipeId":6,"Quantity":0.2},
-    {"FoodResourceId":144,"RecipeId":6,"Quantity":0.5},
-    {"FoodResourceId":9,"RecipeId":7,"Quantity":0.08},
-    {"FoodResourceId":91,"RecipeId":7,"Quantity":0.2},
-    {"FoodResourceId":94,"RecipeId":7,"Quantity":0.02},
-    {"FoodResourceId":31,"RecipeId":7,"Quantity":0.8},
-    {"FoodResourceId":58,"RecipeId":7,"Quantity":0.8},
-    {"FoodResourceId":73,"RecipeId":7,"Quantity":0.2},
-    {"FoodResourceId":77,"RecipeId":7,"Quantity":1},
-    {"FoodResourceId":138,"RecipeId":7,"Quantity":0.15},
-    {"FoodResourceId":29,"RecipeId":7,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":7,"Quantity":0.02},
-    {"FoodResourceId":135,"RecipeId":8,"Quantity":0.15},
-    {"FoodResourceId":29,"RecipeId":8,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":8,"Quantity":0.02},
-    {"FoodResourceId":9,"RecipeId":8,"Quantity":0.08},
-    {"FoodResourceId":91,"RecipeId":8,"Quantity":0.4},
-    {"FoodResourceId":105,"RecipeId":8,"Quantity":0.2},
-    {"FoodResourceId":73,"RecipeId":8,"Quantity":0.2},
-    {"FoodResourceId":40,"RecipeId":8,"Quantity":0.25},
-    {"FoodResourceId":77,"RecipeId":8,"Quantity":1},
-    {"FoodResourceId":95,"RecipeId":8,"Quantity":0.2},
-    {"FoodResourceId":134,"RecipeId":8,"Quantity":0.1},
-    {"FoodResourceId":7,"RecipeId":8,"Quantity":0.05},
-    {"FoodResourceId":119,"RecipeId":8,"Quantity":0.2},
-    {"FoodResourceId":144,"RecipeId":8,"Quantity":0.5},
-    {"FoodResourceId":69,"RecipeId":9,"Quantity":0.4},
-    {"FoodResourceId":111,"RecipeId":9,"Quantity":0.4},
-    {"FoodResourceId":73,"RecipeId":9,"Quantity":0.2},
-    {"FoodResourceId":94,"RecipeId":9,"Quantity":0.08},
-    {"FoodResourceId":103,"RecipeId":9,"Quantity":0.1},
-    {"FoodResourceId":91,"RecipeId":9,"Quantity":0.2},
-    {"FoodResourceId":135,"RecipeId":9,"Quantity":0.08},
-    {"FoodResourceId":90,"RecipeId":9,"Quantity":0.2},
-    {"FoodResourceId":144,"RecipeId":9,"Quantity":0.5},
-    {"FoodResourceId":74,"RecipeId":10,"Quantity":1.1},
-    {"FoodResourceId":29,"RecipeId":10,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":10,"Quantity":0.02},
-    {"FoodResourceId":9,"RecipeId":10,"Quantity":0.08},
-    {"FoodResourceId":94,"RecipeId":10,"Quantity":0.08},
-    {"FoodResourceId":7,"RecipeId":10,"Quantity":0.05},
-    {"FoodResourceId":15,"RecipeId":10,"Quantity":0.15},
-    {"FoodResourceId":8,"RecipeId":10,"Quantity":0.1},
-    {"FoodResourceId":74,"RecipeId":11,"Quantity":1.2},
-    {"FoodResourceId":29,"RecipeId":11,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":11,"Quantity":0.02},
-    {"FoodResourceId":9,"RecipeId":11,"Quantity":0.08},
-    {"FoodResourceId":83,"RecipeId":11,"Quantity":0.2},
-    {"FoodResourceId":84,"RecipeId":11,"Quantity":0.1},
-    {"FoodResourceId":11,"RecipeId":11,"Quantity":0.04},
-    {"FoodResourceId":135,"RecipeId":11,"Quantity":0.08},
-    {"FoodResourceId":75,"RecipeId":12,"Quantity":0.6},
-    {"FoodResourceId":29,"RecipeId":12,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":12,"Quantity":0.02},
-    {"FoodResourceId":9,"RecipeId":12,"Quantity":0.08},
-    {"FoodResourceId":91,"RecipeId":12,"Quantity":0.2},
-    {"FoodResourceId":1,"RecipeId":12,"Quantity":0.6},
-    {"FoodResourceId":135,"RecipeId":12,"Quantity":0.08},
-    {"FoodResourceId":111,"RecipeId":12,"Quantity":0.1},
-    {"FoodResourceId":126,"RecipeId":12,"Quantity":0.2},
-    {"FoodResourceId":138,"RecipeId":12,"Quantity":0.15},
-    {"FoodResourceId":75,"RecipeId":13,"Quantity":0.8},
-    {"FoodResourceId":29,"RecipeId":13,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":13,"Quantity":0.02},
-    {"FoodResourceId":9,"RecipeId":13,"Quantity":0.08},
-    {"FoodResourceId":91,"RecipeId":13,"Quantity":0.2},
-    {"FoodResourceId":94,"RecipeId":13,"Quantity":0.02},
-    {"FoodResourceId":40,"RecipeId":13,"Quantity":0.25},
-    {"FoodResourceId":141,"RecipeId":13,"Quantity":0.06},
-    {"FoodResourceId":95,"RecipeId":13,"Quantity":0.2},
-    {"FoodResourceId":134,"RecipeId":13,"Quantity":0.1},
-    {"FoodResourceId":2,"RecipeId":13,"Quantity":0.2},
-    {"FoodResourceId":58,"RecipeId":13,"Quantity":0.8},
-    {"FoodResourceId":105,"RecipeId":14,"Quantity":0.6},
-    {"FoodResourceId":29,"RecipeId":14,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":14,"Quantity":0.02},
-    {"FoodResourceId":100,"RecipeId":14,"Quantity":0.2},
-    {"FoodResourceId":91,"RecipeId":14,"Quantity":0.2},
-    {"FoodResourceId":19,"RecipeId":14,"Quantity":0.6},
-    {"FoodResourceId":144,"RecipeId":14,"Quantity":0.5},
-    {"FoodResourceId":105,"RecipeId":15,"Quantity":0.8},
-    {"FoodResourceId":29,"RecipeId":15,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":15,"Quantity":0.02},
-    {"FoodResourceId":9,"RecipeId":15,"Quantity":0.05},
-    {"FoodResourceId":91,"RecipeId":15,"Quantity":0.2},
-    {"FoodResourceId":40,"RecipeId":15,"Quantity":0.25},
-    {"FoodResourceId":57,"RecipeId":15,"Quantity":0.25},
-    {"FoodResourceId":96,"RecipeId":16,"Quantity":0.6},
-    {"FoodResourceId":29,"RecipeId":16,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":16,"Quantity":0.02},
-    {"FoodResourceId":8,"RecipeId":16,"Quantity":0.1},
-    {"FoodResourceId":91,"RecipeId":16,"Quantity":0.2},
-    {"FoodResourceId":16,"RecipeId":16,"Quantity":0.1},
-    {"FoodResourceId":7,"RecipeId":16,"Quantity":0.05},
-    {"FoodResourceId":81,"RecipeId":16,"Quantity":0.2},
-    {"FoodResourceId":95,"RecipeId":16,"Quantity":0.2},
-    {"FoodResourceId":103,"RecipeId":16,"Quantity":0.1},
-    {"FoodResourceId":1,"RecipeId":16,"Quantity":1},
-    {"FoodResourceId":144,"RecipeId":16,"Quantity":0.5},
-    {"FoodResourceId":96,"RecipeId":17,"Quantity":0.8},
-    {"FoodResourceId":91,"RecipeId":17,"Quantity":0.2},
-    {"FoodResourceId":94,"RecipeId":17,"Quantity":0.02},
-    {"FoodResourceId":9,"RecipeId":17,"Quantity":0.08},
-    {"FoodResourceId":29,"RecipeId":17,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":17,"Quantity":0.02},
-    {"FoodResourceId":95,"RecipeId":17,"Quantity":0.4},
-    {"FoodResourceId":99,"RecipeId":17,"Quantity":0.2},
-    {"FoodResourceId":73,"RecipeId":18,"Quantity":0.6},
-    {"FoodResourceId":29,"RecipeId":18,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":18,"Quantity":0.02},
-    {"FoodResourceId":94,"RecipeId":18,"Quantity":0.02},
-    {"FoodResourceId":135,"RecipeId":18,"Quantity":0.04},
-    {"FoodResourceId":8,"RecipeId":18,"Quantity":0.08},
-    {"FoodResourceId":26,"RecipeId":18,"Quantity":0.6},
-    {"FoodResourceId":138,"RecipeId":18,"Quantity":0.25},
-    {"FoodResourceId":57,"RecipeId":18,"Quantity":0.1},
-    {"FoodResourceId":73,"RecipeId":19,"Quantity":0.8},
-    {"FoodResourceId":29,"RecipeId":19,"Quantity":0.02},
-    {"FoodResourceId":76,"RecipeId":19,"Quantity":0.02},
-    {"FoodResourceId":10,"RecipeId":19,"Quantity":0.02},
-    {"FoodResourceId":11,"RecipeId":19,"Quantity":0.04},
-    {"FoodResourceId":91,"RecipeId":19,"Quantity":0.2},
-    {"FoodResourceId":84,"RecipeId":19,"Quantity":0.1},
-    {"FoodResourceId":31,"RecipeId":19,"Quantity":0.1},
-    {"FoodResourceId":108,"RecipeId":19,"Quantity":0.4},
-    {"FoodResourceId":94,"RecipeId":19,"Quantity":0.02},
-    {"FoodResourceId":141,"RecipeId":19,"Quantity":0.06},
-    {"FoodResourceId":138,"RecipeId":19,"Quantity":0.25},
-    {"FoodResourceId":135,"RecipeId":19,"Quantity":0.04},
-    {"FoodResourceId":73,"RecipeId":20,"Quantity":3},
-    {"FoodResourceId":29,"RecipeId":20,"Quantity":0.08},
-    {"FoodResourceId":10,"RecipeId":20,"Quantity":0.06},
-    {"FoodResourceId":11,"RecipeId":20,"Quantity":0.1},
-    {"FoodResourceId":94,"RecipeId":20,"Quantity":0.02},
-    {"FoodResourceId":91,"RecipeId":20,"Quantity":0.5},
-    {"FoodResourceId":77,"RecipeId":20,"Quantity":1},
-    {"FoodResourceId":126,"RecipeId":21,"Quantity":0.8},
-    {"FoodResourceId":107,"RecipeId":21,"Quantity":5},
-    {"FoodResourceId":16,"RecipeId":21,"Quantity":0.2},
-    {"FoodResourceId":135,"RecipeId":22,"Quantity":0.25},
-    {"FoodResourceId":126,"RecipeId":22,"Quantity":0.5},
-    {"FoodResourceId":16,"RecipeId":22,"Quantity":0.25},
-    {"FoodResourceId":37,"RecipeId":22,"Quantity":0.1},
-    {"FoodResourceId":31,"RecipeId":22,"Quantity":0.2},
-    {"FoodResourceId":111,"RecipeId":22,"Quantity":2},
-    {"FoodResourceId":29,"RecipeId":22,"Quantity":0.01}]
+[
+  {
+    "FoodResourceId": 73,
+    "RecipeId": 1,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 1,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 76,
+    "RecipeId": 1,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 1,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 11,
+    "RecipeId": 1,
+    "Quantity": 0.04
+  },
+  {
+    "FoodResourceId": 84,
+    "RecipeId": 1,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 1,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 94,
+    "RecipeId": 1,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 1,
+    "RecipeId": 1,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 1,
+    "Quantity": 0.3
+  },
+  {
+    "FoodResourceId": 2,
+    "RecipeId": 2,
+    "Quantity": 0.85
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 2,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 2,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 2,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 2,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 77,
+    "RecipeId": 2,
+    "Quantity": 1
+  },
+  {
+    "FoodResourceId": 84,
+    "RecipeId": 2,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 97,
+    "RecipeId": 3,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 130,
+    "RecipeId": 3,
+    "Quantity": 0.3
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 3,
+    "Quantity": 0.12
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 3,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 3,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 1,
+    "RecipeId": 4,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 90,
+    "RecipeId": 4,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 70,
+    "RecipeId": 4,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 107,
+    "RecipeId": 4,
+    "Quantity": 4
+  },
+  {
+    "FoodResourceId": 60,
+    "RecipeId": 4,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 69,
+    "RecipeId": 4,
+    "Quantity": 0.3
+  },
+  {
+    "FoodResourceId": 111,
+    "RecipeId": 4,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 102,
+    "RecipeId": 5,
+    "Quantity": 0.4
+  },
+  {
+    "FoodResourceId": 97,
+    "RecipeId": 5,
+    "Quantity": 0.4
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 5,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 128,
+    "RecipeId": 5,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 5,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 105,
+    "RecipeId": 6,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 6,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 6,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 6,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 103,
+    "RecipeId": 6,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 1,
+    "RecipeId": 6,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 90,
+    "RecipeId": 6,
+    "Quantity": 0.4
+  },
+  {
+    "FoodResourceId": 97,
+    "RecipeId": 6,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 6,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 7,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 7,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 94,
+    "RecipeId": 7,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 31,
+    "RecipeId": 7,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 58,
+    "RecipeId": 7,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 73,
+    "RecipeId": 7,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 77,
+    "RecipeId": 7,
+    "Quantity": 1
+  },
+  {
+    "FoodResourceId": 138,
+    "RecipeId": 7,
+    "Quantity": 0.15
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 7,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 7,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 135,
+    "RecipeId": 8,
+    "Quantity": 0.15
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 8,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 8,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 8,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 8,
+    "Quantity": 0.4
+  },
+  {
+    "FoodResourceId": 105,
+    "RecipeId": 8,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 73,
+    "RecipeId": 8,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 40,
+    "RecipeId": 8,
+    "Quantity": 0.25
+  },
+  {
+    "FoodResourceId": 77,
+    "RecipeId": 8,
+    "Quantity": 1
+  },
+  {
+    "FoodResourceId": 95,
+    "RecipeId": 8,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 134,
+    "RecipeId": 8,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 7,
+    "RecipeId": 8,
+    "Quantity": 0.05
+  },
+  {
+    "FoodResourceId": 119,
+    "RecipeId": 8,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 8,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 69,
+    "RecipeId": 9,
+    "Quantity": 0.4
+  },
+  {
+    "FoodResourceId": 111,
+    "RecipeId": 9,
+    "Quantity": 0.4
+  },
+  {
+    "FoodResourceId": 73,
+    "RecipeId": 9,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 94,
+    "RecipeId": 9,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 103,
+    "RecipeId": 9,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 9,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 135,
+    "RecipeId": 9,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 90,
+    "RecipeId": 9,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 9,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 74,
+    "RecipeId": 10,
+    "Quantity": 1.1
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 10,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 10,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 10,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 94,
+    "RecipeId": 10,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 7,
+    "RecipeId": 10,
+    "Quantity": 0.05
+  },
+  {
+    "FoodResourceId": 15,
+    "RecipeId": 10,
+    "Quantity": 0.15
+  },
+  {
+    "FoodResourceId": 8,
+    "RecipeId": 10,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 74,
+    "RecipeId": 11,
+    "Quantity": 1.2
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 11,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 11,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 11,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 83,
+    "RecipeId": 11,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 84,
+    "RecipeId": 11,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 11,
+    "RecipeId": 11,
+    "Quantity": 0.04
+  },
+  {
+    "FoodResourceId": 135,
+    "RecipeId": 11,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 75,
+    "RecipeId": 12,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 12,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 12,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 12,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 12,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 1,
+    "RecipeId": 12,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 135,
+    "RecipeId": 12,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 111,
+    "RecipeId": 12,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 126,
+    "RecipeId": 12,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 138,
+    "RecipeId": 12,
+    "Quantity": 0.15
+  },
+  {
+    "FoodResourceId": 75,
+    "RecipeId": 13,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 13,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 13,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 13,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 13,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 94,
+    "RecipeId": 13,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 40,
+    "RecipeId": 13,
+    "Quantity": 0.25
+  },
+  {
+    "FoodResourceId": 141,
+    "RecipeId": 13,
+    "Quantity": 0.06
+  },
+  {
+    "FoodResourceId": 95,
+    "RecipeId": 13,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 134,
+    "RecipeId": 13,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 2,
+    "RecipeId": 13,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 58,
+    "RecipeId": 13,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 105,
+    "RecipeId": 14,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 14,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 14,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 100,
+    "RecipeId": 14,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 14,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 19,
+    "RecipeId": 14,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 14,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 105,
+    "RecipeId": 15,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 15,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 15,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 15,
+    "Quantity": 0.05
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 15,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 40,
+    "RecipeId": 15,
+    "Quantity": 0.25
+  },
+  {
+    "FoodResourceId": 57,
+    "RecipeId": 15,
+    "Quantity": 0.25
+  },
+  {
+    "FoodResourceId": 96,
+    "RecipeId": 16,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 16,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 16,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 8,
+    "RecipeId": 16,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 16,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 16,
+    "RecipeId": 16,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 7,
+    "RecipeId": 16,
+    "Quantity": 0.05
+  },
+  {
+    "FoodResourceId": 81,
+    "RecipeId": 16,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 95,
+    "RecipeId": 16,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 103,
+    "RecipeId": 16,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 1,
+    "RecipeId": 16,
+    "Quantity": 1
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 16,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 96,
+    "RecipeId": 17,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 17,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 94,
+    "RecipeId": 17,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 9,
+    "RecipeId": 17,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 17,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 17,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 95,
+    "RecipeId": 17,
+    "Quantity": 0.4
+  },
+  {
+    "FoodResourceId": 99,
+    "RecipeId": 17,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 73,
+    "RecipeId": 18,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 18,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 18,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 94,
+    "RecipeId": 18,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 135,
+    "RecipeId": 18,
+    "Quantity": 0.04
+  },
+  {
+    "FoodResourceId": 8,
+    "RecipeId": 18,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 26,
+    "RecipeId": 18,
+    "Quantity": 0.6
+  },
+  {
+    "FoodResourceId": 138,
+    "RecipeId": 18,
+    "Quantity": 0.25
+  },
+  {
+    "FoodResourceId": 57,
+    "RecipeId": 18,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 73,
+    "RecipeId": 19,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 19,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 76,
+    "RecipeId": 19,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 19,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 11,
+    "RecipeId": 19,
+    "Quantity": 0.04
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 19,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 84,
+    "RecipeId": 19,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 31,
+    "RecipeId": 19,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 108,
+    "RecipeId": 19,
+    "Quantity": 0.4
+  },
+  {
+    "FoodResourceId": 94,
+    "RecipeId": 19,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 141,
+    "RecipeId": 19,
+    "Quantity": 0.06
+  },
+  {
+    "FoodResourceId": 138,
+    "RecipeId": 19,
+    "Quantity": 0.25
+  },
+  {
+    "FoodResourceId": 135,
+    "RecipeId": 19,
+    "Quantity": 0.04
+  },
+  {
+    "FoodResourceId": 73,
+    "RecipeId": 20,
+    "Quantity": 3
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 20,
+    "Quantity": 0.08
+  },
+  {
+    "FoodResourceId": 10,
+    "RecipeId": 20,
+    "Quantity": 0.06
+  },
+  {
+    "FoodResourceId": 11,
+    "RecipeId": 20,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 94,
+    "RecipeId": 20,
+    "Quantity": 0.02
+  },
+  {
+    "FoodResourceId": 91,
+    "RecipeId": 20,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 77,
+    "RecipeId": 20,
+    "Quantity": 1
+  },
+  {
+    "FoodResourceId": 126,
+    "RecipeId": 21,
+    "Quantity": 0.8
+  },
+  {
+    "FoodResourceId": 107,
+    "RecipeId": 21,
+    "Quantity": 5
+  },
+  {
+    "FoodResourceId": 16,
+    "RecipeId": 21,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 135,
+    "RecipeId": 22,
+    "Quantity": 0.25
+  },
+  {
+    "FoodResourceId": 126,
+    "RecipeId": 22,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 16,
+    "RecipeId": 22,
+    "Quantity": 0.25
+  },
+  {
+    "FoodResourceId": 37,
+    "RecipeId": 22,
+    "Quantity": 0.1
+  },
+  {
+    "FoodResourceId": 31,
+    "RecipeId": 22,
+    "Quantity": 0.2
+  },
+  {
+    "FoodResourceId": 111,
+    "RecipeId": 22,
+    "Quantity": 2
+  },
+  {
+    "FoodResourceId": 29,
+    "RecipeId": 22,
+    "Quantity": 0.01
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 1,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 6,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 8,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 14,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 16,
+    "Quantity": 0.5
+  },
+  {
+    "FoodResourceId": 144,
+    "RecipeId": 9,
+    "Quantity": 0.5
+  }
+]

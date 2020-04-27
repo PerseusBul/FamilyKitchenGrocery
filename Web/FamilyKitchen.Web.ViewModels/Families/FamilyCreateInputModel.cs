@@ -4,11 +4,6 @@
 
     public class FamilyCreateInputModel
     {
-        //[Required]
-        //[EmailAddress]
-        //[Display(Name = "Your Username")]
-        //public string FamilyHead { get; set; }
-
         [Required]
         [Display(Name = "Family Nickname")]
         [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
