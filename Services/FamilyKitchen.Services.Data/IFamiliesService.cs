@@ -20,5 +20,7 @@
         Task<bool> ReturnFamilyCart(string member);
 
         string GetFamilyName(string username);
+
+        string GetFamilyGroupNameSignalR(string username);
     }
 }

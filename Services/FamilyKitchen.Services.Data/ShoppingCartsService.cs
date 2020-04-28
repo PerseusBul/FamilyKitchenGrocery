@@ -261,32 +261,35 @@
                 return false;
             }
 
-            var moderatorCart = this.productCartRepository.All().Where(x => x.ShoppingCartId == moderator.ShoppingCartId).ToList();
-            if (moderatorCart == null)
+            if (moderator.UserName != member.UserName)
             {
-                return false;
-            }
-
-            var memberCart = moderatorCart.Select(mc => new ShoppingCartShopProduct
-            {
-                ShoppingCartId = member.ShoppingCartId,
-                ShopProductId = mc.ShopProductId,
-                Quantity = mc.Quantity,
-            }).ToList();
-
-            foreach (var entity in memberCart)
-            {
-                if (this.productCartRepository.All().Any(x => x.ShoppingCartId == entity.ShoppingCartId && x.ShopProductId == entity.ShopProductId))
+                var moderatorCart = this.productCartRepository.All().Where(x => x.ShoppingCartId == moderator.ShoppingCartId).ToList();
+                if (moderatorCart == null)
                 {
-                    this.productCartRepository.Update(entity);
+                    return false;
                 }
-                else
-                {
-                    await this.productCartRepository.AddAsync(entity);
-                }
-            }
 
-            await this.productCartRepository.SaveChangesAsync();
+                var memberCart = moderatorCart.Select(mc => new ShoppingCartShopProduct
+                {
+                    ShoppingCartId = member.ShoppingCartId,
+                    ShopProductId = mc.ShopProductId,
+                    Quantity = mc.Quantity,
+                }).ToList();
+
+                foreach (var entity in memberCart)
+                {
+                    if (this.productCartRepository.All().Any(x => x.ShoppingCartId == entity.ShoppingCartId && x.ShopProductId == entity.ShopProductId))
+                    {
+                        this.productCartRepository.Update(entity);
+                    }
+                    else
+                    {
+                        await this.productCartRepository.AddAsync(entity);
+                    }
+                }
+
+                await this.productCartRepository.SaveChangesAsync();
+            }
 
             return true;
         }
@@ -298,37 +301,40 @@
                 return false;
             }
 
-            var memberCart = this.productCartRepository.All().Where(x => x.ShoppingCartId == member.ShoppingCartId).ToList();
-            if (memberCart == null)
+            if (moderator.UserName != member.UserName)
             {
-                return false;
-            }
-
-            var moderatorCart = memberCart.Select(mc => new ShoppingCartShopProduct
-            {
-                ShoppingCartId = moderator.ShoppingCartId,
-                ShopProductId = mc.ShopProductId,
-                Quantity = mc.Quantity,
-            }).ToList();
-
-            foreach (var entity in moderatorCart)
-            {
-                if (this.productCartRepository.All().Any(x => x.ShoppingCartId == entity.ShoppingCartId && x.ShopProductId == entity.ShopProductId))
+                var memberCart = this.productCartRepository.All().Where(x => x.ShoppingCartId == member.ShoppingCartId).ToList();
+                if (memberCart == null)
                 {
-                    this.productCartRepository.Update(entity);
+                    return false;
                 }
-                else
+
+                var moderatorCart = memberCart.Select(mc => new ShoppingCartShopProduct
                 {
-                    await this.productCartRepository.AddAsync(entity);
+                    ShoppingCartId = moderator.ShoppingCartId,
+                    ShopProductId = mc.ShopProductId,
+                    Quantity = mc.Quantity,
+                }).ToList();
+
+                foreach (var entity in moderatorCart)
+                {
+                    if (this.productCartRepository.All().Any(x => x.ShoppingCartId == entity.ShoppingCartId && x.ShopProductId == entity.ShopProductId))
+                    {
+                        this.productCartRepository.Update(entity);
+                    }
+                    else
+                    {
+                        await this.productCartRepository.AddAsync(entity);
+                    }
                 }
-            }
 
-            foreach (var entity in memberCart)
-            {
-                this.productCartRepository.Delete(entity);
-            }
+                foreach (var entity in memberCart)
+                {
+                    this.productCartRepository.Delete(entity);
+                }
 
-            await this.productCartRepository.SaveChangesAsync();
+                await this.productCartRepository.SaveChangesAsync();
+            }
 
             return true;
         }

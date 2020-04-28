@@ -23,9 +23,5 @@
         public int Availability { get; set; }
 
         public bool Available => this.Availability > 0;
-
-        // public string ExpireDate { get; set; }
-
-        // public string NutritionDeclaration { get; set; }
     }
 }

@@ -172,5 +172,10 @@
 
             return this.Redirect("/");
         }
+
+        public IActionResult FamilyCart()
+        {
+            return this.View();
+        }
     }
 }

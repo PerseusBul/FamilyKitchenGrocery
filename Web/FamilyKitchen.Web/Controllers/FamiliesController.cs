@@ -1,12 +1,13 @@
 ﻿namespace FamilyKitchen.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     using FamilyKitchen.Common;
     using FamilyKitchen.Services.Data;
     using FamilyKitchen.Web.ViewModels.Families;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     [Authorize(Roles = GlobalConstants.FamilyHeadRoleName)]
     public class FamiliesController : BaseController

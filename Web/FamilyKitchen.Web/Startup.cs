@@ -15,6 +15,7 @@
     using FamilyKitchen.Services.Mapping;
     using FamilyKitchen.Services.Messaging;
     using FamilyKitchen.Web.ElasticSearchConf;
+    using FamilyKitchen.Web.ExtensionsConf.SignalRConf;
     using FamilyKitchen.Web.MappingConfiguration;
     using FamilyKitchen.Web.ViewModels;
     using Microsoft.AspNetCore.Builder;
@@ -170,7 +171,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        // endpoints.MapHub<MyHub>("/hubRoute");
+                        endpoints.MapHub<CartHub>("/carthub");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

@@ -194,5 +194,13 @@ namespace FamilyKitchen.Services.Data
 
             return fam.Name;
         }
+
+        public string GetFamilyGroupNameSignalR(string username)
+        {
+            var user = this.usersRepository.All().Where(x => x.UserName == username);
+            var familyName = user.Select(x => x.Family.Name).FirstOrDefault();
+
+            return familyName;
+        }
     }
 }

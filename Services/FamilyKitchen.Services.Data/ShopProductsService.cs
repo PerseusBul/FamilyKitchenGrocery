@@ -44,24 +44,6 @@
             IQueryable<ShopProduct> query =
                this.productsRepository.All().Where(x => x.RecipeId != null && x.Recipe.IsPrivate == false);
 
-            //IQueryable<Recipe> recipes =
-            //   this.recipeRepository.All();
-
-            //if (query.ToList().Count() < recipes.ToList().Count())
-            //{
-            //    var newRecipes = recipes.Where(x => !query.Any(y => y.RecipeId == x.Id)).AsQueryable();
-
-            //    var newMeals = this.ProduceNewKitchenProducts(newRecipes);
-
-            //    this.productsRepository.AddRangeAsync(newMeals).GetAwaiter().GetResult();
-            //    this.productsRepository.SaveChangesAsync().GetAwaiter().GetResult();
-
-            //    query =
-            //   this.productsRepository.All().Where(x => x.RecipeId != null);
-            //}
-
-            // return query.Where(x => x.Recipe.IsPrivate == false).To<T>().ToList();
-
             return query.To<T>().ToList();
         }
 

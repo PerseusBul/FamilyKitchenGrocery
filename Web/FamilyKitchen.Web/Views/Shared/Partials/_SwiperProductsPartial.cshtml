@@ -36,10 +36,10 @@
                             </div>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a class="add-to-cart d-flex justify-content-center align-items-center text-center" asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@product.Id">
+                                    <a class="add-to-cart d-flex justify-content-center align-items-center text-center" id="signalRButton" productId="@product.Id">
                                         <span><i class="ion-ios-menu"></i></span>
                                     </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <a class="buy-now d-flex justify-content-center align-items-center mx-1" asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@product.Id">
                                         <span><i class="ion-ios-cart"></i></span>
                                     </a>
                                     <a href="/FavoriteProducts/Add/@product.Id" class="heart d-flex justify-content-center align-items-center ">

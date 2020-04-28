@@ -24,7 +24,7 @@
         {
             var viewModel = new ListAllProductsViewModel
             {
-                Products = this.productsService.GetAllProducts<ShopProductViewModel>(), // TODO await
+                Products = this.productsService.GetAllProducts<ShopProductViewModel>(),
             };
 
             return this.View(viewModel);
@@ -34,7 +34,7 @@
         {
             var viewModel = new ListAllMealsViewModel
             {
-                Products = this.productsService.GetAllMeals<ShopProductViewModel>(), // await
+                Products = this.productsService.GetAllMeals<ShopProductViewModel>(),
             };
 
             return this.View(viewModel);
