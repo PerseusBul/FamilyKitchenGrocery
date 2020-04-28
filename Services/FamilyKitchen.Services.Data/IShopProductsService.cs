@@ -16,6 +16,8 @@
 
         T GetProductById<T>(int id);
 
+        T GetProductByName<T>(string name);
+
         Task Update(ShopProduct product);
 
         Task Delete(ShopProduct product);

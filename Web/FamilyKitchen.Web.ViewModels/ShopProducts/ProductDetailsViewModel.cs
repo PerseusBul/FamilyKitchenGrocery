@@ -1,6 +1,5 @@
 ﻿namespace FamilyKitchen.Web.ViewModels.ShopProducts
 {
-
     using FamilyKitchen.Data.Models;
     using FamilyKitchen.Services.Mapping;
 

@@ -1,0 +1,61 @@
+﻿
+<h1>FamilyCart</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-left justify-content-left">
+            <div class="col-md-9 text-left">
+                <p class="breadcrumbs"><span class="mr-2"><a asp-controller="ShoppingCarts" asp-action="DeleteCart">Empty Cart<span><i class="ion-ios-basket"></i></span></a></span></p>
+            </div>
+        </div>
+    </div>
+    <section class="ftco-section ftco-cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div class="cart-list">
+                        <table class="table">
+                            <thead class="thead-primary">
+                                <tr class="text-center">
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>Product name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyCart">
+                                <tr class="text-center">
+                                    <td class="image-prod">
+                                        <img class="img-fluid" src="~/images/image_3.jpg" alt=""><!-- imageUrl-->
+                                    </td>
+
+                                    <td class="product-name">
+                                        <h3 id="productName"></h3><!-- productName-->
+                                        <p>Far far away, behind the word mountains, far from the countries</p>
+                                    </td>
+
+                                    <td class="price" id="productSalePrice"></td><!-- productSalePrice-->
+
+                                    <td class="quantity">
+                                        <div class="input-group mb-3">
+                                            <input type="text" name="quantity" class="quantity form-control input-number" id="productQuantity" value="" min="1" max="100"><!-- productQuantity-->
+                                        </div>
+                                    </td>
+
+                                    <td class="total" id="cartTotal"></td><!-- cartTotal-->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</body>
+</html>

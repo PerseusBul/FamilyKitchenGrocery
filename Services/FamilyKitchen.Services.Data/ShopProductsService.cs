@@ -51,15 +51,24 @@
         {
             IQueryable<ShopProduct> query =
                 this.productsRepository.All().Where(x => x.RecipeId == null);
-            var products = query.Take(1).ToArray();
+
+            // ElasticSearch
+            // var products = query.Skip(10).ToArray();
             // var indexManyResponse = this.elasticClient.IndexMany(products);
-            // var result = this.elasticClient.Bulk(b => b.Index("shopProducts").IndexMany(products));
+            // var result = this.elasticClient.Bulk(b => b.Index("shopproducts").IndexMany(products));
             return query.To<T>().ToList();
         }
 
         public T GetProductById<T>(int id)
         {
             var product = this.productsRepository.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return product;
+        }
+
+        public T GetProductByName<T>(string name)
+        {
+            var product = this.productsRepository.All().Where(x => x.Name == name)
                 .To<T>().FirstOrDefault();
             return product;
         }
@@ -77,7 +86,9 @@
 
             await this.productsRepository.AddAsync(product);
             await this.productsRepository.SaveChangesAsync();
-            // await this.elasticClient.IndexDocumentAsync<ShopProduct>(product);
+
+            // ElasticSearch
+            await this.elasticClient.IndexDocumentAsync<ShopProduct>(product);
 
             return true;
         }
@@ -95,7 +106,9 @@
 
             await this.productsRepository.AddAsync(product);
             await this.productsRepository.SaveChangesAsync();
-            // await this.elasticClient.DeleteAsync<ShopProduct>(product);
+
+            // ElasticSearch
+            await this.elasticClient.DeleteAsync<ShopProduct>(product);
         }
 
         public async Task Update(ShopProduct product)
@@ -111,7 +124,9 @@
 
             await this.productsRepository.AddAsync(product);
             await this.productsRepository.SaveChangesAsync();
-            // await this.elasticClient.UpdateAsync<ShopProduct>(product, u => u.Doc(product));
+
+            // ElasticSearch
+            await this.elasticClient.UpdateAsync<ShopProduct>(product, u => u.Doc(product));
         }
 
         public IEnumerable<ShopProduct> ProduceNewKitchenProducts(IQueryable<Recipe> meals)
@@ -131,7 +146,9 @@
                 RecipeId = x.Id,
             }).ToList();
 
-           // var indexManyResponse = this.elasticClient.IndexMany(products);
+            // ElasticSearch
+            var indexManyResponse = this.elasticClient.IndexMany(products);
+
             return products;
         }
     }

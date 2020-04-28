@@ -1,15 +1,17 @@
 ﻿namespace FamilyKitchen.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using FamilyKitchen.Data.Models;
     using FamilyKitchen.Services.Data;
+    using FamilyKitchen.Web.ViewModels.ShopProducts;
     using Microsoft.AspNetCore.Mvc;
     using Nest;
 
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SearchController : ControllerBase
+    //[Route("api/[controller]")]
+    //[ApiController]
+    public class SearchController : BaseController
     {
         private readonly IShopProductsService productService;
         private readonly IElasticClient client;
@@ -28,12 +30,29 @@
                      .From((page - 1) * pageSize)
                      .Size(pageSize));
 
+            var products = new List<ShopProductViewModel>();
+            this.ViewBag.Query = query;
+            var viewModel = new ListAllProductsViewModel
+            {
+                Products = new List<ShopProductViewModel>(),
+            };
+
             if (!response.IsValid)
             {
-                return this.Ok(new ShopProduct[] { });
+                return this.View(viewModel);
             }
 
-            return this.Ok(response.Documents);
+            foreach (var item in response.Hits)
+            {
+                var name = item.Source.Name;
+
+                var model = this.productService.GetProductByName<ShopProductViewModel>(name);
+                products.Add(model);
+            }
+
+            viewModel.Products = products;
+
+            return this.View(viewModel);
         }
     }
 }

@@ -44,6 +44,11 @@
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-12 ftco-animate text-center">
                     <p class="mb-0 bread"><span class="mr-2"><a asp-controller="FavoriteProducts" asp-action="List">Favorite</a></span> <span>Products</span></p>
+                    <div class="mb-0 bread">
+                        <form class="container" asp-action="Find" asp-controller="Search" method="get">
+                            <input type="search" id="query" name="query" placeholder="Search..." value="@ViewContext.HttpContext.Request.Query["query"]" />
+                        </form>
+                    </div>
                     <h1 class="breadcrumbs">TAKE ALL!</h1>
                 </div>
             </div>
