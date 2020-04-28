@@ -9,8 +9,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Nest;
 
-    //[Route("api/[controller]")]
-    //[ApiController]
     public class SearchController : BaseController
     {
         private readonly IShopProductsService productService;
@@ -23,7 +21,7 @@
         }
 
         [HttpGet("Find")]
-        public async Task<IActionResult> Find(string query, int page = 1, int pageSize = 5)
+        public async Task<IActionResult> Find(string query, int page = 1, int pageSize = 12)
         {
             var response = await this.client.SearchAsync<ShopProduct>(
                  s => s.Query(q => q.QueryString(d => d.Query('*' + query + '*')))

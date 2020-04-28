@@ -5,5 +5,7 @@
     public interface ISubscribersService
     {
         Task<bool> SubscribeEmail(string username, string subscriber);
+
+        string SendEmail(string name, string email, string message);
     }
 }

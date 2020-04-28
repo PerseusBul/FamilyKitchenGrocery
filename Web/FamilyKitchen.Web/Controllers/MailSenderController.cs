@@ -1,35 +1,24 @@
-﻿namespace FamilyKitchen.Services.Data
+﻿namespace FamilyKitchen.Web.Controllers
 {
-    using System;
     using System.Net;
     using System.Net.Mail;
-    using System.Threading.Tasks;
     using FamilyKitchen.Common;
-    using FamilyKitchen.Data.Common.Repositories;
-    using FamilyKitchen.Data.Models;
+    using FamilyKitchen.Web.ViewModels.MailSender;
+    using Microsoft.AspNetCore.Mvc;
 
-    public class SubscribersService : ISubscribersService
+    public class MailSenderController : BaseController
     {
-        private readonly IDeletableEntityRepository<Subscriber> subscribersRepository;
-
-        public SubscribersService(IDeletableEntityRepository<Subscriber> subscribersRepository)
+        public IActionResult Contact()
         {
-            this.subscribersRepository = subscribersRepository;
+            return this.View();
         }
 
-        public async Task<bool> SubscribeEmail(string username, string subscriber)
+        [HttpPost]
+        public IActionResult Contact(ContactInputModel input)
         {
-            var subscriberEntity = new Subscriber()
-            {
-                Email = subscriber,
-                Username = username,
-                SubscriptionTime = DateTime.UtcNow,
-            };
+            this.SendEmail(input.Name, input.Email, GlobalConstants.EmailMessageAnswer);
 
-            await this.subscribersRepository.AddAsync(subscriberEntity);
-            await this.subscribersRepository.SaveChangesAsync();
-
-            return true;
+            return this.Redirect(nameof(this.Contact));
         }
 
         public string SendEmail(string name, string email, string message)

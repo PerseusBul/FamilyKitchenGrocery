@@ -11,5 +11,17 @@
         public const string FamilyMemberRoleName = "FamilyMember";
 
         public const string ImageUrlPattern = "/images/product_{this.Id}.jpg";
+
+        public const string FamilyKitchenEmail = "family.kitchen.shop@gmail.com";
+
+        public const string FKEmailPassword = "PerseusBul1";
+
+        public const string GmailHost = "smtp.gmail.com";
+
+        public const string EmailGreeting = "Email Sent Successfully!";
+
+        public const string EmailSubject = "Email Sender App";
+
+        public const string EmailMessageAnswer = "We will answer you soon! Thank you for contacting us!";
     }
 }
