@@ -4,6 +4,7 @@
     using FamilyKitchen.Web.ViewModels.Orders;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     [Authorize]
     public class OrdersController : BaseController
@@ -42,7 +43,7 @@
         }
 
         [HttpPost]
-        public IActionResult PaymentMethod(OrderPaymentInputModel input)
+        public async Task<IActionResult> PaymentMethod(OrderPaymentInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -61,10 +62,10 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            var actionOrder = this.ordersService
+            var actionOrder = await this.ordersService
                 .CreateOrder(this.User.Identity.Name, sessionOrderProfile, input.PaymentMethod);
 
-            if (!actionOrder.Result)
+            if (!actionOrder)
             {
                 return this.RedirectToAction(nameof(this.Index));
             }

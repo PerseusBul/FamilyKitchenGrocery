@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using AutoMapper;
+    using FamilyKitchen.Common;
     using FamilyKitchen.Data.Common.Repositories;
     using FamilyKitchen.Data.Models;
     using FamilyKitchen.Data.Models.Enums;
@@ -40,7 +41,10 @@
 
         public async Task<bool> CreateOrder(string username, OrderProfileInputModel profile, string paymentMethod)
         {
-            var user = this.usersRepository.All().Where(u => u.UserName == username).FirstOrDefault();
+            var user = this.usersRepository
+                .All()
+                .Where(u => u.UserName == username)
+                .FirstOrDefault();
 
             if (user == null)
             {
@@ -52,9 +56,12 @@
             await this.ordersRepository.AddAsync(order);
             await this.ordersRepository.SaveChangesAsync();
 
-            var products = this.cartProductRepository.All().Where(x => x.ShoppingCartId == user.ShoppingCartId).AsQueryable();
+            var products = this.cartProductRepository
+                .All()
+                .Where(x => x.ShoppingCartId == user.ShoppingCartId)
+                .AsQueryable();
 
-            this.OrderEntityUpdate(user, order, products);
+            await this.OrderEntityUpdate(user, order, products);
 
             foreach (var entity in products)
             {
@@ -68,6 +75,13 @@
 
         private Order OrderFactory(FamilyKitchenUser user, OrderProfileInputModel profile, string paymentMethod)
         {
+            var card = this.clientCardRepository
+                .All()
+                .Where(x => x.Id == user.ClientCardId)
+                .FirstOrDefault();
+
+            var clientCard = user.ClientCard?.DeliveryPrice;
+
             var order = new Order()
             {
                 Status = OrderStatus.PayingAwaiting,
@@ -75,7 +89,7 @@
                 PaymentMethod = (PaymentMethod)Enum.Parse(typeof(PaymentMethod), paymentMethod),
                 OrderDate = DateTime.UtcNow,
                 DeliveryDate = DateTime.UtcNow.AddDays(2),
-                DeliveryPrice = 0,
+                DeliveryPrice = card.DeliveryPrice,
                 FamilyKitchenUser = user,
                 OrderProfile = this.mapper.Map<OrderProfile>(profile),
                 TotalPrice = 0,
@@ -84,26 +98,44 @@
             return order;
         }
 
-        private void OrderEntityUpdate(FamilyKitchenUser user, Order order, IQueryable<ShoppingCartShopProduct> products)
+        private async Task OrderEntityUpdate(FamilyKitchenUser user, Order order, IQueryable<ShoppingCartShopProduct> products)
         {
-            var productList = products.Select(x => new OrderShopProduct()
+            var productList = products.Select(x => new OrderShopProduct
             {
                 OrderId = order.Id,
                 ShopProductId = x.ShopProductId,
                 Quantity = x.Quantity,
-                Price = Math.Round(x.ShopProduct.Price - (x.ShopProduct.Price * x.ShopProduct.Discount / 100), 2),
+                Price = Math.Round(x.ShopProduct.Price - (x.ShopProduct.Price * x.ShopProduct.Discount / GlobalConstants.PercentageDivider), GlobalConstants.FractionalDigits),
             })
             .ToList();
 
-            var discount = this.clientCardRepository.All().Where(x => x.Id == user.ClientCardId).FirstOrDefault().Discount;
+            var card = this.clientCardRepository
+                .All()
+                .Where(x => x.Id == user.ClientCardId)
+                .FirstOrDefault();
+
+            var discount = card.Discount;
             var subTotal = productList.Sum(x => x.Price * x.Quantity);
-            var totalPrice = Math.Round(subTotal - (subTotal * discount / 100), 2);
+            var totalPrice = Math.Round(subTotal - (subTotal * discount / GlobalConstants.PercentageDivider) + order.DeliveryPrice, GlobalConstants.FractionalDigits);
+
+            if (totalPrice<0)
+            {
+                totalPrice = 0;
+                order.PaymentStatus = PaymentStatus.Complete;
+                order.Status = OrderStatus.Paid;
+            }
 
             order.OrdersShopProducts = productList;
             order.TotalPrice = totalPrice;
 
             this.ordersRepository.Update(order);
-            this.ordersRepository.SaveChangesAsync().GetAwaiter().GetResult();
+            await this.ordersRepository.SaveChangesAsync();
+
+            card.Voucher = 0;
+            card.DeliveryPrice = 10;
+
+            this.clientCardRepository.Update(card);
+            await this.clientCardRepository.SaveChangesAsync();
         }
     }
 }

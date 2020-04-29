@@ -23,5 +23,9 @@
         public const string EmailSubject = "Email Sender App";
 
         public const string EmailMessageAnswer = "We will answer you soon! Thank you for contacting us!";
+
+        public const int FractionalDigits = 2;
+
+        public const int PercentageDivider = 100;
     }
 }

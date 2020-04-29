@@ -10,20 +10,20 @@
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement("email")]
-        [JsonProperty("email")]
+        [BsonElement("Email")]
+        [JsonProperty("Email")]
         public string Email { get; set; }
 
-        [BsonElement("name")]
-        [JsonProperty("name")]
+        [BsonElement("Name")]
+        [JsonProperty("Name")]
         public string Name { get; set; }
 
-        [BsonElement("subject")]
-        [JsonProperty("subject")]
+        [BsonElement("Subject")]
+        [JsonProperty("Subject")]
         public string Subject { get; set; }
 
-        [BsonElement("message")]
-        [JsonProperty("message")]
+        [BsonElement("Message")]
+        [JsonProperty("Message")]
         public string Message { get; set; }
     }
 }

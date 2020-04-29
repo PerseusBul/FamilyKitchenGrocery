@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using FamilyKitchen.Data.Common.Models;
 
     public class ClientCard : BaseDeletableModel<string>
@@ -16,6 +17,10 @@
         public decimal Discount { get; set; }
 
         public int Points { get; set; }
+
+        public decimal DeliveryPrice { get; set; }
+
+        public int Voucher { get; set; }
 
         public string FamilyKitchenUserId { get; set; }
 

@@ -12,7 +12,7 @@
         public Order()
         {
             this.OrdersShopProducts = new HashSet<OrderShopProduct>();
-            this.DeliveryPrice = 6.99m;
+            this.DeliveryPrice = 10m;
         }
 
         [Required]

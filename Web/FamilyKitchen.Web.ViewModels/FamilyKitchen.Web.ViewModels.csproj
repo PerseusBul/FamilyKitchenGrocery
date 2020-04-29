@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\FamilyKitchen.Data.Models\FamilyKitchen.Data.Models.csproj" />
+    <ProjectReference Include="..\..\FamilyKitchen.Common\FamilyKitchen.Common.csproj" />
     <ProjectReference Include="..\..\Services\FamilyKitchen.Services.Mapping\FamilyKitchen.Services.Mapping.csproj" />
   </ItemGroup>
 

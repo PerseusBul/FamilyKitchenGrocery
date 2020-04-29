@@ -1,9 +1,8 @@
-﻿namespace FamilyKitchen.Web.Controllers
+﻿namespace FamilyKitchen.Web.ApiControllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using FamilyKitchen.Services.Data;
     using FamilyKitchen.Web.ViewModels.Recipes;
     using Microsoft.AspNetCore.Mvc;

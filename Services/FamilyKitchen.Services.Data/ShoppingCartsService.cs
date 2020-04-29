@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using AutoMapper;
+    using FamilyKitchen.Common;
     using FamilyKitchen.Data.Common.Repositories;
     using FamilyKitchen.Data.Models;
     using FamilyKitchen.Services.Mapping;
@@ -230,23 +231,37 @@
 
         public async Task<CartTotalViewModel> GetCartTotalParameters(string username)
         {
-            var user = this.userRepository.All().Where(x => x.UserName == username).FirstOrDefault();
-            var subTotal = this.GetSubtotal(username);
-            var clientDiscount = this.GetDiscountByCardId(user.ClientCardId);
+            var user = this.userRepository
+                .All()
+                .Where(x => x.UserName == username)
+                .FirstOrDefault();
 
-            if (user == null || subTotal == null || clientDiscount == null)
+            var subTotal = this.GetSubtotal(username);
+            var clientDiscount = (decimal)this.GetDiscountByCardId(user.ClientCardId);
+
+            if (user == null || subTotal == null)
             {
                 return null;
             }
 
+            var delivery = (decimal)this.GetDeliveryPriceByCardId(user.ClientCardId);
+
             var subTotalOper = (decimal)subTotal;
-            var discount = Math.Round(subTotalOper * (decimal)clientDiscount / 100, 2);
-            var total = Math.Round(subTotalOper - discount + 0, 2);
+
+            var discount =
+                Math.Round(subTotalOper * (decimal)clientDiscount / GlobalConstants.PercentageDivider + user.ClientCard.Voucher, GlobalConstants.FractionalDigits);
+            var total =
+                Math.Round(subTotalOper - discount + delivery, GlobalConstants.FractionalDigits);
+
+            if (total < 0)
+            {
+                total = 0;
+            }
 
             var viewModel = new CartTotalViewModel
             {
                 Subtotal = subTotalOper,
-                DeliveryPrice = 0,
+                DeliveryPrice = delivery,
                 Discount = discount,
                 Total = total,
             };
@@ -348,16 +363,31 @@
                 return null;
             }
 
-            var subTotal = productsAmounts.Select(x => x.CartProductTotal).Sum();
+            var subTotal = productsAmounts
+                .Select(x => x.CartProductTotal)
+                .Sum();
 
             return subTotal;
         }
 
         private decimal? GetDiscountByCardId(string cardId)
         {
-            var card = this.clientCardRepository.All().Where(c => c.Id == cardId).FirstOrDefault();
+            var card = this.clientCardRepository
+                .All()
+                .Where(c => c.Id == cardId)
+                .FirstOrDefault();
 
             return card?.Discount;
+        }
+
+        private decimal? GetDeliveryPriceByCardId(string cardId)
+        {
+            var card = this.clientCardRepository
+                .All()
+                .Where(c => c.Id == cardId)
+                .FirstOrDefault();
+
+            return card?.DeliveryPrice;
         }
     }
 }

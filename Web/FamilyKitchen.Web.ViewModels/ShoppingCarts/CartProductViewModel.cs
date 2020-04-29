@@ -1,7 +1,7 @@
 ﻿namespace FamilyKitchen.Web.ViewModels.ShoppingCarts
 {
     using System;
-
+    using FamilyKitchen.Common;
     using FamilyKitchen.Web.ViewModels.ShopProducts;
 
     public class CartProductViewModel
@@ -10,6 +10,6 @@
 
         public ShopProductViewModel Details { get; set; }
 
-        public decimal CartProductTotal => Math.Round(this.Quantity * this.Details.SalePrice, 2);
+        public decimal CartProductTotal => Math.Round(this.Quantity * this.Details.SalePrice, GlobalConstants.FractionalDigits);
     }
 }

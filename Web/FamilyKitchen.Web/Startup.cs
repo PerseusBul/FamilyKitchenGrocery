@@ -77,7 +77,7 @@
             services.AddSingleton<ContactsService>();
 
             services.AddControllers()
-                .AddNewtonsoftJson(options => options.UseMemberCasing()); ;
+                .AddNewtonsoftJson(options => options.UseMemberCasing());
 
             services.AddResponseCaching();
             services.AddSession(options =>
@@ -124,6 +124,7 @@
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<ISubscribersService, SubscribersService>();
             services.AddTransient<IFamiliesService, FamiliesService>();
+            services.AddTransient<IClientCardsService, ClientCardsService>();
 
             Account account = new Account(
             this.configuration["Cloudinary:AppName"],

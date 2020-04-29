@@ -63,6 +63,8 @@
 
         public DbSet<Subscriber> Subscribers { get; set; }
 
+        public DbSet<Voucher> Vouchers { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

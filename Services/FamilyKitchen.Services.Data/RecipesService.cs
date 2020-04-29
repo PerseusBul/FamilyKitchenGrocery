@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using FamilyKitchen.Common;
     using FamilyKitchen.Data.Common.Repositories;
     using FamilyKitchen.Data.Models;
     using FamilyKitchen.Data.Models.Enums;
@@ -77,7 +77,7 @@
                     SaturatedFats = decimal.Parse(((decimal)x.FoodResourcesRecipes.Select(n => n.FoodResource.NutritionDeclaration.SaturatedFats * n.Quantity / 0.1m).Sum()).ToString("F2")),
                     Carbohydrate = decimal.Parse(((decimal)x.FoodResourcesRecipes.Select(l => l.FoodResource.NutritionDeclaration.Carbohydrate * l.Quantity / 0.1m).Sum()).ToString("F2")),
                     Protein = decimal.Parse(((decimal)x.FoodResourcesRecipes.Select(k => k.FoodResource.NutritionDeclaration.Protein * k.Quantity / 0.1m).Sum()).ToString("F2")),
-                    Sodium = decimal.Parse(((decimal)x.FoodResourcesRecipes.Select(g => g.FoodResource.NutritionDeclaration.Sodium * g.Quantity / 100m).Sum()).ToString("F2")),
+                    Sodium = decimal.Parse(((decimal)x.FoodResourcesRecipes.Select(g => g.FoodResource.NutritionDeclaration.Sodium * g.Quantity / GlobalConstants.PercentageDivider).Sum()).ToString("F2")),
                 },
             })
                 .FirstOrDefault();
@@ -115,7 +115,7 @@
                 {
                     FoodResourceId = food.FoodResourceId,
                     RecipeId = newRecipe.Id,
-                    Quantity = Math.Round(resourse.Value / 100, 2),
+                    Quantity = Math.Round(resourse.Value / GlobalConstants.PercentageDivider, GlobalConstants.FractionalDigits),
                 };
 
                 await this.foodRecipeRepository.AddAsync(oper);

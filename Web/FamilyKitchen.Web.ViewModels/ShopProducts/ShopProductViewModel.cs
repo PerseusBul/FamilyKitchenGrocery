@@ -1,7 +1,7 @@
 ﻿namespace FamilyKitchen.Web.ViewModels.ShopProducts
 {
     using System;
-
+    using FamilyKitchen.Common;
     using FamilyKitchen.Data.Models;
     using FamilyKitchen.Services.Mapping;
 
@@ -19,7 +19,7 @@
 
         public string ImageUrl => $"/images/product_{this.Id}.jpg";
 
-        public decimal SalePrice => Math.Round(this.Price - (this.Price * this.Discount / 100), 2);
+        public decimal SalePrice => Math.Round(this.Price - (this.Price * this.Discount / GlobalConstants.PercentageDivider), GlobalConstants.FractionalDigits);
 
     }
 }

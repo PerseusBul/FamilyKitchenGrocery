@@ -1,4 +1,4 @@
-﻿namespace FamilyKitchen.Web.Controllers
+﻿namespace FamilyKitchen.Web.ApiControllers
 {
     using System.Threading.Tasks;
 

@@ -53,7 +53,7 @@
                 this.productsRepository.All().Where(x => x.RecipeId == null);
 
             // ElasticSearch
-            // var products = query.Skip(10).ToArray();
+            // var products = query.ToArray();
             // var indexManyResponse = this.elasticClient.IndexMany(products);
             // var result = this.elasticClient.Bulk(b => b.Index("shopproducts").IndexMany(products));
             return query.To<T>().ToList();
