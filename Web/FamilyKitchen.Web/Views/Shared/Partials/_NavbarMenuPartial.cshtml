@@ -17,7 +17,7 @@
                 <li class="nav-item"><a class="nav-link" asp-controller="MailSender" asp-action="Contact">Contact</a></li>
             </ul>
           
-            <partial name="~/Views/Shared/Partial/_LoginPartial.cshtml" />
+            <partial name="~/Views/Shared/Partials/_LoginPartial.cshtml" />
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item cta cta-colored"><a class="nav-link" asp-controller="ShoppingCarts" asp-action="GetCart"><span class="icon-shopping_cart"></span>[0]</a></li>
                 @if (this.User.Identity.IsAuthenticated)

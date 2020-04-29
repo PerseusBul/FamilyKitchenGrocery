@@ -15,6 +15,7 @@
     using FamilyKitchen.Services.Mapping;
     using FamilyKitchen.Services.Messaging;
     using FamilyKitchen.Web.ElasticSearchConf;
+    using FamilyKitchen.Web.ExtensionsConf.MongoDbConf;
     using FamilyKitchen.Web.ExtensionsConf.SignalRConf;
     using FamilyKitchen.Web.MappingConfiguration;
     using FamilyKitchen.Web.ViewModels;
@@ -27,6 +28,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Options;
     using Nest;
 
     public class Startup
@@ -38,7 +40,6 @@
             this.configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(
@@ -67,6 +68,17 @@
                 configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
+            services.Configure<MongoDbDatabaseSettings>(
+                    this.configuration.GetSection(nameof(MongoDbDatabaseSettings)));
+
+            services.AddSingleton<IMongoDbDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<MongoDbDatabaseSettings>>().Value);
+
+            services.AddSingleton<ContactsService>();
+
+            services.AddControllers()
+                .AddNewtonsoftJson(options => options.UseMemberCasing()); ;
+
             services.AddResponseCaching();
             services.AddSession(options =>
             {
@@ -80,7 +92,10 @@
                 options.EnableForHttps = true;
             });
 
-            services.AddSignalR(options => options.EnableDetailedErrors = true);
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });
 
             services.AddAntiforgery(options =>
             {
@@ -92,12 +107,10 @@
 
             services.AddSingleton(this.configuration);
 
-            // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(FamilyKitchen.Data.Common.Repositories.IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
-            // Application services
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
@@ -120,21 +133,18 @@
             Cloudinary cloudinary = new Cloudinary(account);
             services.AddSingleton(cloudinary);
 
-            // services.AddSingleton<IProductService, ElasticSearchProductService>();
-            // services.Configure<ProductSettings>(configuration.GetSection("shopproducts"));
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddElasticsearch(this.configuration);
         }
 
+        // "https://cloud.mongodb.com/freemonitoring/cluster/5QLIYFUBC75L5YJLGXM4OMWDSLF6N5I5"
         // mongodb+srv://PerseusBul:PerseusBul1@cluster0-aw8nr.azure.mongodb.net/test?retryWrites=true&w=majority // TODO encode
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
-            // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -158,9 +168,6 @@
                 app.UseHsts();
             }
 
-            // app.UseResponseCompression();
-            // app.UseResponseCaching();
-            // app.UseHttpContextItemsMiddleware();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
