@@ -1,5 +1,6 @@
 ﻿namespace FamilyKitchen.Web.ViewModels.MailSender
 {
+    using FamilyKitchen.Services.Mapping;
     using System.ComponentModel.DataAnnotations;
 
     public class ContactInputModel
